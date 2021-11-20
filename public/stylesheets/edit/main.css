@@ -1,0 +1,11 @@
+@import "./navbar.css";
+
+body {
+    font-family: Corbel;
+    margin: 0px;
+    padding: 0px
+}
+
+form#result {
+    display: none;
+}

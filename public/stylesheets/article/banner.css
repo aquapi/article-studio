@@ -1,0 +1,11 @@
+.banner {
+    background-image: url("/images/download.jpg");
+    width: 100%;
+    max-width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 93vh;
+    background-blend-mode: darken;
+    background-attachment: fixed;
+    cursor: pointer;
+} 

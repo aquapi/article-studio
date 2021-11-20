@@ -1,0 +1,37 @@
+// Socket
+let socket = io();
+
+// Elements
+let messages = document.getElementById('messages');
+let form = document.getElementById('form');
+let input = document.getElementById('input');
+
+// User ID if they haven't signed in
+let rnd = Math.round(Math.random() * 1000000);
+
+// Form listener
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (input.value) {
+        /**
+         * @param {string} event Chat event
+         * @param {string} message Message
+         * @param {number} rnd User ID if user isn't logged in
+         * @param {string} CurrentUser Current user 
+         */
+
+        socket.emit('chat message', input.value, rnd, document.querySelector("span").innerHTML);
+
+        // Reset input form after send message
+        input.value = '';
+    }
+});
+
+// Handle socket
+socket.on('chat message', (msg, textAlign, user) => {
+    let item = document.createElement('li');
+    item.style.textAlign = textAlign;
+    item.innerHTML = `<p>${msg}</p><div class="username">${user}</div>`;
+    messages.appendChild(item);
+    window.scrollTo(0, document.body.scrollHeight);
+});

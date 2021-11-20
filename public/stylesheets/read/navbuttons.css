@@ -1,0 +1,13 @@
+button {
+    padding: 20px;
+    font-size: 13px;
+    letter-spacing: 0.5px; 
+    color: white;
+    background-color: #111;
+    border: 0px;
+    font-family: "Oxygen", sans-serif;
+}
+
+button:hover {
+    background-color: #333;
+}

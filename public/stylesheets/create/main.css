@@ -1,0 +1,21 @@
+@import "./form.css";
+
+* {
+    font-family: "Lato", sans-serif;
+    letter-spacing: 0.5px;
+}
+
+
+body {
+    padding: 50px;
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#back {
+    position: absolute;
+    top: 85vh;
+    left: 38vw
+}

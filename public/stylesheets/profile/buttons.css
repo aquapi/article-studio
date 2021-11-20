@@ -1,0 +1,19 @@
+button:not([id=back]) {
+    width: 180px;
+    height: 30px;
+    font-size: 12px;
+    font-family: "Oxygen", sans-serif;
+    background-color: white;
+    border: 0.5px solid black;
+    cursor: pointer;
+    display: inline-block;
+}
+
+button:not([id=back]):hover {
+    background-color: whitesmoke;
+}
+
+#delete {
+    color: red;
+    border: 1px solid red;
+}

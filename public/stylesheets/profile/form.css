@@ -1,0 +1,31 @@
+form {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#display {
+    display: inline-block;
+    background-color: white;
+    height: 31.5px;
+    width: 17px;
+    border-top-right-radius: 24px;
+    border-bottom-right-radius: 24px;
+    border: 1px solid black;
+    border-left: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 10px;
+}
+
+input {
+    font-family: 'Oxygen', sans-serif;
+    width: 360px;
+    height: 30px;
+    border-radius: 24px; 
+    padding-left: 12px;
+    outline: none;
+    font-size: 12px;
+    margin-bottom: 20px;
+    border: 0.5px solid black;
+}
