@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora&family=Oxygen:wght@300&family=Qwigley&display=swap"
+        rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/stylesheets/discuss/main.css">
+    <!-- Title -->
+    <title>{{name}} Discuss</title>
+    <!-- Icon -->
+    <link rel="icon" href="https://iconarchive.com/download/i97950/thehoth/seo/seo-article.ico">
+</head>
+
+<body>
+    <!-- User name -->
+    <span>{{user}}</span>
+    <!-- Navbar -->
+    <div id="buttons">
+        <button onclick="location.replace(`/reader/${encodeURIComponent(`{{name}}`)}`)">Back</button><br>
+        <button onclick="location.reload()">Refress</button>
+    </div>
+    <!-- Messages will be here -->
+    <ul id="messages"></ul>
+    <!-- Send message form -->
+    <form id="form" action="">
+        <input id="input" autocomplete="off" /><button>Send</button>
+    </form>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/javascripts/discuss.js"></script>
+</body>
+
+</html>

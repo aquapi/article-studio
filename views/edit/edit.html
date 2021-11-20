@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="https://iconarchive.com/download/i97950/thehoth/seo/seo-article.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}}</title>
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/stylesheets/edit/main.css">
+    <!-- Showdown.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"
+        integrity="sha512-L03kznCrNOfVxOUovR6ESfCz9Gfny7gihUX/huVbQB9zjODtYpxaVtIaAkpetoiyV2eqWbvxMH9fiSv5enX7bw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.js"
+        integrity="sha512-bvV1V1YSjP1fbfKJjTlNmdnUO2XpsLYUdKwmz5UXBi5U+x40rx9JpA0ooQUMZfpz1MaaBC0ydNLoC6r0sitPUQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.js.map"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js.map"></script>
+    <!-- Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- Socket.io -->
+    <script src="https://cdn.socket.io/4.3.2/socket.io.min.js" integrity="sha384-KAZ4DtjNhLChOB/hxXuKqhMLYvx3b5MlT55xPEiNmREKRzeEm+RVPlTnAn0ajQNs" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav>
+        <!-- Navbar buttons -->
+        <div style="display: flex">
+            <div id='save' class="nav-item">Save</div>
+            <div id='run' class="nav-item">Test</div>
+        </div>
+        <div style="display: flex">
+            <div id='image' class="nav-item" style="justify-self: flex-end">
+                <input type=text name="display_img" value="{{image_url}}" style="font-family: Corbel" id="img_url">
+            </div>
+            <div class="nav-item" id='back'>Back</div>
+        </div>
+        <!-- Click #back to go back to /reader/article_name -->
+        <script>
+            document.querySelector('#back').addEventListener('click', () => {
+                const name = `{{name}}`;
+                location.replace(`/reader/${encodeURIComponent(name)}`);
+            });
+        </script>
+    </nav>
+    <!-- Write and test -->
+    <div style="width: 100%; display: flex">
+        <textarea style="width: 48%; padding: 10px; height: 248.6px">{{md_content}}</textarea>
+        <iframe style="width: 50%; border: 1px solid #555; height: 268.6px"></iframe>
+    </div>
+    <!-- All data will be here before sending to the server -->
+    <form id="result">
+        <input name="name" value="{{name}}">
+        <textarea name="content" class="save"></textarea>
+        <input name="display_img" class="save">
+        <button id="submit"></button>
+    </form>
+    <script src="/javascripts/edit.js"></script>
+</body>
+
+</html> 

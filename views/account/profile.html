@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}}'s Profile</title>
+    <link rel="icon" href="https://iconarchive.com/download/i97950/thehoth/seo/seo-article.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora&family=Oxygen:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/stylesheets/profile/main.css">
+</head>
+
+<body>
+    <div style="overflow: hidden;">
+        <!-- Go back to homepage -->
+        <button onclick="location.replace('/article')"
+            style="position: absolute; top: 80%; width: 50px; font-family: Oxygen, sans-serif; outline: none; padding: 5px;"
+            id="back">
+            Back
+        </button>
+        <!-- Form -->
+        <form>
+            <h3>Profile</h3>
+            <hr style="margin-bottom: 20px;">
+            <input type="text" name="name" value="{{name}}" readonly><br>
+            <div style="display: flex; justify-content: center;">
+                <input type="password" name="pass" value="{{pass}}" readonly style="
+                width: 335px;
+                border-top-right-radius: 0px !important;
+                border-bottom-right-radius: 0px !important;
+                border-right: 0px;
+            ">
+                <!-- Display or hide password -->
+                <div id="display">
+                    <i class="fas fa-eye" style="cursor: pointer;"></i>
+                </div>
+            </div>
+            <!-- Script to display and hide password -->
+            <script>
+                let clicked = false;
+                document.getElementById("display").addEventListener("click", () => {
+                    if (clicked) {
+                        document.querySelector("div > input").type = "password";
+                        document.querySelector("i").className = "fas fa-eye";
+                    }
+                    else {
+                        document.querySelector("div > input").type = "text";
+                        document.querySelector("i").className = "fas fa-eye-slash";
+                    }
+                    clicked = !clicked;
+                });
+            </script>
+        </form>
+        <!-- Buttons -->
+        <div style="text-align: center;">
+            <button onclick="location.replace('/logout')">Logout</button>
+            <button id="delete">Delete account</button>
+            <!-- Blank form to go to /delete using post method -->
+            <form id="blank" action="/delete" method="post" style="display: none;"></form>
+            <script>
+                document.getElementById("delete").addEventListener("click", () => {
+                    if (confirm("Confirm delete?\nThis will delete all your article"))
+                        document.getElementById("blank").submit();
+                });
+            </script>
+        </div>
+    </div>
+</body>
+
+</html>
