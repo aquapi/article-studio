@@ -25,6 +25,16 @@ form.addEventListener('submit', (e) => {
         // Reset input form after send message
         input.value = '';
     }
+
+    // Stop user from typing messages
+    input.readOnly = true;
+    input.placeholder = "Wait for 5 seconds to type messages again";
+
+    // Allow user to type again in 5 seconds
+    setTimeout(() => {
+        input.readOnly = false;
+        input.placeholder = "";
+    }, 5000);
 });
 
 // Handle socket
@@ -34,4 +44,5 @@ socket.on('chat message', (msg, textAlign, user) => {
     item.innerHTML = `<p>${msg}</p><div class="username">${user}</div>`;
     messages.appendChild(item);
     window.scrollTo(0, document.body.scrollHeight);
+
 });
