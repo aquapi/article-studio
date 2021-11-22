@@ -4,6 +4,13 @@ import nodemailer from "nodemailer";
 import "../models/article.js";
 import "../models/user.js";
 
+// Server port
+export const port = process.env.PORT || 443;
+
+// Server name
+export const hostname = process.env.HOST || "0.0.0.0";
+
+// Database URL
 export const url = process.env.DB_URL;
 
 // Connection settings
