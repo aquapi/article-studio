@@ -9,10 +9,10 @@ import {
 	EndScript,
 	InitLoginScreen,
 	SortByComponent
-} from "../../resource/resource.js";
+} from "../../resource/resource.mjs";
 import mongoose from "mongoose";
 import fs from "fs";
-import app from "../../app/config.js";
+import app from "../../app/config.mjs";
 
 let Csession;
 // My article subpage: Show all articles created not by others
@@ -24,7 +24,7 @@ app.get("/myarticle", (req, res) => {
 	if (!Csession.userID)
 		res.redirect("/login");
 	// Init webpage
-	res.write(fs.readFileSync("./views/article/article.html"));
+	res.write(fs.readFileSync("./pages/article/article.html"));
 	// add created article with name matched to webpage 
 	mongoose.connect(url, settings)
 		.then(() => {
@@ -85,7 +85,7 @@ app.get("/otherarticle", (req, res) => {
 	if (!Csession.userID)
 		res.redirect("/login");
 	// Init webpage
-	res.write(fs.readFileSync("./views/article/article.html"));
+	res.write(fs.readFileSync("./pages/article/article.html"));
 	// add created article with name matched to webpage
 	mongoose.connect(url, settings)
 		.then(() => {

@@ -1,9 +1,9 @@
-import { url, settings, DB } from "../../resource/resource.js";
-import app from "../../app/config.js";
+import { url, settings, DB } from "../../resource/resource.mjs";
+import app from "../../app/config.mjs";
 import mongoose from "mongoose";
 import handlebars from "handlebars";
 import fs from "fs";
-import Article from "../../models/article.js";
+import Article from "../../models/article.mjs";
 
 let Csession;
 

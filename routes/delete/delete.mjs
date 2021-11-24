@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import { DB, settings, url } from "../../resource/resource.js";
-import app from "../../app/config.js";
+import { DB, settings, url } from "../../resource/resource.mjs";
+import app from "../../app/config.mjs";
 
 let Csession;
 

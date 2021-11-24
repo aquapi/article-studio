@@ -1,7 +1,7 @@
-import { url, DB, settings, transporter } from "../../resource/resource.js";
-import app from "../../app/config.js";
+import { url, DB, settings, transporter } from "../../resource/resource.mjs";
+import app from "../../app/config.mjs";
 import mongoose from "mongoose";
-import User from "../../models/user.js";
+import User from "../../models/user.mjs";
 import fs from "fs";
 
 let Csession;
@@ -15,7 +15,7 @@ app.get("/login", (req, res) => {
 	Csession = req.session;
     if (Csession && Csession.userID)
 		res.redirect("/article");
-	fs.readFile("./views/account/login.html", (err, data) => {
+	fs.readFile("./pages/account/login.html", (err, data) => {
 		if (err) throw err;
 		res.write(data);
 		return res.end();
@@ -30,7 +30,7 @@ app.get("/signup", (req, res) => {
 	Csession = req.session;
     if (Csession && Csession.userID)
 		res.redirect("/article");
-	fs.readFile("./views/account/signup.html", (err, data) => {
+	fs.readFile("./pages/account/signup.html", (err, data) => {
 		if (err) throw err;
 		res.write(data);
 		return res.end();

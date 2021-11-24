@@ -1,4 +1,4 @@
-import { socket } from "../../app/config.js";
+import { socket } from "../../app/config.mjs";
 
 // Socket event
 socket.on('connection', (s) => {

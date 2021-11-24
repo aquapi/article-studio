@@ -1,8 +1,8 @@
 import fs from "fs";
 import handlebars from "handlebars";
 import mongoose from "mongoose";
-import { DB, settings, url } from "../../resource/resource.js";
-import app from "../../app/config.js";
+import { DB, settings, url } from "../../resource/resource.mjs";
+import app from "../../app/config.mjs";
 
 let Csession;
 
@@ -19,7 +19,7 @@ app.get("/article/profile", (req, res) => {
             if (!r || !r.username || !r.password)
                 res.redirect("/login");
             else {
-                fs.readFile("./views/account/profile.html", (err, data) => {
+                fs.readFile("./pages/account/profile.html", (err, data) => {
                     if (err) throw err;
                     let template = handlebars.compile(data.toString());
                     res.write(template({

@@ -1,5 +1,5 @@
-import app from "../../app/config.js";
-import { DB, settings, url } from "../../resource/resource.js"
+import app from "../../app/config.mjs";
+import { DB, settings, url } from "../../resource/resource.mjs"
 import mongoose from "mongoose";
 import fs from "fs";
 import handlebars from "handlebars";

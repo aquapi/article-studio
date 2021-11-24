@@ -9,8 +9,8 @@ import {
     EndScript,
     InitLoginScreen,
     SortByComponent
-} from "../../resource/resource.js";
-import app from "../../app/config.js";
+} from "../../resource/resource.mjs";
+import app from "../../app/config.mjs";
 import mongoose from "mongoose";
 import fs from "fs";
 
@@ -21,7 +21,7 @@ let Csession;
 app.get("/article", (req, res) => {
     // Init webpage
     Csession = req.session;
-    res.write(fs.readFileSync("./views/article/article.html").toString().trim().replace(/\<\/html\>/, "").replace(/\<\/body\>/, ""));
+    res.write(fs.readFileSync("./pages/article/article.html").toString().trim().replace(/\<\/html\>/, "").replace(/\<\/body\>/, ""));
     // add created article with name matched to webpage
     mongoose.connect(url, settings)
         .then(() => {
