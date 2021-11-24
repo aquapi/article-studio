@@ -58,7 +58,7 @@ app.get("/article/edit/:name", (req, res) => {
     mongoose.connect(url, settings)
         .then(() => {
             return DB.sites.findOne({
-                name: req.params.name ?? ""
+                name: req.params.name ? req.params.name : ""
             });
         })
         .then(r => {
@@ -90,7 +90,7 @@ app.post("/article/save", (req, res) => {
     mongoose.connect(url, settings)
         .then(() => {
             return DB.sites.findOne({
-                name: req.body.name ?? ""
+                name: req.body.name ? req.body.name : ""
             });
         })
         .then(r => {
@@ -103,7 +103,7 @@ app.post("/article/save", (req, res) => {
                         display_img: req.body.display_img && req.body.display_img !== "Display image url" ? req.body.display_img : "",
                         description: r.description,
                         views: r.views,
-                        tag: r.tag ?? "",
+                        tag: r.tag ? r.tag : "",
                         votes: r.votes
                     }
                 );

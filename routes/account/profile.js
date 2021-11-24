@@ -12,7 +12,7 @@ app.get("/article/profile", (req, res) => {
     mongoose.connect(url, settings)
         .then(() => {
             return DB.users.findOne({
-                username: Csession.userID ?? ""
+                username: Csession.userID ? Csession.userID : ""
             })
         })
         .then(r => {
