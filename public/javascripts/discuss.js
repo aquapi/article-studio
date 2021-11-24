@@ -44,5 +44,4 @@ socket.on('chat message', (msg, textAlign, user) => {
     item.innerHTML = `<p>${msg}</p><div class="username">${user}</div>`;
     messages.appendChild(item);
     window.scrollTo(0, document.body.scrollHeight);
-
 });
