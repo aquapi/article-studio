@@ -10,12 +10,12 @@
     "express-session": "^1.17.2",
     "handlebars": "^4.7.7",
     "mongoose": "^6.0.13",
+    "next": "^12.0.4",
     "nodemailer": "^6.7.1",
     "socket.io": "^4.4.0"
   },
-  "type": "module",
   "scripts": {
-    "start": "nodemon --config nodemon.json server.js"
+    "start": "nodemon --config nodemon.json server.mjs"
   },
   "license": "MIT",
   "devDependencies": {
