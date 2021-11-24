@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" href="https://iconarchive.com/download/i97950/thehoth/seo/seo-article.ico">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arvo&family=Merriweather:wght@300&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora&family=Oxygen:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Arvo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"
+        integrity="sha256-hlKLmzaRlE8SCJC1Kw8zoUbU8BxA+8kR3gseuKfMjxA=" crossorigin="anonymous"></script>
+    <script>
+        function contain(str, str1) {
+            for (let c of str1) {
+                if (!str.includes(c)) return false;
+            }
+            return true;
+        }
+
+        const updateScrollPos = (e) => {
+            $('#created-article').css('cursor', 'grabbing');
+            let scrollTo = $('#created-article').scrollLeft() + (clickX - e.pageX) / 10;
+            $('#created-article').scrollLeft(scrollTo);
+        }
+
+        const initWidthHeight = () => {
+            document.getElementById("banner-text").style.left = (innerWidth - 203.34) / 2 + "px";
+            document.getElementById("banner-text").style.top = (innerHeight - 133.34) * 93 / 200 + "px";
+        }
+    </script>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/stylesheets/article/main.css">
+    <!-- Socket.io -->
+    <script src="https://cdn.socket.io/4.3.2/socket.io.min.js" integrity="sha384-KAZ4DtjNhLChOB/hxXuKqhMLYvx3b5MlT55xPEiNmREKRzeEm+RVPlTnAn0ajQNs" crossorigin="anonymous"></script>
+    <title>Articles</title>
+</head>
+
+<body>
+    <div class="wait">
+        <div style="position: absolute; display: none; background-color: white; height: 2px; z-index: 4;"
+            id="hover-action"></div>
+        <script>
+            let clicked = false, clickX;
+            $(() => {
+                $(".create").each((i, e) => {
+                    e.addEventListener("mouseover", () => {
+                        $("#hover-action").css("top", "50px");
+                        $("#hover-action").css("display", "block");
+                        $("#hover-action").css("left", $(e).position().left + 20);
+                        $("#hover-action").animate({
+                            "width": $(e).width()
+                        }, 650);
+                    });
+                    e.addEventListener("mouseleave", () => {
+                        $("#hover-action").css("display", "none");
+                        $("#hover-action").css("width", "0px");
+                        $("#hover-action").stop();
+                    })
+                });
+
+                // Drag to scroll
+
+                $("#created-article").on({
+                    'mousemove': (e) => {
+                        clicked ? updateScrollPos(e) : void (0);
+                    },
+                    'mousedown': (e) => {
+                        clicked = true;
+                        clickX = e.pageX;
+                    },
+                    'mouseup': () => {
+                        clicked = false;
+                        $('#created-article').css('cursor', 'grab');
+                    },
+                });
+            });
+        </script>
+        <!-- Search bar -->
+        <div class="search-bar">
+            <input type="text" placeholder="Search">
+        </div>
+        <script>
+            $(".search-bar").fadeOut(0);
+        </script>
+        <!-- Navbar -->
+        <nav id="nav">
+            <!-- Navbar buttons -->
+            <div style="display: flex;" id="nav_button">
+                <div class="create" id="new">NEW</div>
+                <div class="create" id="sign">SIGN UP</div>
+                <div class="create" id="login">LOGIN</div>
+                <script>
+                    document.querySelector("#login").addEventListener("click", () => {
+                        location.replace("/login");
+                    });
+                </script>
+            </div>
+            <!-- Navbar search icon -->
+            <div class="input">
+                <button
+                    style="margin: 0px; background-color: transparent !important; border-color: transparent; border-style: solid; border-width: 5px; height: 36px;"><i
+                        class="fa fa-search"
+                        style="background-color: transparent; color: white; font-size: 16px;"></i></button>
+            </div>
+            <!-- Trigger when click the search icon => fade in search bar -->
+            <script>
+                $(".input > button").click(e => {
+                    $(".search-bar").fadeIn(600);
+                });
+            </script>
+        </nav>
+        <!-- Make the background darker -->
+        <div style="opacity: 0.5; background-color: black; width: 100%; height: 93vh; position: absolute; z-index: 0;"
+            id="inner"></div>
+        <!-- Banner text -->
+        <div style="position: absolute; z-index: 1; text-align: center;" id="banner-text">
+            <h1 style="color: white; font-family: Lora, sans-serif; font-weight: 300;">
+                Article Studio</h1>
+            <h6
+                style="font-family: Oxygen, sans-serif; color: rgba(255, 255, 255, 0.63); font-weight: 300; font-size: 12px; z-index: 2;">
+                A place for creating creative articles
+            </h6>
+            <!-- Make the text stay in the middle of the banner -->
+            <script>
+                initWidthHeight();
+                onresize = initWidthHeight;
+            </script>
+        </div>
+        <div class="banner"></div>
+        <!-- When click the banner, the search bar fade out -->
+        <script>
+            $("#inner").click(e => {
+                $(".search-bar").fadeOut(600);
+            });
+        </script>
+    </div>
+</body>
+
+</html>

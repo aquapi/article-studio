@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora&family=Oxygen:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
+    <title>{{name}}</title>
+    <link rel="icon" href="https://iconarchive.com/download/i97950/thehoth/seo/seo-article.ico">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/stylesheets/read/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/less@4.1.1" ></script>
+    <!-- Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- Socket.io -->
+    <script src="https://cdn.socket.io/4.3.2/socket.io.min.js" integrity="sha384-KAZ4DtjNhLChOB/hxXuKqhMLYvx3b5MlT55xPEiNmREKRzeEm+RVPlTnAn0ajQNs" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- Decode DOM -->
+    <script>
+        function htmlDecode(input) {
+            var doc = new DOMParser().parseFromString(input, "text/html");
+            return doc.documentElement.textContent;
+        }
+    </script>
+    <!-- Navbar -->
+    <div style="display: flex; background-color: #111" id="buttons">
+        <button onclick="location.replace('/article')">Back</button><br>
+        <button onclick="location.replace(`/discuss/${encodeURIComponent('{{name}}')}`)">Discuss</button><br>
+    </div>
+    <!-- Init buttons -->
+    <script>
+        document.getElementById("buttons").innerHTML += htmlDecode(`{{admin_button}}`);
+    </script>
+    <!-- 'Delete' button listener -->
+    <script>
+        document.getElementById("del").addEventListener("click", () => {
+            let delName = `{{name}}`;
+            if (confirm("Confirm delete?")) {
+                (async () => {
+                    await axios.post("/article/delete", {
+                        name: delName
+                    });
+                    location.replace(`/article`);
+                })();
+            }
+        });
+    </script>
+    <!-- Content and article data -->
+    <div
+        style="display: flex; flex-direction: column; justify-content: center; align-items: left; padding: 20px; border-left: 2px solid #222; border-right: 2px solid #222; margin-top: 30px">
+        <!-- Article -->
+        <div id="content"></div>
+        <!-- Init article content -->
+        <script>
+            document.getElementById("content").innerHTML = htmlDecode(`{{content}}`);
+        </script>
+        <!-- Article data -->
+        <div style="font-size: 12px !important; align-self: flex-end"> Views: {{views}} </div>
+        <div style="font-size: 12px !important; align-self: flex-end">Author: {{author}}</div>
+        <div style="font-size: 12px !important; align-self: flex-end">Tag: {{tag}}</div>
+        <div style="font-size: 12px !important; align-self: flex-end">Votes: {{votes}}</div>
+    </div>
+</body>
+
+</html>
