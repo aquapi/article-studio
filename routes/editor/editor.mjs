@@ -69,7 +69,7 @@ app.get("/article/edit/:name", (req, res) => {
                     md_content: r.content.split("<style>body {font-family: Corbel}</style>")[0]
                 };
 
-                let template = handlebars.compile(fs.readFileSync("./views/edit/edit.html").toString());
+                let template = handlebars.compile(fs.readFileSync("./pages/edit/edit.html").toString());
                 res.write(template(compileOBJ));
             } else
                 res.redirect("/login");
@@ -129,7 +129,7 @@ app.get("/article/new", (req, res) => {
     Csession = req.session;
     if (!Csession || !Csession.userID)
 		res.redirect("/login");
-    fs.readFile("./views/article/create.html", (err, data) => {
+    fs.readFile("./pages/article/create.html", (err, data) => {
         if (err) throw err;
         res.write(data);
         return res.end();

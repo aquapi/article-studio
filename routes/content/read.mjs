@@ -19,7 +19,7 @@ app.get("/reader/:name", (req, res) => {
             });
         })
         .then(r => {
-            let template = handlebars.compile(fs.readFileSync("./views/article/read.html").toString());
+            let template = handlebars.compile(fs.readFileSync("./pages/article/read.html").toString());
             res.write(template({
                 name: req.params.name,
                 admin_button: `

@@ -19,7 +19,7 @@ app.get("/discuss/:name", (req, res) => {
             if (!r || !req.params.name)
                 res.redirect("/article");
             else {
-                const template = handlebars.compile(fs.readFileSync("./views/discuss/discuss.html").toString());
+                const template = handlebars.compile(fs.readFileSync("./pages/discuss/discuss.html").toString());
                 res.end(template({
                     name: req.params.name,
                     user: Csession.userID ? Csession.userID : "User" + Math.round(Math.random() * 100000)  

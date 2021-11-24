@@ -71,7 +71,7 @@ app.get("/article", (req, res) => {
 app.get("/mostvote", (req, res) => {
     // Init webpage
     Csession = req.session;
-    res.write(fs.readFileSync("./views/article/article.html").toString().trim().replace(/\<\/html\>/, "").replace(/\<\/body\>/, ""));
+    res.write(fs.readFileSync("./pages/article/article.html").toString().trim().replace(/\<\/html\>/, "").replace(/\<\/body\>/, ""));
     // add created article with name matched to webpage
     mongoose.connect(url, settings)
         .then(() => {
