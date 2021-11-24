@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 import nodemailer from "nodemailer";
 // Register mongoose models
-import "../models/article.js";
-import "../models/user.js";
+import "../models/article.mjs";
+import "../models/user.mjs";
 
 // Server port
 export const port = process.env.PORT || 443;
