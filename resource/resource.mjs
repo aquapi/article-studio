@@ -37,6 +37,10 @@ export const transporter = nodemailer.createTransport({
     }
 });
 
+export const errHandler = err => {
+    if (err) throw err;
+}
+
 // Templates
 
 /**
