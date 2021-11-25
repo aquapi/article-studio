@@ -13,7 +13,7 @@ let CurrentUser;
 app.get("/login", (req, res) => {
 	// Check whether the user isn't logged in
 	Csession = req.session;
-    if (Csession && Csession.userID)
+	if (Csession && Csession.userID)
 		res.redirect("/article");
 	fs.readFile("./pages/account/login.html", (err, data) => {
 		if (err) throw err;
@@ -28,7 +28,7 @@ app.get("/login", (req, res) => {
 app.get("/signup", (req, res) => {
 	// Check whether the user isn't logged in
 	Csession = req.session;
-    if (Csession && Csession.userID)
+	if (Csession && Csession.userID)
 		res.redirect("/article");
 	fs.readFile("./pages/account/signup.html", (err, data) => {
 		if (err) throw err;

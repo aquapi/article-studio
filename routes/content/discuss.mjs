@@ -22,7 +22,7 @@ app.get("/discuss/:name", (req, res) => {
                 const template = handlebars.compile(fs.readFileSync("./pages/discuss/discuss.html").toString());
                 res.end(template({
                     name: req.params.name,
-                    user: Csession.userID ? Csession.userID : "User" + Math.round(Math.random() * 100000)  
+                    user: Csession.userID ? Csession.userID : "User" + Math.round(Math.random() * 100000)
                 }));
             }
         })

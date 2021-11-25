@@ -12,7 +12,7 @@ let Csession;
 app.get("/process", (req, res) => {
     Csession = req.session;
     if (!Csession || !Csession.userID)
-		res.redirect("/login");
+        res.redirect("/login");
     mongoose.connect(url, settings)
         .then(() => {
             return DB.sites.findOne({
@@ -54,7 +54,7 @@ app.get("/process", (req, res) => {
 app.get("/article/edit/:name", (req, res) => {
     Csession = req.session;
     if (!Csession || !Csession.userID)
-		res.redirect("/login");
+        res.redirect("/login");
     mongoose.connect(url, settings)
         .then(() => {
             return DB.sites.findOne({
@@ -86,7 +86,7 @@ app.post("/article/save", (req, res) => {
     // Check whether the user is logged in
     Csession = req.session;
     if (!Csession || !Csession.userID)
-		res.redirect("/login");
+        res.redirect("/login");
     mongoose.connect(url, settings)
         .then(() => {
             return DB.sites.findOne({
@@ -128,7 +128,7 @@ app.get("/article/new", (req, res) => {
     // Check whether the user is logged in
     Csession = req.session;
     if (!Csession || !Csession.userID)
-		res.redirect("/login");
+        res.redirect("/login");
     fs.readFile("./pages/article/create.html", (err, data) => {
         if (err) throw err;
         res.write(data);
