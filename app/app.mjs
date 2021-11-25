@@ -2,6 +2,12 @@
 import { next } from './next.mjs';
 await next.prepare();
 
+// Connect to database
+import mongoose from 'mongoose';
+import { url, settings } from "../resource/resource.mjs";
+
+mongoose.connect(url, settings);
+
 // Socket event handler
 import '../routes/socket/event.mjs';
 
