@@ -6,5 +6,6 @@ export default {
     modern: true,
     experimental: {
         esmExternals: true,
-    }
+    },
+    useFileSystemPublicRoutes: false
 };
