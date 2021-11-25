@@ -1,6 +1,6 @@
 // Next server config
-import { next_server } from './next.mjs';
-await next_server.prepare();
+import { next } from './next.mjs';
+await next.prepare();
 
 // Socket event handler
 import '../routes/socket/event.mjs';

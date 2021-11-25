@@ -23,9 +23,6 @@ export const socket = new Server(server);
 // Use resources in public directory
 app.use(express.static("public"));
 
-// views directory
-app.set('views', './views');
-
 // Use for GET and POST request
 app.use(express.json({ limit: '200mb' }));
 app.use(express.urlencoded({
