@@ -1,6 +1,5 @@
-import { url, settings, DB } from "../../resource/resource.mjs";
+import { DB } from "../../resource/resource.mjs";
 import app from "../../app/config.mjs";
-import mongoose from "mongoose";
 import handlebars from "handlebars";
 import fs from "fs";
 import Article from "../../models/article.mjs";
@@ -13,12 +12,9 @@ app.get("/process", (req, res) => {
     Csession = req.session;
     if (!Csession || !Csession.userID)
         res.redirect("/login");
-    mongoose.connect(url, settings)
-        .then(() => {
-            return DB.sites.findOne({
-                name: req.query.name
-            });
-        })
+    DB.sites.findOne({
+        name: req.query.name
+    })
         .then(result => {
             // Check whether req.query.name is duplicated
             if (result) {
@@ -55,12 +51,9 @@ app.get("/article/edit/:name", (req, res) => {
     Csession = req.session;
     if (!Csession || !Csession.userID)
         res.redirect("/login");
-    mongoose.connect(url, settings)
-        .then(() => {
-            return DB.sites.findOne({
-                name: req.params.name ? req.params.name : ""
-            });
-        })
+    DB.sites.findOne({
+        name: req.params.name ? req.params.name : ""
+    })
         .then(r => {
             if (r && r.user == Csession.userID) {
                 let compileOBJ = {
@@ -87,12 +80,9 @@ app.post("/article/save", (req, res) => {
     Csession = req.session;
     if (!Csession || !Csession.userID)
         res.redirect("/login");
-    mongoose.connect(url, settings)
-        .then(() => {
-            return DB.sites.findOne({
-                name: req.body.name ? req.body.name : ""
-            });
-        })
+    DB.sites.findOne({
+        name: req.body.name ? req.body.name : ""
+    })
         .then(r => {
             if (r && r.user && Csession.userID === r.user) {
                 return DB.sites.replaceOne(r,

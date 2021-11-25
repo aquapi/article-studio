@@ -1,6 +1,4 @@
 import {
-	url,
-	settings,
 	DB,
 	ArticleTemplate,
 	ScriptTemplate,
@@ -10,7 +8,6 @@ import {
 	InitLoginScreen,
 	SortByComponent
 } from "../../resource/resource.mjs";
-import mongoose from "mongoose";
 import fs from "fs";
 import app from "../../app/config.mjs";
 
@@ -26,12 +23,9 @@ app.get("/myarticle", (req, res) => {
 	// Init webpage
 	res.write(fs.readFileSync("./pages/article/article.html"));
 	// add created article with name matched to webpage 
-	mongoose.connect(url, settings)
-		.then(() => {
-			return DB.sites.find({
-				user: Csession.userID
-			});
-		})
+	DB.sites.find({
+		user: Csession.userID
+	})
 		.then(r => {
 			let script = "";
 			let article = [];
@@ -87,10 +81,7 @@ app.get("/otherarticle", (req, res) => {
 	// Init webpage
 	res.write(fs.readFileSync("./pages/article/article.html"));
 	// add created article with name matched to webpage
-	mongoose.connect(url, settings)
-		.then(() => {
-			return DB.sites.find({});
-		})
+	DB.sites.find({})
 		.then(r => {
 			let script = "";
 			let article = [];

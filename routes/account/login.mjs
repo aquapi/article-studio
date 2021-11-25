@@ -1,6 +1,5 @@
-import { url, DB, settings, transporter } from "../../resource/resource.mjs";
+import { DB, transporter } from "../../resource/resource.mjs";
 import app from "../../app/config.mjs";
-import mongoose from "mongoose";
 import User from "../../models/user.mjs";
 import fs from "fs";
 
@@ -39,14 +38,10 @@ app.get("/signup", (req, res) => {
 
 // login process
 app.post("/loginprocess", (req, res) => {
-	mongoose
-		.connect(url, settings)
-		.then(() => {
-			return DB.users.findOne({
-				username: req.body.name,
-				password: req.body.pass,
-			});
-		})
+	DB.users.findOne({
+		username: req.body.name,
+		password: req.body.pass,
+	})
 		.then((r) => {
 			res.contentType("html");
 			if (!r)
@@ -73,13 +68,9 @@ app.post("/loginprocess", (req, res) => {
 
 // sign up process
 app.post("/signupprocess", (req, res) => {
-	mongoose
-		.connect(url, settings)
-		.then(() => {
-			return DB.users.findOne({
-				username: req.body.name,
-			});
-		})
+	DB.users.findOne({
+		username: req.body.name,
+	})
 		.then(r => {
 			if (!r) {
 				transporter.sendMail({

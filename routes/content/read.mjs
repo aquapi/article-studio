@@ -1,6 +1,5 @@
-import { url, DB, settings } from "../../resource/resource.mjs";
+import { DB } from "../../resource/resource.mjs";
 import app from "../../app/config.mjs";
-import mongoose from "mongoose";
 import handlebars from "handlebars";
 import fs from "fs";
 
@@ -12,12 +11,9 @@ app.get("/reader/:name", (req, res) => {
     // Check whether '/reader' has been provided with a 'name' parameter
     if (!req.params || !req.params.name)
         res.redirect("/article");
-    mongoose.connect(url, settings)
-        .then(() => {
-            return DB.sites.findOne({
-                name: req.params.name
-            });
-        })
+    DB.sites.findOne({
+        name: req.params.name
+    })
         .then(r => {
             let template = handlebars.compile(fs.readFileSync("./pages/article/read.html").toString());
             res.write(template({
@@ -60,12 +56,9 @@ app.get("/vote/:name", (req, res) => {
     // Check whether '/vote' has been provided with a 'name' parameter
     if (!req.params || !req.params.name)
         res.redirect("/article");
-    mongoose.connect(url, settings)
-        .then(() => {
-            return DB.sites.findOne({
-                name: req.params.name
-            });
-        })
+    DB.sites.findOne({
+        name: req.params.name
+    })
         .then(r => {
             if (r.user !== Csession.userID) {
                 return DB.sites.replaceOne(r, {

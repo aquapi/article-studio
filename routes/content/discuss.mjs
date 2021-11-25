@@ -1,6 +1,5 @@
 import app from "../../app/config.mjs";
-import { DB, settings, url } from "../../resource/resource.mjs"
-import mongoose from "mongoose";
+import { DB } from "../../resource/resource.mjs"
 import fs from "fs";
 import handlebars from "handlebars";
 
@@ -9,12 +8,9 @@ let Csession;
 // Discuss page
 app.get("/discuss/:name", (req, res) => {
     Csession = req.session;
-    mongoose.connect(url, settings)
-        .then(() => {
-            return DB.sites.find({
-                name: req.params.name
-            });
-        })
+    DB.sites.find({
+        name: req.params.name
+    })
         .then(r => {
             if (!r || !req.params.name)
                 res.redirect("/article");

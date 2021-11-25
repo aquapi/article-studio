@@ -1,6 +1,4 @@
 import {
-    url,
-    settings,
     DB,
     ArticleTemplate,
     ScriptTemplate,
@@ -11,7 +9,6 @@ import {
     SortByComponent
 } from "../../resource/resource.mjs";
 import app from "../../app/config.mjs";
-import mongoose from "mongoose";
 import fs from "fs";
 
 let Csession;
@@ -23,10 +20,7 @@ app.get("/article", (req, res) => {
     Csession = req.session;
     res.write(fs.readFileSync("./pages/article/article.html").toString().trim().replace(/\<\/html\>/, "").replace(/\<\/body\>/, ""));
     // add created article with name matched to webpage
-    mongoose.connect(url, settings)
-        .then(() => {
-            return DB.sites.find({});
-        })
+    DB.sites.find({})
         .then(r => {
             let script = "";
             let article = [];
@@ -73,10 +67,7 @@ app.get("/mostvote", (req, res) => {
     Csession = req.session;
     res.write(fs.readFileSync("./pages/article/article.html").toString().trim().replace(/\<\/html\>/, "").replace(/\<\/body\>/, ""));
     // add created article with name matched to webpage
-    mongoose.connect(url, settings)
-        .then(() => {
-            return DB.sites.find({});
-        })
+    DB.sites.find({})
         .then(r => {
             let script = "";
             let article = [];

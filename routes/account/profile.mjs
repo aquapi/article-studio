@@ -1,7 +1,6 @@
 import fs from "fs";
 import handlebars from "handlebars";
-import mongoose from "mongoose";
-import { DB, settings, url } from "../../resource/resource.mjs";
+import { DB } from "../../resource/resource.mjs";
 import app from "../../app/config.mjs";
 
 let Csession;
@@ -9,12 +8,9 @@ let Csession;
 // User's Profile
 app.get("/article/profile", (req, res) => {
     Csession = req.session;
-    mongoose.connect(url, settings)
-        .then(() => {
-            return DB.users.findOne({
-                username: Csession.userID ? Csession.userID : ""
-            })
-        })
+    DB.users.findOne({
+        username: Csession.userID ? Csession.userID : ""
+    })
         .then(r => {
             if (!r || !r.username || !r.password)
                 res.redirect("/login");
