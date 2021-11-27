@@ -19,3 +19,7 @@ h3 {
     font-family: "Lora", sans-serif;
     font-weight: 400;
 }
+
+hr {
+    margin-bottom: 20px;
+}
