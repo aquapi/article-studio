@@ -2,10 +2,12 @@
  * @type {import('next').NextConfig}
  */
 
-export default {
+const config = {
     modern: true,
     experimental: {
         esmExternals: true,
     },
-    useFileSystemPublicRoutes: false
-};
+    useFileSystemPublicRoutes: false,
+}
+
+export default config;
