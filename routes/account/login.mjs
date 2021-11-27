@@ -14,7 +14,7 @@ app.get("/login", (req, res) => {
 	Csession = req.session;
 	if (Csession && Csession.userID)
 		res.redirect("/article");
-	return next.render(req, res, "/account/login/main");
+	return next.render(req, res, "/account/login");
 });
 
 // Sign up page
@@ -25,7 +25,7 @@ app.get("/signup", (req, res) => {
 	Csession = req.session;
 	if (Csession && Csession.userID)
 		res.redirect("/article");
-	return next.render(req, res, "/account/signup/main");
+	return next.render(req, res, "/account/signup");
 });
 
 // login process

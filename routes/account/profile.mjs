@@ -13,5 +13,5 @@ app.get("/article/profile", async (req, res) => {
     const pass = await mongoose.model("User").findOne({
         username: name
     }).then(r => r && r.password ? r.password : "No password");
-    return next.render(req, res, "/account/profile/main", { name: name, pass: pass });
+    return next.render(req, res, "/account/profile", { name: name, pass: pass });
 });
