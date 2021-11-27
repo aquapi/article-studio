@@ -1,32 +1,17 @@
-import fs from "fs";
-import handlebars from "handlebars";
-import { DB } from "../../resource/resource.mjs";
 import app from "../../app/config.mjs";
+import { next } from "../../app/next.mjs";
+import mongoose from "mongoose"
 
 let Csession;
 
 // User's Profile
-app.get("/article/profile", (req, res) => {
+app.get("/article/profile", async (req, res) => {
     Csession = req.session;
-    DB.users.findOne({
-        username: Csession.userID ? Csession.userID : ""
-    })
-        .then(r => {
-            if (!r || !r.username || !r.password)
-                res.redirect("/login");
-            else {
-                fs.readFile("./pages/account/profile.html", (err, data) => {
-                    if (err) throw err;
-                    let template = handlebars.compile(data.toString());
-                    res.write(template({
-                        name: r.username,
-                        pass: r.password
-                    }));
-                    return res.end();
-                });
-            }
-        })
-        .catch(err => {
-            throw err;
-        });
+    if (!Csession && !Csession.userID)
+        res.redirect("/login");
+    const name = req.session && req.session.userID ? req.session.userID : "";
+    const pass = await mongoose.model("User").findOne({
+        username: name
+    }).then(r => r && r.password ? r.password : "No password");
+    return next.render(req, res, "/account/profile/main", { name: name, pass: pass });
 });

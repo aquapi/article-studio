@@ -1,7 +1,7 @@
 import { DB, transporter } from "../../resource/resource.mjs";
 import app from "../../app/config.mjs";
 import User from "../../models/user.mjs";
-import fs from "fs";
+import { next } from "../../app/next.mjs";
 
 let Csession;
 let CurrentUser;
@@ -14,11 +14,7 @@ app.get("/login", (req, res) => {
 	Csession = req.session;
 	if (Csession && Csession.userID)
 		res.redirect("/article");
-	fs.readFile("./pages/account/login.html", (err, data) => {
-		if (err) throw err;
-		res.write(data);
-		return res.end();
-	});
+	return next.render(req, res, "/account/login/main");
 });
 
 // Sign up page
@@ -29,11 +25,7 @@ app.get("/signup", (req, res) => {
 	Csession = req.session;
 	if (Csession && Csession.userID)
 		res.redirect("/article");
-	fs.readFile("./pages/account/signup.html", (err, data) => {
-		if (err) throw err;
-		res.write(data);
-		return res.end();
-	});
+	return next.render(req, res, "/account/signup/main");
 });
 
 // login process
