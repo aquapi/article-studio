@@ -2,6 +2,7 @@
     "ignore": [
         ".git",
         "node_modules",
-        "public/javascripts/*"
+        "public/javascripts/*",
+        "pages"
     ]
 }
