@@ -5,6 +5,7 @@ let socket = io();
 let messages = document.getElementById('messages');
 let form = document.getElementById('form');
 let input = document.getElementById('input');
+let data = document.querySelectorAll("span");
 
 // User ID if they haven't signed in
 let rnd = Math.round(Math.random() * 1000000);
@@ -20,7 +21,7 @@ form.addEventListener('submit', (e) => {
          * @param {string} CurrentUser Current user 
          */
 
-        socket.emit('chat message', input.value, rnd, document.querySelector("span").innerHTML);
+        socket.emit('chat message', input.value, rnd, data.item(0).innerHTML);
 
         // Reset input form after send message
         input.value = '';
@@ -45,3 +46,7 @@ socket.on('chat message', (msg, textAlign, user) => {
     messages.appendChild(item);
     window.scrollTo(0, document.body.scrollHeight);
 });
+
+// Event listeners
+document.getElementById("refress").addEventListener("click", () => location.reload());
+document.getElementById("back").addEventListener("click", () => location.replace(`/reader/${encodeURIComponent(data.item(1).innerHTML)}`));
