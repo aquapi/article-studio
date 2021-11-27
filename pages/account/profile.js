@@ -1,4 +1,4 @@
-import Head from "../component/head-profile";
+import Head from "../components/head-profile";
 
 export default ({ name, pass }) => {
     return (
