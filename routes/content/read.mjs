@@ -15,6 +15,10 @@ app.get("/reader/:name", (req, res) => {
         name: req.params.name
     })
         .then(r => {
+            if (!r) {
+                res.redirect("/article");
+                return;
+            }
             let template = handlebars.compile(fs.readFileSync("./pages/article/read.html").toString());
             res.write(template({
                 name: req.params.name,
