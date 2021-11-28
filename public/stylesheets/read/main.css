@@ -1,14 +1,23 @@
 @import "./navbuttons.css";
 
 body {
-    padding: 50px;
     font-family: "Oxygen", sans-serif !important;
     font-size: 13px;
     font-weight: 300;
     letter-spacing: 0.5px;
+    padding: 5vh;
 } 
 
 h1, h2, h3, h4, h5, h6 {
     font-family: "Lora", sans-serif;
     font-weight: 400;
+}
+
+span {
+    display: none;
+}
+
+#__next {
+    width: 95vw;
+    height: 95vh;
 }
