@@ -1,7 +1,6 @@
 import { DB } from "../../resource/resource.mjs";
 import app from "../../app/config.mjs";
 import { next } from "../../app/next.mjs";
-import fs from "fs";
 import Article from "../../models/article.mjs";
 
 let Csession;
@@ -112,9 +111,5 @@ app.get("/article/new", (req, res) => {
     Csession = req.session;
     if (!Csession || !Csession.userID)
         res.redirect("/login");
-    fs.readFile("./pages/article/create.html", (err, data) => {
-        if (err) throw err;
-        res.write(data);
-        return res.end();
-    });
+    return next.render(req, res, "/article/create");
 });
