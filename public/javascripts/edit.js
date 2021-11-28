@@ -78,6 +78,13 @@ async function main() {
             noHeaderId: true
         }).makeHtml(document.querySelector('textarea').value) + "<style>body {font-family: Corbel}</style>";
     });
+
+    // Back button
+
+    document.querySelector('#back').addEventListener('click', () => {
+        const name = document.querySelectorAll("span").item(0).innerHTML;
+        location.replace(`/reader/${encodeURIComponent(name)}`);
+    });
 }
 
 // Run main

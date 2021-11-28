@@ -9,3 +9,7 @@ body {
 form#result {
     display: none;
 }
+
+span {
+    display: none;
+}
