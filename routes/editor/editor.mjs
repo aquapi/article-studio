@@ -1,6 +1,6 @@
 import { DB } from "../../resource/resource.mjs";
 import app from "../../app/config.mjs";
-import handlebars from "handlebars";
+import { next } from "../../app/next.mjs";
 import fs from "fs";
 import Article from "../../models/article.mjs";
 
@@ -47,30 +47,23 @@ app.get("/process", (req, res) => {
 // Edit articles
 // https://localhost/article/edit
 
-app.get("/article/edit/:name", (req, res) => {
+app.get("/article/edit/:name", async (req, res) => {
     Csession = req.session;
     if (!Csession || !Csession.userID)
         res.redirect("/login");
-    DB.sites.findOne({
+    const r = await DB.sites.findOne({
         name: req.params.name ? req.params.name : ""
-    })
-        .then(r => {
-            if (r && r.user == Csession.userID) {
-                let compileOBJ = {
-                    name: req.params.name,
-                    image_url: r && r.display_img && r.display_img !== "undefined" ? r.display_img : "Display image url",
-                    md_content: r.content.split("<style>body {font-family: Corbel}</style>")[0]
-                };
-
-                let template = handlebars.compile(fs.readFileSync("./pages/edit/edit.html").toString());
-                res.write(template(compileOBJ));
-            } else
-                res.redirect("/login");
-            res.end();
-        })
-        .catch(err => {
-            throw err;
-        })
+    }).then(r => r);
+    if (r && r.user == Csession.userID) {
+        let compileOBJ = {
+            name: req.params.name,
+            image_url: r && r.display_img && r.display_img !== "undefined" ? r.display_img : "Display image url",
+            md_content: r.content.split("<style>body {font-family: Corbel}</style>")[0]
+        };
+        return next.render(req, res, "/edit/edit", compileOBJ);
+    } else
+        res.redirect("/login");
+    res.end();
 });
 
 // Save changes of articles
