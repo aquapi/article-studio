@@ -1,0 +1,1 @@
+document.getElementById("back").addEventListener("click", () => location.replace('/article'))

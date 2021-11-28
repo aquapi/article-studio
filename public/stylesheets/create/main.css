@@ -5,9 +5,15 @@
     letter-spacing: 0.5px;
 }
 
+#__next {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 body {
-    padding: 50px;
     background-color: #333;
     display: flex;
     justify-content: center;
