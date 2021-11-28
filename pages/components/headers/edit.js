@@ -25,4 +25,5 @@ export default ({ name }) => (
     </Head>
 )
 
+// Empty
 export const getServerSideProps = () => ({});
