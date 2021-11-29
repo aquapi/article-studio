@@ -97,6 +97,7 @@ export const Header = (name) => {
 
 export const InitCategory = (ct, res, articles) => {
     const length = articles.length;
+    const sorted = [];
     for (let i = 0; i < length; i++) {
         let mostViewsIndex = 0;
         let currentMost = Number.MIN_VALUE;
@@ -109,8 +110,10 @@ export const InitCategory = (ct, res, articles) => {
             index++;
         }
         res.write(articles[mostViewsIndex].content);
+        sorted.push(articles[mostViewsIndex].content);
         articles.splice(mostViewsIndex, 1);
     }
+    return sorted;
 }
 
 /**
@@ -164,11 +167,11 @@ export const EndScript = (Csession, headerName) => {
 
 export const InitLoginScreen = (res, Csession) => {
     if (!Csession.userID)
-        res.write(`</div><script>
+        res.write(`<script>
             document.querySelector("#new").style.display = "none";
         </script>`)
     else {
-        res.write(`</div><script>
+        res.write(`<script>
             document.querySelector("#sign").innerHTML = "PROFILE";
             document.querySelector("#login").style.display = "none";
         </script>`)
