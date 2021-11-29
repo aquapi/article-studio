@@ -95,7 +95,7 @@ export const Header = (name) => {
  * @param {any[]} articles list
  */
 
-export const InitCategory = (ct, res, articles) => {
+export const InitCategory = (ct, articles) => {
     const length = articles.length;
     const sorted = [];
     for (let i = 0; i < length; i++) {
@@ -109,8 +109,7 @@ export const InitCategory = (ct, res, articles) => {
             }
             index++;
         }
-        res.write(articles[mostViewsIndex].content);
-        sorted.push(articles[mostViewsIndex].content);
+        sorted.push(articles[mostViewsIndex]);
         articles.splice(mostViewsIndex, 1);
     }
     return sorted;
@@ -124,18 +123,16 @@ export const InitCategory = (ct, res, articles) => {
 
 export const EndScript = (Csession, headerName) => {
     return `
-    <script>
-    document.querySelector("#new").addEventListener("click", () => {
-        location.replace("/article/new");
-    });
-    $(".wait").css("display", "block");
-    $("#created-article").css("display", 'flex');
-    $("body").css("display", 'block');
-    $("#sign").click(() => {
-        ${!Csession.userID ? "location.replace('/signup');" : "location.replace('/article/profile');"}
-    });
-    </script>
-    <script>
+        <script>
+        document.querySelector("#new").addEventListener("click", () => {
+            location.replace("/article/new");
+        });
+        $(".wait").css("display", "block");
+        $("#created-article").css("display", 'flex');
+        $("body").css("display", 'block');
+        $("#sign").click(() => {
+            ${!Csession.userID ? "location.replace('/signup');" : "location.replace('/article/profile');"}
+        });
         $("body").scrollTop();  
         $("input[type=text]").keyup(() => {
             document.querySelector("#header-name").innerHTML = $("input[type=text]").val() ? "Search Result" : "${headerName}";
@@ -154,8 +151,7 @@ export const EndScript = (Csession, headerName) => {
             else 
                 document.querySelector("#created-article").style["justify-content"] = "center";
         })
-    </script>
-    </body></html>
+        </script>
     `;
 }
 
@@ -165,17 +161,16 @@ export const EndScript = (Csession, headerName) => {
  * @param {session.Session & Partial<session.SessionData>} Csession current session
  */
 
-export const InitLoginScreen = (res, Csession) => {
-    if (!Csession.userID)
-        res.write(`<script>
-            document.querySelector("#new").style.display = "none";
-        </script>`)
-    else {
-        res.write(`<script>
+export const InitLoginScreen = (Csession) => {
+    return `<script>
+        ${!Csession.userID ?
+            `document.querySelector("#new").style.display = "none";` :
+            `
             document.querySelector("#sign").innerHTML = "PROFILE";
             document.querySelector("#login").style.display = "none";
-        </script>`)
-    }
+            `
+        }
+    </script>`;
 }
 
 /**
