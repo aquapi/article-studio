@@ -52,7 +52,7 @@ app.get("/article/edit/:name", async (req, res) => {
         res.redirect("/login");
     const r = await DB.sites.findOne({
         name: req.params.name ? req.params.name : ""
-    }).then(r => r);
+    });
     if (r && r.user == Csession.userID) {
         let compileOBJ = {
             name: req.params.name,
