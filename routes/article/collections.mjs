@@ -52,7 +52,7 @@ app.get("/myarticle", (req, res) => {
 			// Init articles
 			const length = article.length;
 			InitCategory("views", res, article);
-			res.write("</div>");
+			res.write("</div></div>");
 
 			// Load javascript in webpage
 			InitLoginScreen(res, Csession);
@@ -109,7 +109,7 @@ app.get("/otherarticle", (req, res) => {
 			const length = article.length;
 			// Init articles
 			InitCategory("views", res, article);
-			res.write("</div>");
+			res.write("</div></div>");
 
 			// Load javascript in webpage
 			InitLoginScreen(res, Csession);

@@ -32,7 +32,8 @@ app.get("/article", (req, res) => {
                     content: ArticleTemplate(i),
                     views: i.views ? i.views : 0,
                     author: i.user,
-                    votes: i.votes
+                    votes: i.votes,
+                    data: i
                 });
                 script += ScriptTemplate(i);
             }
@@ -47,7 +48,7 @@ app.get("/article", (req, res) => {
 
             // Init articles
             InitCategory("views", res, article);
-            res.write("</div>");
+            res.write("</div></div>");
 
             // Load javascript in webpage
             InitLoginScreen(res, Csession);
@@ -94,7 +95,7 @@ app.get("/mostvote", (req, res) => {
 
             // Init articles
             InitCategory("votes", res, article);
-            res.write("</div>");
+            res.write("</div></div>");
 
             // Load javascript in webpage
             InitLoginScreen(res, Csession);
