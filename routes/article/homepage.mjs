@@ -34,7 +34,7 @@ app.get("/article", async (req, res) => {
     // Header
     res.write(Header("Discover"));
     // Created articles
-    res.write("<div style='display: none; overflow-x: scroll; overflow-y: hidden, max-height: 504px' id='created-article'>");
+    res.write("<div id='created-article'>");
     for (let i of r) {
         article.push({
             content: ArticleTemplate(i),
@@ -90,7 +90,7 @@ app.get("/mostvote", async (req, res) => {
     // Header
     res.write(Header("Most Voted"));
     // Created article
-    res.write("<div style='display: none; overflow-x: scroll; overflow-y: hidden, max-height: 504px' id='created-article'>");
+    res.write("<div id='created-article'>");
     // Add articles from database
     for (let i of r) {
         article.push({

@@ -39,7 +39,7 @@ app.get("/myarticle", async (req, res) => {
 	// Header
 	res.write(Header("My Articles"));
 	// Articles
-	res.write("<div style='display: none; overflow-x: scroll; overflow-y: hidden, max-height: 504px' id='created-article'>");
+	res.write("<div id='created-article'>");
 	for (let i of r) {
 		article.push({
 			content: ArticleTemplate(i),
@@ -105,7 +105,7 @@ app.get("/otherarticle", async (req, res) => {
 	// Header
 	res.write(Header("Other Articles"));
 	// Articles
-	res.write("<div style='display: none; overflow-x: scroll; overflow-y: hidden, max-height: 504px' id='created-article'>");
+	res.write("<div id='created-article'>");
 	for (let i of r) {
 		if (i.user !== Csession.userID) {
 			article.push({
