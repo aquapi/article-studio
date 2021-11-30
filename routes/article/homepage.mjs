@@ -4,8 +4,6 @@ import {
     ScriptTemplate,
     Header,
     InitCategory,
-    EndScript,
-    InitLoginScreen,
     SortByComponent
 } from "../../resource/resource.mjs";
 import app from "../../app/config.mjs";
@@ -26,6 +24,11 @@ app.get("/article", async (req, res) => {
      * @type {{content: string, views: number, author: string, votes: number}[]}
      */
     let article = [];
+    // Init hidden data
+    res.write(`
+        <span style="display: none">${Csession.userID}</span>
+        <span style="display: none">Discover</span>
+    `)
     // All lists of articles link
     res.write(SortByComponent(!!Csession.userID));
     // Header
@@ -58,9 +61,9 @@ app.get("/article", async (req, res) => {
     res.write("</div>");
 
     // Load javascript in webpage
-    res.write(InitLoginScreen(Csession));
+    res.write(`<script src="/javascripts/homepage/navbuttons.js"></script>`);
     res.write(`<script>${script}</script>`);
-    res.end(EndScript(Csession, "Discover"));
+    res.end('<script src="/javascripts/homepage/endscript.js"></script>');
 });
 
 // Most Vote
@@ -77,6 +80,11 @@ app.get("/mostvote", async (req, res) => {
      * @type {{content: string, views: number, author: string, votes: number}[]}
      */
     let article = [];
+    // Init data
+    res.write(`
+        <span style="display: none">${Csession.userID}</span>
+        <span style="display: none">Most Voted</span>
+    `)
     // All lists of articles link
     res.write(SortByComponent(!!Csession.userID))
     // Header
@@ -110,9 +118,9 @@ app.get("/mostvote", async (req, res) => {
     res.write("</div>");
 
     // Load javascript in webpage
-    res.write(InitLoginScreen(Csession));
+    res.write(`<script src="/javascripts/homepage/navbuttons.js"></script>`);
     // All scripts
     res.write(`<script>${script}</script>`);
     // End scripts
-    res.end(EndScript(Csession, "Most Voted"));
+    res.end('<script src="/javascripts/homepage/endscript.js"></script>');
 });

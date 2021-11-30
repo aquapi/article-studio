@@ -4,8 +4,6 @@ import {
 	ScriptTemplate,
 	InitCategory,
 	Header,
-	EndScript,
-	InitLoginScreen,
 	SortByComponent
 } from "../../resource/resource.mjs";
 import fs from "fs";
@@ -31,6 +29,11 @@ app.get("/myarticle", async (req, res) => {
 	 * @type {{content: string, views: number, author: string, votes: number}[]}
 	 */
 	let article = [];
+	// Init hidden data
+	res.write(`
+        <span style="display: none">${Csession.userID}</span>
+        <span style="display: none">My Articles</span>
+    `)
 	// All lists of articles
 	res.write(SortByComponent(true));
 	// Header
@@ -64,7 +67,7 @@ app.get("/myarticle", async (req, res) => {
 	res.write("</div>");
 
 	// Load javascript in webpage
-	res.write(InitLoginScreen(Csession));
+	res.write(`<script src="/javascripts/homepage/navbuttons.js"></script>`);
 	res.write(`<script>${script}</script>`)
 	// Check if no article found
 	if (length === 0) {
@@ -72,7 +75,7 @@ app.get("/myarticle", async (req, res) => {
             location.replace("/article")
         </script>`)
 	}
-	res.end(EndScript(Csession, "My Articles"));
+	res.end('<script src="/javascripts/homepage/endscript.js"></script>');
 });
 
 // Other article subpage: Show all articles created by others
@@ -92,6 +95,11 @@ app.get("/otherarticle", async (req, res) => {
 	 * @type {{content: string, views: number, author: string, votes: number}[]}
 	 */
 	let article = [];
+	// Init hidden data
+	res.write(`
+        <span style="display: none">${Csession.userID}</span>
+        <span style="display: none">Other Articles</span>
+    `)
 	// All lists of articles
 	res.write(SortByComponent(true));
 	// Header
@@ -125,7 +133,7 @@ app.get("/otherarticle", async (req, res) => {
 	res.write("</div>");
 
 	// Load javascript in webpage
-	res.write(InitLoginScreen(Csession));
+	res.write(`<script src="/javascripts/homepage/navbuttons.js"></script>`);
 	res.write(`<script>${script}</script>`);
 	// Check if no article found
 	if (length === 0) {
@@ -133,5 +141,5 @@ app.get("/otherarticle", async (req, res) => {
             location.replace("/article")
         </script>`)
 	}
-	res.end(EndScript(Csession, "Other Articles"));
+	res.end('<script src="/javascripts/homepage/endscript.js"></script>');
 });
