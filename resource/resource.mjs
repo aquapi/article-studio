@@ -116,64 +116,6 @@ export const InitCategory = (ct, articles) => {
 }
 
 /**
- * @param {session.Session & Partial<session.SessionData>} Csession current session
- * @param {string} headerName current header
- * @returns rendered scripts
- */
-
-export const EndScript = (Csession, headerName) => {
-    return `
-        <script>
-        document.querySelector("#new").addEventListener("click", () => {
-            location.replace("/article/new");
-        });
-        $(".wait").css("display", "block");
-        $("#created-article").css("display", 'flex');
-        $("body").css("display", 'block');
-        $("#sign").click(() => {
-            ${!Csession.userID ? "location.replace('/signup');" : "location.replace('/article/profile');"}
-        });
-        $("body").scrollTop();  
-        $("input[type=text]").keyup(() => {
-            document.querySelector("#header-name").innerHTML = $("input[type=text]").val() ? "Search Result" : "${headerName}";
-            let count = 0, haveResult = false;
-            for (let e of $("#created-article").children("div").toArray()) {
-                let el = e.querySelector("div");
-                if (!$("input[type=text]").val() || contain(el.id.toLowerCase(), $("input[type=text]").val().toLowerCase()) || contain(el.className.toLowerCase(), $("input[type=text]").val().toLowerCase())) {
-                    e.style.display = "block";
-                    count++;
-                    haveResult = true;
-                } else 
-                    e.style.display = "none";
-            }
-            if (count > 4) 
-                document.querySelector("#created-article").style["justify-content"] = "flex-start";
-            else 
-                document.querySelector("#created-article").style["justify-content"] = "center";
-        })
-        </script>
-    `;
-}
-
-/**
- * Check whether user is logged in and init "My article" and "Other article" buttons
- * @param {Response<any, Record<string, any>, number>} res to write result to client
- * @param {session.Session & Partial<session.SessionData>} Csession current session
- */
-
-export const InitLoginScreen = (Csession) => {
-    return `<script>
-        ${!Csession.userID ?
-            `document.querySelector("#new").style.display = "none";` :
-            `
-            document.querySelector("#sign").innerHTML = "PROFILE";
-            document.querySelector("#login").style.display = "none";
-            `
-        }
-    </script>`;
-}
-
-/**
  * @param {boolean} login 
  * @returns rendered lists of sorted articles by category
  */
@@ -184,26 +126,7 @@ export const SortByComponent = (login = false) => {
             <div class="list">Discover</div>
             <div class="list">Most Voted</div>
             ${login ? "<div class='list'>My Article</div><div class='list'>Other Article</div>" : ""}
-            <script>
-                document.querySelectorAll(".list").forEach((e, i) => {
-                    if (i === 0)
-                        e.addEventListener('click', () => {
-                            location.replace("/article");
-                        });
-                    else if (i === 1)
-                        e.addEventListener('click', () => {
-                            location.replace("/mostvote");
-                        });
-                    else if (i === 2)
-                        e.addEventListener('click', () => {
-                            location.replace("/myarticle");
-                        });
-                    else if (i === 3)
-                        e.addEventListener('click', () => {
-                            location.replace("/otherarticle");
-                        });
-                });
-            </script>
+            <script src="/javascripts/homepage/collections.js"></script>
         </div>
     `
 }
