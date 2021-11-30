@@ -6,7 +6,8 @@ await next.prepare();
 import mongoose from 'mongoose';
 import { url, settings } from "../resource/resource.mjs";
 
-mongoose.connect(url, settings);
+// Connect to database
+await mongoose.connect(url, settings).catch(err => console.log(err));
 
 // Socket event handler
 import '../routes/socket/event.mjs';
