@@ -3,6 +3,8 @@
         ".git",
         "node_modules",
         "public/javascripts/*",
-        "pages"
+        "pages/*",
+        "next.config.mjs",
+        ".next/*"
     ]
 }
