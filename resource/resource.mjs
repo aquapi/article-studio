@@ -37,45 +37,6 @@ export const transporter = nodemailer.createTransport({
     }
 });
 
-export const errHandler = err => {
-    if (err) throw err;
-}
-
-// Templates
-
-/**
- * @param {{name: string, display_img: string, tag: string, description: string, user: string, views: number, content: string, votes: number}} i Article data
- * @returns rendered div
- */
-
-export const ArticleTemplate = (i) => {
-    return `
-        <div class="created">
-            <div id="${i.name}" style="display: flex; flex-direction: column; justify-content: center; overflow: hidden; max-height: 480.63px" class="${i.tag}">
-                <img src="${i.display_img && i.display_img !== "undefined" && i.display_img !== "Display image url" ? i.display_img : "images/image-icon.jpg"}" height="150px" width="276px" onerror="this.src = 'images/image-icon.jpg'">
-                <h3>${i.name.length <= 21 ? i.name : i.name.slice(0, 21) + "..."}</h3>
-                <div style="max-width: 250px; text-align: ${i.description.length <= 110 ? "justify" : "left"}; font-size: 13px;" class="article-content">
-                    ${i.description && i.description !== "undefined" ? (i.description.length <= 70 ? i.description : i.description.slice(0, 67) + "...") :
-            "Lorem ipsum dolor sit amet, consectetur adipiscing \
-                    elit, sed do eiusmod..."}
-                </div>
-            </div>
-        </div>
-    `;
-};
-
-/**
- * @param {string} name header name
- * @returns rendered header
- */
-
-export const Header = (name) => {
-    return `
-        <h2 style="font-family: Oxygen" id="header-name">${name}</h2>
-        <hr style="width: 10%">
-    `;
-}
-
 /**
  * @param {string} ct category name
  * @param {Response<any, Record<string, any>, number>} res to write the result to the client
@@ -100,20 +61,4 @@ export const InitCategory = (ct, articles) => {
         articles.splice(mostViewsIndex, 1);
     }
     return sorted;
-}
-
-/**
- * @param {boolean} login 
- * @returns rendered lists of sorted articles by category
- */
-
-export const SortByComponent = (login = false) => {
-    return `
-        <div id="sort">
-            <div class="list">Discover</div>
-            <div class="list">Most Voted</div>
-            ${login ? "<div class='list'>My Article</div><div class='list'>Other Article</div>" : ""}
-            <script src="/javascripts/homepage/collections.js"></script>
-        </div>
-    `
 }
