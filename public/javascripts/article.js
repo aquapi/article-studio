@@ -63,11 +63,11 @@ document.querySelector("#login").addEventListener("click", () => {
 });
 
 // Search bar fade in/out
-$(".input > button").click(e => {
+$(".input > button").click(() => {
     $(".search-bar").fadeIn(600);
 });
 
-$("#inner").click(e => {
+$("#inner").click(() => {
     $(".search-bar").fadeOut(600);
 });
 
