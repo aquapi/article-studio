@@ -40,7 +40,7 @@ app.get("/reader/:name", async (req, res) => {
                 <button style="display: ${r.user === Csession.userID ? 'block' : 'none'};" id="del">Delete</button>
                 <button onclick='location.replace("/vote/${encodeURIComponent(r.name)}")' style="display: ${r.user === Csession.userID ? 'none' : 'block'};">Vote</button>
                 `,
-        content: r && r.content ? r.content : `This article have no content`,
+        content: r?.content ?? `This article have no content`,
         views: r.views,
         author: r.user,
         tag: r.tag,
@@ -49,33 +49,25 @@ app.get("/reader/:name", async (req, res) => {
 });
 
 // Vote
-app.get("/vote/:name", (req, res) => {
+app.get("/vote/:name", async (req, res) => {
     Csession = req.session;
     // Check whether '/vote' has been provided with a 'name' parameter
     if (!req.params || !req.params.name)
         res.redirect("/article");
-    DB.sites.findOne({
+    const r = await DB.sites.findOne({
         name: req.params.name
-    })
-        .then(r => {
-            if (r.user !== Csession.userID) {
-                return DB.sites.replaceOne(r, {
-                    user: r.user,
-                    name: r.name,
-                    content: r.content,
-                    display_img: r.display_img,
-                    description: r.description,
-                    views: r.views,
-                    tag: r.tag,
-                    votes: r.votes + 1
-                });
-            }
-        })
-        .then(r => {
-            res.end(`<script>location.replace("/reader/${encodeURIComponent(req.params.name)}")</script>`);
-            return;
-        })
-        .catch(err => {
-            throw err;
+    });
+    if (r.user !== Csession.userID) {
+        await DB.sites.replaceOne(r, {
+            user: r.user,
+            name: r.name,
+            content: r.content,
+            display_img: r.display_img,
+            description: r.description,
+            views: r.views,
+            tag: r.tag,
+            votes: r.votes + 1
         });
+    }
+    res.redirect(`/reader/${encodeURIComponent(req.params.name)}`);
 });

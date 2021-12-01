@@ -38,7 +38,7 @@ app.get("/article", async (req, res) => {
     for (let i of r) {
         article.push({
             content: ArticleTemplate(i),
-            views: i.views ? i.views : 0,
+            views: i.views ?? 0,
             author: i.user,
             votes: i.votes
         });
@@ -95,7 +95,7 @@ app.get("/mostvote", async (req, res) => {
     for (let i of r) {
         article.push({
             content: ArticleTemplate(i),
-            views: i.views ? i.views : 0,
+            views: i.views ?? 0,
             author: i.user,
             votes: i.votes
         });

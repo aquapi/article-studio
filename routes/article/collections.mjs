@@ -43,7 +43,7 @@ app.get("/myarticle", async (req, res) => {
 	for (let i of r) {
 		article.push({
 			content: ArticleTemplate(i),
-			views: i.views ? i.views : 0,
+			views: i.views ?? 0,
 			author: i.user
 		});
 		script += ScriptTemplate(i);
@@ -110,7 +110,7 @@ app.get("/otherarticle", async (req, res) => {
 		if (i.user !== Csession.userID) {
 			article.push({
 				content: ArticleTemplate(i),
-				views: i.views ? i.views : 0,
+				views: i.views ?? 0,
 				author: i.user
 			});
 			script += ScriptTemplate(i);

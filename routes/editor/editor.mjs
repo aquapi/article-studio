@@ -56,7 +56,7 @@ app.get("/article/edit/:name", async (req, res) => {
     if (r && r.user == Csession.userID) {
         let compileOBJ = {
             name: req.params.name,
-            image_url: r && r.display_img && r.display_img !== "undefined" ? r.display_img : "Display image url",
+            image_url: r?.display_img && r.display_img !== "undefined" ? r.display_img : "Display image url",
             md_content: r.content.split("<style>body {font-family: Corbel}</style>")[0]
         };
         return next.render(req, res, "/edit/edit", compileOBJ);
@@ -67,41 +67,31 @@ app.get("/article/edit/:name", async (req, res) => {
 
 // Save changes of articles
 
-app.post("/article/save", (req, res) => {
+app.post("/article/save", async (req, res) => {
     // Check whether the user is logged in
     Csession = req.session;
-    if (!Csession || !Csession.userID)
+    if (!Csession?.userID)
         res.redirect("/login");
-    DB.sites.findOne({
+    const r = await DB.sites.findOne({
         name: req.body.name ? req.body.name : ""
     })
-        .then(r => {
-            if (r && r.user && Csession.userID === r.user) {
-                return DB.sites.replaceOne(r,
-                    {
-                        user: r.user,
-                        name: req.body.name,
-                        content: req.body.content,
-                        display_img: req.body.display_img && req.body.display_img !== "Display image url" ? req.body.display_img : "",
-                        description: r.description,
-                        views: r.views,
-                        tag: r.tag ? r.tag : "",
-                        votes: r.votes
-                    }
-                );
-            } else {
-                res.redirect("/login");
+    if (r?.user && Csession.userID === r.user) {
+        await DB.sites.replaceOne(r,
+            {
+                user: r.user,
+                name: req.body.name,
+                content: req.body.content,
+                display_img: req.body.display_img && req.body.display_img !== "Display image url" ? req.body.display_img : "",
+                description: r.description,
+                views: r.views,
+                tag: r.tag ?? "",
+                votes: r.votes
             }
-        })
-        .then(_v => {
-            res.end(`<script>
-            location.replace('/article/edit/${encodeURIComponent(req.body.name)}');
-        </script>`);
-        })
-        .catch(err => {
-            throw err;
-        });
-})
+        );
+        res.redirect(`/article/edit/${encodeURIComponent(req.body.name)}`);
+    } else 
+        res.redirect("/login");
+});
 
 // Create articles
 // https://localhost/article/new
