@@ -29,8 +29,6 @@ app.get("/reader/:name", async (req, res) => {
             views: r.views + 1,
             tag: r.tag,
             votes: r.votes
-        }).catch(err => {
-            throw err;
         });
     // Render
     return next.render(req, res, "/article/read", {

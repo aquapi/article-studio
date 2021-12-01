@@ -22,12 +22,10 @@ app.post("/delete", async (req, res) => {
 
 app.post("/article/delete", async (req, res) => {
     Csession = req.session;
-    if (Csession.userID) {
-        await DB.sites.deleteOne({
-            user: Csession.userID,
-            name: req.body.name
-        });
-    }
+    await DB.sites.deleteOne({
+        user: Csession?.userID ?? "",
+        name: req.body.name
+    });
     // Redirect to homepage
     res.redirect("/article");
 }) 
