@@ -14,9 +14,9 @@ export default ({ Csession, headerName, articles }) => (
             <nav id="nav">
                 {/*Navbar buttons*/}
                 <div style={{ display: 'flex' }} id="nav_button">
-                    <div class="create" id="new">NEW</div>
-                    <div class="create" id="sign">SIGN UP</div>
-                    <div class="create" id="login">LOGIN</div>
+                    <div className="create" id="new">NEW</div>
+                    <div className="create" id="sign">SIGN UP</div>
+                    <div className="create" id="login">LOGIN</div>
                 </div>
                 {/*Navbar search icon*/}
                 <div className="input">
@@ -33,24 +33,21 @@ export default ({ Csession, headerName, articles }) => (
             <div id="inner"></div>
             {/*Banner text*/}
             <div id="banner-text">
-                <h1>
-                    Article Studio</h1>
-                <h6>
-                    A place for creating creative articles
-                </h6>
+                <h1>Article Studio</h1>
+                <h6>A place for creating creative articles</h6>
             </div>
             <div className="banner"></div>
         </div>
         <span style={{ display: 'none' }}>{Csession.userID}</span>
         <span style={{ display: 'none' }}>{headerName}</span>
-        <span style={{ display: 'none' }}>{articles.map(d => d.name)}</span>
+        <span style={{ display: 'none' }}>{articles.map(d => d.name).toString()}</span>
         <script src="/javascripts/article.js"></script>
         <div id="sort">
-            <div class="list">Discover</div>
-            <div class="list">Most Voted</div>
+            <div className="list">Discover</div>
+            <div className="list">Most Voted</div>
             {Csession.userID ? <>
-                <div class='list'>My Article</div>
-                <div class='list'>Other Article</div>
+                <div className='list'>My Article</div>
+                <div className='list'>Other Article</div>
             </> : <></>}
             <script src="/javascripts/homepage/collections.js"></script>
         </div>
