@@ -75,6 +75,4 @@ $("#inner").click(() => {
 initWidthHeight();
 onresize = initWidthHeight;
 
-// If articles count larger than 4
-if (document.getElementsByClassName("created").length > 4) 
-    document.querySelector("#created-article").style["justify-content"] = "flex-start";
+
