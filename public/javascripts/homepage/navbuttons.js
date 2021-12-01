@@ -1,4 +1,4 @@
-if (document.querySelectorAll("span").item(0).innerHTML === "undefined") {
+if (document.querySelectorAll("span").item(0).innerHTML === "" || document.querySelectorAll("span").item(0).innerHTML === "undefined") {
     // if user is not signed in 
     document.querySelector("#new").style.display = "none"
 } else {
