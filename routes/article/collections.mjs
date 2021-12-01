@@ -14,16 +14,19 @@ let Csession;
 // https://localhost/myarticle
 
 app.get("/myarticle", async (req, res) => {
-	// Check whether the user is logged in
 	Csession = req.session;
-	if (!Csession.userID)
-		res.redirect("/login");
-	// Init webpage
-	res.write(fs.readFileSync("./pages/article/article.html"));
 	// Search all articles which belongs to current user
 	const r = await DB.sites.find({
 		user: Csession.userID
 	});
+	// Check whether no article found
+	if (!r)
+		res.redirect('/article');
+	// Check whether the user is logged in
+	if (!Csession.userID)
+		res.redirect("/login");
+	// Init webpage
+	res.write(fs.readFileSync("./pages/article/article.html"));
 	let script = "";
 	/**
 	 * @type {{content: string, views: number, author: string, votes: number}[]}
@@ -48,15 +51,6 @@ app.get("/myarticle", async (req, res) => {
 		});
 		script += ScriptTemplate(i);
 	}
-
-	// Check whether article number is larger than 4
-	if (article.length > 4) {
-		res.write(`
-			<script>
-				document.querySelector("#created-article").style["justify-content"] = "flex-start";
-			</script>
-		`)
-	}
 	// Init articles
 	const length = article.length;
 	// Init articles
@@ -69,12 +63,6 @@ app.get("/myarticle", async (req, res) => {
 	// Load javascript in webpage
 	res.write(`<script src="/javascripts/homepage/navbuttons.js"></script>`);
 	res.write(`<script>${script}</script>`)
-	// Check if no article found
-	if (length === 0) {
-		res.write(`<script>
-            location.replace("/article")
-        </script>`)
-	}
 	res.end('<script src="/javascripts/homepage/endscript.js"></script>');
 });
 
@@ -82,14 +70,19 @@ app.get("/myarticle", async (req, res) => {
 // https://localhost/otherarticle
 
 app.get("/otherarticle", async (req, res) => {
-	// Check whether the user is logged in
 	Csession = req.session;
+	// Search all articles which belongs to current user
+	const r = await DB.sites.find({
+		user: Csession.userID
+	});
+	// Check whether no article found
+	if (!r)
+		res.redirect('/article');
+	// Check whether the user is logged in
 	if (!Csession.userID)
 		res.redirect("/login");
 	// Init webpage
 	res.write(fs.readFileSync("./pages/article/article.html"));
-	// Search all articles
-	const r = await DB.sites.find({});
 	let script = "";
 	/**
 	 * @type {{content: string, views: number, author: string, votes: number}[]}
@@ -116,14 +109,7 @@ app.get("/otherarticle", async (req, res) => {
 			script += ScriptTemplate(i);
 		}
 	}
-	// Check whether article number is larger than 4
-	if (article.length > 4) {
-		res.write(`
-			<script>
-				document.querySelector("#created-article").style["justify-content"] = "flex-start";
-			</script>
-		`);
-	}
+
 	const length = article.length;
 	// Init articles
 	article = InitCategory("views", article);
@@ -135,11 +121,5 @@ app.get("/otherarticle", async (req, res) => {
 	// Load javascript in webpage
 	res.write(`<script src="/javascripts/homepage/navbuttons.js"></script>`);
 	res.write(`<script>${script}</script>`);
-	// Check if no article found
-	if (length === 0) {
-		res.write(`<script>
-            location.replace("/article")
-        </script>`)
-	}
 	res.end('<script src="/javascripts/homepage/endscript.js"></script>');
 });

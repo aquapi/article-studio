@@ -14,11 +14,12 @@ let Csession;
 // https://localhost/article
 
 app.get("/article", async (req, res) => {
-    // Init webpage
     Csession = req.session;
+	// Search all articles which belongs to current user
+	const r = await DB.sites.find({
+		user: Csession.userID
+	});
     res.write(fs.readFileSync("./pages/article/article.html").toString().trim().replace(/\<\/html\>/, "").replace(/\<\/body\>/, ""));
-    // Find all articles
-    const r = await DB.sites.find({});
     let script = "";
     /**
      * @type {{content: string, views: number, author: string, votes: number}[]}
@@ -44,14 +45,6 @@ app.get("/article", async (req, res) => {
         });
         script += ScriptTemplate(i);
     }
-    // Check whether article number is larger than 4
-    if (article.length > 4) {
-        res.write(`
-			<script>
-				document.querySelector("#created-article").style["justify-content"] = "flex-start";
-			</script>
-		`)
-    }
 
     // Init articles
     article = InitCategory("views", article);
@@ -70,11 +63,12 @@ app.get("/article", async (req, res) => {
 // https://localhost/mostvote
 
 app.get("/mostvote", async (req, res) => {
-    // Init webpage
     Csession = req.session;
+	// Search all articles which belongs to current user
+	const r = await DB.sites.find({
+		user: Csession.userID
+	});
     res.write(fs.readFileSync("./pages/article/article.html").toString().trim().replace(/\<\/html\>/, "").replace(/\<\/body\>/, ""));
-    // Search all articles
-    const r = await DB.sites.find({});
     let script = "";
     /**
      * @type {{content: string, views: number, author: string, votes: number}[]}
@@ -100,14 +94,6 @@ app.get("/mostvote", async (req, res) => {
             votes: i.votes
         });
         script += ScriptTemplate(i);
-    }
-    // Check whether article number is larger than 4
-    if (article.length > 4) {
-        res.write(`
-			<script>
-				document.querySelector("#created-article").style["justify-content"] = "flex-start";
-			</script>
-		`);
     }
 
     // Init articles
