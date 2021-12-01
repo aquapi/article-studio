@@ -16,9 +16,7 @@ let Csession;
 app.get("/article", async (req, res) => {
     Csession = req.session;
 	// Search all articles which belongs to current user
-	const r = await DB.sites.find({
-		user: Csession.userID
-	});
+	const r = await DB.sites.find({});
     res.write(fs.readFileSync("./pages/article/article.html").toString().trim().replace(/\<\/html\>/, "").replace(/\<\/body\>/, ""));
     let script = "";
     /**
@@ -65,9 +63,7 @@ app.get("/article", async (req, res) => {
 app.get("/mostvote", async (req, res) => {
     Csession = req.session;
 	// Search all articles which belongs to current user
-	const r = await DB.sites.find({
-		user: Csession.userID
-	});
+	const r = await DB.sites.find({});
     res.write(fs.readFileSync("./pages/article/article.html").toString().trim().replace(/\<\/html\>/, "").replace(/\<\/body\>/, ""));
     let script = "";
     /**
@@ -76,7 +72,7 @@ app.get("/mostvote", async (req, res) => {
     let article = [];
     // Init data
     res.write(`
-        <span style="display: none">${Csession.userID}</span>
+        <span style="display: none">${Csession?.userID}</span>
         <span style="display: none">Most Voted</span>
     `)
     // All lists of articles link

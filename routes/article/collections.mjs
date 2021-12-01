@@ -20,10 +20,10 @@ app.get("/myarticle", async (req, res) => {
 		user: Csession.userID
 	});
 	// Check whether no article found
-	if (!r)
+	if (r.length === 0)
 		res.redirect('/article');
 	// Check whether the user is logged in
-	if (!Csession.userID)
+	else if (!Csession.userID)
 		res.redirect("/login");
 	// Init webpage
 	res.write(fs.readFileSync("./pages/article/article.html"));
@@ -52,8 +52,6 @@ app.get("/myarticle", async (req, res) => {
 		script += ScriptTemplate(i);
 	}
 	// Init articles
-	const length = article.length;
-	// Init articles
 	article = InitCategory("views", article);
 	for (let atc of article)
 		res.write(atc.content);
@@ -73,13 +71,13 @@ app.get("/otherarticle", async (req, res) => {
 	Csession = req.session;
 	// Search all articles which belongs to current user
 	const r = await DB.sites.find({
-		user: Csession.userID
+		user: { $ne: Csession.userID }
 	});
 	// Check whether no article found
-	if (!r)
+	if (r.length === 0)
 		res.redirect('/article');
 	// Check whether the user is logged in
-	if (!Csession.userID)
+	else if (!Csession.userID)
 		res.redirect("/login");
 	// Init webpage
 	res.write(fs.readFileSync("./pages/article/article.html"));
@@ -110,7 +108,6 @@ app.get("/otherarticle", async (req, res) => {
 		}
 	}
 
-	const length = article.length;
 	// Init articles
 	article = InitCategory("views", article);
 	for (let atc of article)
