@@ -65,19 +65,6 @@ export const ArticleTemplate = (i) => {
 };
 
 /**
- * @param {{name: string}} i Article data
- * @returns rendered click listener script of articles div
- */
-
-export const ScriptTemplate = (i) => {
-    return `
-        document.getElementById(\`${i.name}\`).addEventListener("click", () => {
-            location.replace(\`/reader/${encodeURIComponent(i.name)}\`);
-        });
-    `;
-};
-
-/**
  * @param {string} name header name
  * @returns rendered header
  */
