@@ -54,7 +54,7 @@ export default ({ Csession, headerName, articles }) => (
         <h2 style={{ fontFamily: 'Oxygen' }} id="header-name">{headerName}</h2>
         <hr style={{ width: '10%' }} />
         <div id='created-article'>
-            {articles.map(d => <ArticleTemplate data={d.data} />)}
+            {articles.map(d => <ArticleTemplate data={d.data} key={d.data.name}/>)}
         </div>
         <script src="/javascripts/homepage/links.js"></script>
         <script src="/javascripts/homepage/navbuttons.js"></script>
