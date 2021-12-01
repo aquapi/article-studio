@@ -16,14 +16,12 @@ document.getElementById("content").innerHTML = htmlDecode(data.item(2).innerHTML
 // Event listeners
 document.getElementById("back").addEventListener("click", () => location.replace('/article'));
 document.getElementById("discuss_redirect").addEventListener("click", () => location.replace(`/discuss/${encodeURIComponent(data.item(0).innerHTML)}`));
-document.getElementById("del").addEventListener("click", () => {
-    let delName = `{{name}}`;
+document.getElementById("del").addEventListener("click", async () => {
+    let delName = data.item(0).innerHTML;
     if (confirm("Confirm delete?")) {
-        (async () => {
-            await axios.post("/article/delete", {
-                name: delName
-            });
-            location.replace(`/article`);
-        })();
+        await axios.post("/article/delete", {
+            name: delName
+        });
+        location.replace(`/article`);
     }
 });
