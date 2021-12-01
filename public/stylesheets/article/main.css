@@ -3,24 +3,39 @@
 @import "./lists.css";
 @import "./searchbar.css";
 @import "./navbar.css";
+@import "./hover.css";
 
 html::-webkit-scrollbar {
-    display: none;
-} 
+  display: none;
+}
 
 body {
-    padding: 0px;
-    margin: 0px;
-    text-align: center;
-    background-color: whitesmoke;
+  padding: 0px;
+  margin: 0px;
+  text-align: center;
+  background-color: whitesmoke;
 }
 
 h2 {
-    font-family: 'Merriweather', serif;
-    font-weight: 300;
-    font-size: 16px;
+  font-family: "Merriweather", serif;
+  font-weight: 300;
+  font-size: 16px;
+}
+
+h6 {
+  font-family: Oxygen, sans-serif;
+  color: rgba(255, 255, 255, 0.63);
+  font-weight: 300;
+  font-size: 12px;
+  z-index: 2;
+}
+
+h1 {
+  color: white;
+  font-family: Lora, sans-serif;
+  font-weight: 300;
 }
 
 * {
-    outline: none;
+  outline: none;
 }
