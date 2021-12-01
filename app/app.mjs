@@ -10,7 +10,7 @@ import { url, settings } from "../resource/resource.mjs";
 await mongoose.connect(url, settings).catch(err => console.log(err));
 
 // Socket event handler
-import '../routes/socket/event.mjs';
+import '../routes/socket/connect.mjs';
 
 // Display articles
 import '../routes/article/collections.mjs';
