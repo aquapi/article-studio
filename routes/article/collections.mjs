@@ -1,7 +1,6 @@
 import {
 	DB,
 	ArticleTemplate,
-	ScriptTemplate,
 	InitCategory,
 	Header,
 	SortByComponent
@@ -27,9 +26,8 @@ app.get("/myarticle", async (req, res) => {
 		res.redirect("/login");
 	// Init webpage
 	res.write(fs.readFileSync("./pages/article/article.html"));
-	let script = "";
 	/**
-	 * @type {{content: string, views: number, author: string, votes: number}[]}
+	 * @type {{name: string, content: string, views: number, author: string, votes: number}[]}
 	 */
 	let article = [];
 	// Init hidden data
@@ -47,9 +45,10 @@ app.get("/myarticle", async (req, res) => {
 		article.push({
 			content: ArticleTemplate(i),
 			views: i.views ?? 0,
-			author: i.user
+			author: i.user,
+			name: i.name,
+			data: i
 		});
-		script += ScriptTemplate(i);
 	}
 	// Init articles
 	article = InitCategory("views", article);
@@ -57,10 +56,12 @@ app.get("/myarticle", async (req, res) => {
 		res.write(atc.content);
 	// Close the created article div
 	res.write("</div>");
-
-	// Load javascript in webpage
+	res.write(`
+        <span style="display: none">${article.map(e => e.name)}}</span>
+    `)
+    // Load javascript in webpage
+    res.write(`<script src="/javascripts/homepage/links.js"></script>`)
 	res.write(`<script src="/javascripts/homepage/navbuttons.js"></script>`);
-	res.write(`<script>${script}</script>`)
 	res.end('<script src="/javascripts/homepage/endscript.js"></script>');
 });
 
@@ -81,9 +82,8 @@ app.get("/otherarticle", async (req, res) => {
 		res.redirect("/login");
 	// Init webpage
 	res.write(fs.readFileSync("./pages/article/article.html"));
-	let script = "";
 	/**
-	 * @type {{content: string, views: number, author: string, votes: number}[]}
+	 * @type {{name: string, content: string, views: number, author: string, votes: number}[]}
 	 */
 	let article = [];
 	// Init hidden data
@@ -102,9 +102,10 @@ app.get("/otherarticle", async (req, res) => {
 			article.push({
 				content: ArticleTemplate(i),
 				views: i.views ?? 0,
-				author: i.user
+				author: i.user,
+				name: i.name,
+				data: i
 			});
-			script += ScriptTemplate(i);
 		}
 	}
 
@@ -114,9 +115,11 @@ app.get("/otherarticle", async (req, res) => {
 		res.write(atc.content);
 	// Close created article div
 	res.write("</div>");
-
-	// Load javascript in webpage
+	res.write(`
+        <span style="display: none">${article.map(e => e.name)}}</span>
+    `)
+    // Load javascript in webpage
+    res.write(`<script src="/javascripts/homepage/links.js"></script>`)
 	res.write(`<script src="/javascripts/homepage/navbuttons.js"></script>`);
-	res.write(`<script>${script}</script>`);
 	res.end('<script src="/javascripts/homepage/endscript.js"></script>');
 });

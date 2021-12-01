@@ -1,7 +1,6 @@
 import {
     DB,
     ArticleTemplate,
-    ScriptTemplate,
     Header,
     InitCategory,
     SortByComponent
@@ -18,9 +17,8 @@ app.get("/article", async (req, res) => {
 	// Search all articles which belongs to current user
 	const r = await DB.sites.find({});
     res.write(fs.readFileSync("./pages/article/article.html").toString().trim().replace(/\<\/html\>/, "").replace(/\<\/body\>/, ""));
-    let script = "";
     /**
-     * @type {{content: string, views: number, author: string, votes: number}[]}
+     * @type {{name: string, content: string, views: number, author: string, votes: number}[]}
      */
     let article = [];
     // Init hidden data
@@ -36,12 +34,13 @@ app.get("/article", async (req, res) => {
     res.write("<div id='created-article'>");
     for (let i of r) {
         article.push({
+            name: i.name,
             content: ArticleTemplate(i),
             views: i.views ?? 0,
             author: i.user,
-            votes: i.votes
+            votes: i.votes,
+            data: i
         });
-        script += ScriptTemplate(i);
     }
 
     // Init articles
@@ -50,10 +49,12 @@ app.get("/article", async (req, res) => {
         res.write(atc.content);
     // Close created article div
     res.write("</div>");
-
+    res.write(`
+        <span style="display: none">${article.map(e => e.name)}</span>
+    `)
     // Load javascript in webpage
+    res.write(`<script src="/javascripts/homepage/links.js"></script>`)
     res.write(`<script src="/javascripts/homepage/navbuttons.js"></script>`);
-    res.write(`<script>${script}</script>`);
     res.end('<script src="/javascripts/homepage/endscript.js"></script>');
 });
 
@@ -65,7 +66,6 @@ app.get("/mostvote", async (req, res) => {
 	// Search all articles which belongs to current user
 	const r = await DB.sites.find({});
     res.write(fs.readFileSync("./pages/article/article.html").toString().trim().replace(/\<\/html\>/, "").replace(/\<\/body\>/, ""));
-    let script = "";
     /**
      * @type {{content: string, views: number, author: string, votes: number}[]}
      */
@@ -87,9 +87,10 @@ app.get("/mostvote", async (req, res) => {
             content: ArticleTemplate(i),
             views: i.views ?? 0,
             author: i.user,
-            votes: i.votes
+            votes: i.votes,
+            name: i.name,
+            data: i
         });
-        script += ScriptTemplate(i);
     }
 
     // Init articles
@@ -98,11 +99,13 @@ app.get("/mostvote", async (req, res) => {
         res.write(atc.content);
     // End of articles block
     res.write("</div>");
-
+    res.write(`
+        <span style="display: none">${article.map(e => e.name)}}</span>
+    `)
+    // Load javascript in webpage
+    res.write(`<script src="/javascripts/homepage/links.js"></script>`)
     // Load javascript in webpage
     res.write(`<script src="/javascripts/homepage/navbuttons.js"></script>`);
-    // All scripts
-    res.write(`<script>${script}</script>`);
     // End scripts
     res.end('<script src="/javascripts/homepage/endscript.js"></script>');
 });
