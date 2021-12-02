@@ -15,6 +15,9 @@
     + PASSWORD: Your email password
     + DB_URL: Your MongoDB URL
     + SESSION_SECRET: Anything you want (should be machine-generated)
+    + NODE_ENV: `development` or `production`
+    + HOST: Your local network IP
+    + PORT: Your server port (Optional)
 - Generate an SSL certificate in directory `ssl`
     + Private key: `key.pem`
     + Certificate: `cert.pem`
