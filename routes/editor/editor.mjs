@@ -16,7 +16,7 @@ app.get("/process", async (req, res) => {
     });
 
     // Check whether req.query.name is duplicated
-    if (result) {
+    if (result || result.includes("§")) {
         res.end("Failed to create new article");
         res.redirect("/article/create");
     } else {
