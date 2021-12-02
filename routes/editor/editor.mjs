@@ -11,15 +11,21 @@ app.get("/process", async (req, res) => {
     Csession = req.session;
     if (!Csession || !Csession.userID)
         res.redirect("/login");
+    /**
+     * @type {string}
+     */
     const result = await DB.sites.findOne({
         name: req.query?.name ?? ""
     });
 
-    // Check whether req.query.name is duplicated
-    if (result || result.includes("§")) {
-        res.end("Failed to create new article");
-        res.redirect("/article/create");
-    } else {
+    // Check whether req.query.name is duplicated or include §
+    if (result) {
+        res.contentType("text/html");
+        res.write("<code>Some articles have the same name as yours, please choose another name</code>");
+    } else if (req.query?.name?.includes("§")) {
+        res.contentType("text/html");
+        res.write("<code>Illegal character §, please choose another name</code>");
+    } else if (req.query?.name && Csession.userID) {
         const data = new Article({
             user: Csession.userID ? Csession.userID : "None",
             name: req.query.name,
@@ -32,7 +38,12 @@ app.get("/process", async (req, res) => {
         });
         await data.save();
         res.redirect(`/article/edit/${encodeURIComponent(req.query.name)}`);
+        return;
+    } else {
+        res.redirect("/login");
+        return;
     }
+    res.end("<script>setTimeout(() => location.replace('/article/new'), 2000)</script>");
 });
 
 // Edit articles
