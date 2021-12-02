@@ -22,21 +22,36 @@ const initWidthHeight = () => {
 }
 
 // Mouseover and mouseleave
-let clicked = false, clickX;
+let clicked = false, clickX, doneEffect = true;
 $(() => {
     $(".create").each((i, e) => {
         e.addEventListener("mouseover", () => {
+            if (!doneEffect) {
+                // Stop all effects
+                $("#hover-action").stop(true, true);
+                // Hide 
+                $("#hover-action").css("display", "none");
+                // Done effect
+                doneEffect = true;
+            }
+            // Set top equals 50px
             $("#hover-action").css("top", "50px");
+            // Show
             $("#hover-action").css("display", "block");
+            // element prosition plus element padding
             $("#hover-action").css("left", $(e).position().left + 20);
+            // Animate 
             $("#hover-action").animate({
                 "width": $(e).width()
-            }, 650);
+            }, 600, () => { doneEffect = false });
         });
         e.addEventListener("mouseleave", () => {
-            $("#hover-action").css("display", "none");
-            $("#hover-action").css("width", "0px");
-            $("#hover-action").stop();
+            // Stop effect even if it hasn't done
+            $("#hover-action").stop(true, true);
+            // Animate width to 0px
+            $("#hover-action").animate({
+                "width": 0
+            }, 600, () => { doneEffect = true });
         })
     });
 
