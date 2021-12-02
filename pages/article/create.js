@@ -16,7 +16,7 @@ export default () => (
             {/*Submit to /process*/}
             <input type="submit" defaultValue="Create" />
         </form>
-        <script src="/javascripts/create.js"></script>
+        <script src="/javascripts/content/create.js"></script>
     </>
 )
 

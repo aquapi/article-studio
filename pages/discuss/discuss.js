@@ -20,7 +20,7 @@ export default ({ name, user }) => {
                 <button>Send</button>
             </form>
             <script src="/socket.io/socket.io.js"></script>
-            <script src="/javascripts/discuss.js"></script>
+            <script src="/javascripts/content/discuss.js"></script>
         </>
     )
 }

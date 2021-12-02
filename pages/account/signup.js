@@ -7,7 +7,7 @@ export default () =>
         {/*Go back to homepage*/}
         <button id="back">Back</button>
         {/*Script*/}
-        <script src="/javascripts/sign.js"></script>
+        <script src="/javascripts/account/sign.js"></script>
         {/*Login form*/}
         <form action="/signupprocess" method="POST">
             {/*Header*/}

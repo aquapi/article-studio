@@ -31,7 +31,7 @@ export default ({ name, md_content, image_url }) => (
             <input name="display_img" className="save" />
             <button id="submit"></button>
         </form>
-        <script src="/javascripts/edit.js"></script>
+        <script src="/javascripts/content/edit.js"></script>
     </>
 );
 
