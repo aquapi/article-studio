@@ -38,10 +38,12 @@ export default ({ Csession, headerName, articles }) => (
             </div>
             <div className="banner"></div>
         </div>
+        {/*Data*/}
         <span style={{ display: 'none' }}>{Csession.userID}</span>
         <span style={{ display: 'none' }}>{headerName}</span>
-        <span style={{ display: 'none' }}>{articles.map(d => d.name).toString()}</span>
+        <span style={{ display: 'none' }}>{articles.map(d => d.name).join("§")}</span>
         <script src="/javascripts/article.js"></script>
+        {/*Article collections links*/}
         <div id="sort">
             <div className="list">Discover</div>
             <div className="list">Most Voted</div>
@@ -51,11 +53,14 @@ export default ({ Csession, headerName, articles }) => (
             </> : <></>}
             <script src="/javascripts/homepage/collections.js"></script>
         </div>
+        {/*Header*/}
         <h2 style={{ fontFamily: 'Oxygen' }} id="header-name">{headerName}</h2>
         <hr style={{ width: '10%' }} />
+        {/*Created article*/}
         <div id='created-article'>
             {articles.map(d => <ArticleTemplate data={d.data} key={d.data.name}/>)}
         </div>
+        {/*Scripts*/}
         <script src="/javascripts/homepage/links.js"></script>
         <script src="/javascripts/homepage/navbuttons.js"></script>
         <script src="/javascripts/homepage/endscript.js"></script>
