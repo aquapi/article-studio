@@ -1,6 +1,9 @@
 import Head from "../components/headers/article";
 import ArticleTemplate from "../components/homepage/articleTemplate";
 
+/**
+ * @param {{Csession: session.Session & Partial<session.SessionData>, headerName: string, articles: {name: string, content: string, views: number, author: string, votes: number}[]}} 
+ */
 export default ({ Csession, headerName, articles }) => (
     <>
         <Head />
@@ -25,7 +28,9 @@ export default ({ Csession, headerName, articles }) => (
                             margin: '0px', backgroundColor: 'transparent !important', borderColor: 'transparent',
                             borderStyle: 'solid', borderWidth: '5px', height: '36px'
                         }}>
-                        <i className="fa fa-search" style={{ backgroundColor: 'transparent', color: 'white', fontSize: '16px' }}></i>
+                        <i className="fa fa-search" style={{ 
+                            backgroundColor: 'transparent', color: 'white', fontSize: '16px' 
+                        }}></i>
                     </button>
                 </div>
             </nav>
