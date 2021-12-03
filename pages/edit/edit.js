@@ -1,5 +1,9 @@
 import Head from "../components/headers/edit"
 
+/**
+ * @param {{name: string, md_content: string, image_url: string}}
+ */
+
 export default ({ name, md_content, image_url }) => (
     <>
         <Head name={name} />

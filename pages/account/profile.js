@@ -1,5 +1,8 @@
 import Head from "../components/headers/profile";
 
+/**
+ * @param {{name: string, pass: string}}
+ */
 export default ({ name, pass }) => {
     return (
         <>

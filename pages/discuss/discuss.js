@@ -1,11 +1,16 @@
 import Head from "../components/headers/discuss";
 
+/**
+ * @param {{name: string, user: string}}
+ */
+
 export default ({ name, user }) => {
     return (
         <>
             <Head name={name} />
             {/*User name*/}
             <span>{user}</span>
+            {/*Article name*/}
             <span>{name}</span>
             {/*Navbar*/}
             <div id="buttons">
@@ -19,6 +24,7 @@ export default ({ name, user }) => {
                 <input id="input" autoComplete="off" />
                 <button>Send</button>
             </form>
+            {/*Scripts*/}
             <script src="/socket.io/socket.io.js"></script>
             <script src="/javascripts/content/discuss.js"></script>
         </>

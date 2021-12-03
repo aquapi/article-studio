@@ -2,7 +2,7 @@ import Head from "../components/headers/article";
 import ArticleTemplate from "../components/homepage/articleTemplate";
 
 /**
- * @param {{Csession: session.Session & Partial<session.SessionData>, headerName: string, articles: {name: string, content: string, views: number, author: string, votes: number}[]}} 
+ * @param {{Csession: import("express-session").Session & Partial<import("express-session").SessionData>, headerName: string, articles: {name: string, content: string, views: number, author: string, votes: number}[]}} 
  */
 export default ({ Csession, headerName, articles }) => (
     <>

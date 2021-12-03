@@ -1,5 +1,9 @@
 import Head from "next/head";
 
+/**
+ * @param {{name: string}}
+ */
+
 export default ({ name }) => (
     <Head>
         <meta charSet="UTF-8" />

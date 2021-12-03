@@ -1,6 +1,10 @@
 import Head from "next/head";
 
-export default ({page}) => (
+/**
+ * @param {{page: string}}
+ */
+
+export default ({ page }) => (
     <Head>
         <meta charSet="UTF-8" />
         <link rel="icon" href="https://iconarchive.com/download/i97950/thehoth/seo/seo-article.ico" />

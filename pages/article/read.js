@@ -5,6 +5,9 @@ const detailStyle = {
     alignSelf: 'flex-end'
 }
 
+/**
+ * @param {{name: string, admin_button: string, content: string, views: number, author: string, tag: string, votes: number}}
+ */
 export default ({ name, admin_button, content, views, author, tag, votes }) => (
     <>
         <Head name={name} />
