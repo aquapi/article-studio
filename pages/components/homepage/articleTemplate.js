@@ -1,3 +1,7 @@
+/**
+ * @param {{data: {name: string, content: string, views: number, author: string, votes: number}[]}}   
+ */
+
 export default ({ data }) => (
     <div className="created">
         {/*Article name and tag*/}
@@ -14,7 +18,7 @@ export default ({ data }) => (
             </div>
         </div>
     </div>
-); 
+);
 
 // Empty
 export const getServerSideProps = () => ({});
