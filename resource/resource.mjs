@@ -5,7 +5,7 @@ import "../models/article.mjs";
 import "../models/user.mjs";
 
 // Server port
-export const port = process.env.PORT || 443;
+export const port = Number(process.env.PORT) || 443;
 
 // Server name
 export const hostname = process.env.HOST || "0.0.0.0";
