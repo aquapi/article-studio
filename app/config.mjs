@@ -48,7 +48,7 @@ app.use(session({
 
 // Execute when error detected
 app.use((err, _req, res, _next) => {
-    console.error(err.stack)
+    console.error(err.stack);
     res.status(500).send('Error Detected!');
 });
 

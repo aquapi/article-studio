@@ -1,5 +1,5 @@
 // Next server config
-import { next } from './next.mjs';
+import next from './next.mjs';
 await next.prepare();
 
 // Connect to database
