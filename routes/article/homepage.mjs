@@ -2,7 +2,7 @@ import {
     DB,
     InitCategory,
 } from "../../resource/resource.mjs";
-import { next } from "../../app/next.mjs";
+import next from "../../app/next.mjs";
 import app from "../../app/config.mjs";
 import fs from "fs";
 

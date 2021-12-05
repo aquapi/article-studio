@@ -1,6 +1,6 @@
 import app from "../../app/config.mjs";
-import { next } from "../../app/next.mjs";
-import mongoose from "mongoose"
+import next from "../../app/next.mjs";
+import mongoose from "mongoose";
 
 let Csession;
 
