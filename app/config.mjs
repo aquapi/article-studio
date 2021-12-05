@@ -34,15 +34,14 @@ app.use(express.text({ limit: '200mb' }));
 // cookie parser middleware
 app.use(cookieParser());
 
-// Session
-const oneDay = 1000 * 60 * 60 * 24;
+// Static root
 app.use(express.static(path.resolve()));
 
 // Use session middleware
 app.use(session({
     secret: process.env.SESSION_SECRET,
-    saveUninitialized: true,
-    cookie: { maxAge: oneDay },
+    saveUninitialized: false,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 },
     resave: false
 }));
 
