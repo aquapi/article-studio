@@ -5,11 +5,9 @@ await next.prepare();
 // Connect to database
 import mongoose from 'mongoose';
 import { url, settings } from "../resource/resource.mjs";
+await mongoose.connect(url, settings).catch(console.log);
 
-// Connect to database
-await mongoose.connect(url, settings).catch(err => console.log(err));
-
-// Socket event handler
+// Socket connection
 import '../routes/socket/connect.mjs';
 
 // Display articles
