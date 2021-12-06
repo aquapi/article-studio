@@ -56,10 +56,10 @@ app.get("/article/edit/:name", async (req, res) => {
     const r = await DB.sites.findOne({
         name: req.params?.name ?? ""
     });
-    if (r && r.user == Csession.userID) {
+    if (r?.user == Csession.userID) {
         let compileOBJ = {
             name: req.params.name,
-            image_url: r?.display_img && r.display_img !== "undefined" ? r.display_img : "Display image url",
+            image_url: r.display_img && r.display_img !== "undefined" ? r.display_img : "Display image url",
             md_content: r.content.split("<style>body {font-family: Corbel}</style>")[0]
         };
         return next.render(req, res, "/edit/edit", compileOBJ);
@@ -78,7 +78,7 @@ app.post("/article/save", async (req, res) => {
     const r = await DB.sites.findOne({
         name: req.body?.name ?? ""
     })
-    if (r?.user && Csession.userID === r.user) {
+    if (Csession.userID === r?.user) {
         await DB.sites.replaceOne(r,
             {
                 user: r.user,

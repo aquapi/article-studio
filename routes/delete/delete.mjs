@@ -7,7 +7,7 @@ let Csession;
 
 app.post("/delete", async (req, res) => {
     Csession = req.session;
-    if (Csession.userID)
+    if (Csession?.userID)
         await DB.sites.deleteMany({
             user: Csession.userID
         });

@@ -7,11 +7,8 @@ let Csession;
 // Read for client
 app.get("/reader/:name", async (req, res) => {
     Csession = req.session;
-    // Check whether '/reader' has been provided with a 'name' parameter
-    if (!req.params || !req.params.name)
-        res.redirect("/article");
     const r = await DB.sites.findOne({
-        name: req.params.name
+        name: req.params?.name ?? ""
     });
     // If reader can't find target article
     if (!r) {
@@ -19,7 +16,7 @@ app.get("/reader/:name", async (req, res) => {
         return;
     }
     // If another user visits the read site 
-    if (r.user !== Csession.userID)
+    if (r?.user !== Csession.userID)
         await DB.sites.replaceOne(r, {
             user: r.user,
             name: r.name,
@@ -49,13 +46,14 @@ app.get("/reader/:name", async (req, res) => {
 // Vote
 app.get("/vote/:name", async (req, res) => {
     Csession = req.session;
-    // Check whether '/vote' has been provided with a 'name' parameter
-    if (!req.params || !req.params.name)
-        res.redirect("/article");
     const r = await DB.sites.findOne({
-        name: req.params.name
+        name: req.params?.name ?? ""
     });
-    if (r.user !== Csession.userID) {
+    if (!r) {
+        res.redirect("/article");
+        return;
+    }
+    if (r?.user !== Csession.userID) {
         await DB.sites.replaceOne(r, {
             user: r.user,
             name: r.name,
