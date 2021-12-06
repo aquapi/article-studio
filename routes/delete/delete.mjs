@@ -1,19 +1,17 @@
 import { DB } from "../../resource/resource.mjs";
 import app from "../../app/config.mjs";
 
-let Csession;
-
 // Delete an user
 
 app.post("/delete", async (req, res) => {
-    Csession = req.session;
-    if (Csession?.userID)
+    if (req.session?.userID)
         await DB.sites.deleteMany({
-            user: Csession.userID
-        });
-        await DB.users.deleteOne({
-            username: Csession.userID
-        });
+            user: req.session.userID
+        }).then(_ =>
+            DB.users.deleteOne({
+                username: req.session.userID
+            })
+        );
     // Logout
     res.redirect("/logout");
 });
@@ -21,9 +19,8 @@ app.post("/delete", async (req, res) => {
 // Delete an article
 
 app.post("/article/delete", async (req, res) => {
-    Csession = req.session;
     await DB.sites.deleteOne({
-        user: Csession?.userID ?? "",
+        user: req.session?.userID ?? "",
         name: req.body.name
     });
     // Redirect to homepage

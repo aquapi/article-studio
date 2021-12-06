@@ -35,7 +35,7 @@ app.get("/reader/:name", async (req, res) => {
                 <button style="display: ${r.user === Csession.userID ? 'block' : 'none'};" id="del">Delete</button>
                 <button onclick='location.replace("/vote/${encodeURIComponent(r.name)}")' style="display: ${r.user === Csession.userID ? 'none' : 'block'};">Vote</button>
                 `,
-        content: r?.content ?? `This article have no content`,
+        content: r.content ?? `This article have no content`,
         views: r.views,
         author: r.user,
         tag: r.tag,

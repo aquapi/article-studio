@@ -3,7 +3,14 @@ import app from "../../app/config.mjs";
 import User from "../../models/user.mjs";
 import next from "../../app/next.mjs";
 
+/**
+ * @type {import("express-session").Session & Partial<import("express-session").SessionData>}
+ */
 let Csession;
+
+/**
+ * @type {string}
+ */
 let CurrentUser;
 
 // Login page
@@ -69,9 +76,7 @@ app.post("/signupprocess", async (req, res) => {
 				If you didn't sign up on our site, just ignore or delete this mail
 				Send feedback to our site: Userfeedbackrespond@gmail.com
 			`
-		}, err => {
-			if (err) throw err;
-		});
+		}, console.log);
 
 		const user = new User({
 			username: req.body.name,

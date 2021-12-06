@@ -99,10 +99,6 @@ app.post("/article/save", async (req, res) => {
 // Create articles
 // https://localhost/article/new
 
-app.get("/article/new", (req, res) => {
-    // Check whether the user is logged in
-    Csession = req.session;
-    if (!Csession || !Csession.userID)
-        res.redirect("/login");
-    return next.render(req, res, "/article/create");
-});
+app.get("/article/new", (_, res) => 
+    req.session?.userID ? next.render(req, res, "/article/create") : res.redirect("/article")
+);
