@@ -15,7 +15,7 @@ Provide environment variables:
 - PASSWORD: Your email password
 - DB_URL: Your MongoDB URL
 - SESSION_SECRET: Anything you want (should be machine-generated)
-- NODE_ENV: `production` (`development` mode doesn't allowed JSON that hasn't been parsed to string)
+- NODE_ENV: `production` (`development` mode doesn't allow JSON that hasn't been parsed to string)
 - HOST: Your local network IP
 - PORT: Your server port (Optional)
 
