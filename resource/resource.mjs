@@ -8,27 +8,24 @@ import "../models/user.mjs";
 export const port = Number(process.env.PORT) || 443;
 
 // Server name
-export const hostname = process.env.HOST || "0.0.0.0";
+export const hostname = process.env.LAN_IP || "0.0.0.0";
 
 // Database URL
 export const url = process.env.DB_URL;
 
 // Connection settings
-
 export const settings = {
     useNewUrlParser: true,
     useUnifiedTopology: true
 };
 
 // Database models
-
 export const DB = {
     users: mongoose.model("User"),
     sites: mongoose.model("Site")
 }
 
 // Email sender
-
 export const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
