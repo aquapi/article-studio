@@ -44,7 +44,7 @@ export default ({ Csession, headerName, articles }) => (
             <div className="banner"></div>
         </div>
         {/*Data*/}
-        <span style={{ display: 'none' }}>{Csession.userID}</span>
+        <span style={{ display: 'none' }}>{Csession}</span>
         <span style={{ display: 'none' }}>{headerName}</span>
         <span style={{ display: 'none' }}>{articles.map(d => d.name).join("§")}</span>
         <script src="/javascripts/homepage/main.js"></script>
@@ -52,7 +52,7 @@ export default ({ Csession, headerName, articles }) => (
         <div id="sort">
             <div className="list">Discover</div>
             <div className="list">Most Voted</div>
-            {Csession.userID ? <>
+            {Csession ? <>
                 <div className='list'>My Article</div>
                 <div className='list'>Other Article</div>
             </> : <></>}
@@ -74,7 +74,7 @@ export default ({ Csession, headerName, articles }) => (
 
 export const getServerSideProps = async (context) => ({
     props: {
-        Csession: context.query.Csession,
+        Csession: context.query.Csession?.userID ?? null,
         headerName: context.query.headerName,
         articles: context.query.articles
     }
