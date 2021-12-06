@@ -32,7 +32,7 @@ export const socket = new Server(server);
 // Use resources in public directory
 app.use(express.static("public"));
 
-// Use for GET and POST request
+// Use for GET and POST request (Increase limit)
 app.use(express.json({ limit: '200mb' }));
 app.use(express.urlencoded({
     limit: '200mb',
@@ -48,16 +48,16 @@ app.use(express.static(path.resolve()));
 
 // Use session middleware
 app.use(session({
-    secret: process.env.SESSION_SECRET,
-    saveUninitialized: false,
+    secret: process.env.SESSION_SECRET, // Secret
+    saveUninitialized: false, // Prevent the session store from saving uninitialized sessions
     cookie: { 
-        maxAge: 1000 * 60 * 60 * 24,
-        secure: true
+        maxAge: 1000 * 60 * 60 * 24, // One day
+        secure: true // Secure cookie in HTTPS
     },
-    resave: false,
+    resave: false, // Prevent the session store from saving unmodified sessions
     store: new MemoryStore({
         checkPeriod: 86400000 // prune expired entries every 24h
-    })
+    }) // Prevent memory leaks
 }));
 
 // Execute when error detected
