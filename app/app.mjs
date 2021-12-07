@@ -8,7 +8,7 @@ import { url, settings } from "../resource/resource.mjs";
 await mongoose.connect(url, settings).catch(console.log);
 
 // Socket connection
-import '../routes/socket/connect.mjs';
+import './socket.mjs';
 
 // Display articles
 import '../routes/article/collections.mjs';

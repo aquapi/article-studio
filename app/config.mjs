@@ -26,9 +26,6 @@ export const server = https.createServer({
 // Trust proxy
 app.set('trust proxy', 1);
 
-// Socket
-export const socket = new Server(server);
-
 // Use resources in public directory
 app.use(express.static("public"));
 
