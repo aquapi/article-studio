@@ -18,8 +18,8 @@ Provide environment variables:
 - NODE_ENV: `production` (`development` mode doesn't allow JSON that hasn't been parsed to string)
 - HOST: Your local network IP
 - PORT: Your server port (Optional)
-
-Generate an SSL certificate using :
+Create a directory named `ssl`
+Generate an SSL certificate using:
 - `.\bin\ssl\SSL` in CMD or Powershell
 - `./bin/ssl/SSL.sh` in Bash
 
