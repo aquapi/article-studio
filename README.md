@@ -19,9 +19,13 @@ Provide environment variables:
 - HOST: Your local network IP
 - PORT: Your server port (Optional)
 
-Generate an SSL certificate using 
-- `.\ssl\SSL` in CMD or Powershell
-- `./ssl/SSL.sh` in Bash
+Generate an SSL certificate using :
+- `.\bin\ssl\SSL` in CMD or Powershell
+- `./bin/ssl/SSL.sh` in Bash
+
+Run the project using:
+- `.\bin\run\run` in CMD or Powershell
+- `./bin/run/run.sh` in Bash
 
 ## License
 - Do not deploy this application on any cloud platform or machine
