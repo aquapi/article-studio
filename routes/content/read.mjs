@@ -45,7 +45,6 @@ app.get("/reader/:name", async (req, res) => {
 
 // Vote
 app.get("/vote/:name", async (req, res) => {
-    Csession = req.session;
     const r = await DB.sites.findOne({
         name: req.params?.name ?? ""
     });
@@ -53,7 +52,7 @@ app.get("/vote/:name", async (req, res) => {
         res.redirect("/article");
         return;
     }
-    if (r?.user !== Csession.userID) {
+    if (r?.user !== req.session.userID) {
         await DB.sites.replaceOne(r, {
             user: r.user,
             name: r.name,

@@ -16,24 +16,16 @@ let CurrentUser;
 // Login page
 // https://localhost/login
 
-app.get("/login", (req, res) => {
-	// Check whether the user isn't logged in
-	Csession = req.session;
-	if (Csession && Csession.userID)
-		res.redirect("/article");
-	return next.render(req, res, "/account/login");
-});
+app.get("/login", (req, res) => 
+	req.session?.userID ? res.redirect("/article") : next.render(req, res, "/account/login")
+);
 
 // Sign up page
 // https://localhost/signup
 
-app.get("/signup", (req, res) => {
-	// Check whether the user isn't logged in
-	Csession = req.session;
-	if (Csession && Csession.userID)
-		res.redirect("/article");
-	return next.render(req, res, "/account/signup");
-});
+app.get("/signup", (req, res) => 
+	req.session?.userID ? res.redirect("/article") : next.render(req, res, "/account/signup")
+);
 
 // login process
 app.post("/loginprocess", async (req, res) => {

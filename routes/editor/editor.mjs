@@ -50,22 +50,17 @@ app.get("/process", async (req, res) => {
 // https://localhost/article/edit
 
 app.get("/article/edit/:name", async (req, res) => {
-    Csession = req.session;
-    if (!Csession || !Csession.userID)
-        res.redirect("/login");
     const r = await DB.sites.findOne({
         name: req.params?.name ?? ""
     });
-    if (r?.user == Csession.userID) {
-        let compileOBJ = {
-            name: req.params.name,
+    if (r?.user == req.session?.userID) 
+        return next.render(req, res, "/edit/edit", {
+            name: req.params?.name,
             image_url: r.display_img && r.display_img !== "undefined" ? r.display_img : "Display image url",
             md_content: r.content.split("<style>body {font-family: Corbel}</style>")[0]
-        };
-        return next.render(req, res, "/edit/edit", compileOBJ);
-    } else
+        });
+    else
         res.redirect("/login");
-    res.end();
 });
 
 // Save changes of articles
@@ -99,6 +94,6 @@ app.post("/article/save", async (req, res) => {
 // Create articles
 // https://localhost/article/new
 
-app.get("/article/new", (_, res) => 
+app.get("/article/new", (req, res) => 
     req.session?.userID ? next.render(req, res, "/article/create") : res.redirect("/article")
 );
