@@ -1,6 +1,6 @@
 package-lock.json
 node_modules
 .env
-scripts
+bin/package
 ssl/*.pem
 .next
