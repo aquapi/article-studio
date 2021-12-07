@@ -5,7 +5,6 @@ import { config } from "dotenv";
 import * as path from "path";
 import https from "https";
 import fs from "fs";
-import { Server } from "socket.io";
 import createMemoryStore from "memorystore";
 
 // Memory store
