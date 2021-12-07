@@ -19,15 +19,7 @@ Provide environment variables:
 - HOST: Your local network IP
 - PORT: Your server port (Optional)
 
-Generate an SSL certificate using
-```batch
-openssl genrsa -out key.pem
-openssl req -new -key key.pem -out csr.pem
-openssl x509 -req -days 9999 -in csr.pem -signkey key.pem -out cert.pem
-rm csr.pem
-```
-Put all the files into `ssl` directory.
-
+Generate an SSL certificate using `.\ssl\SSL` in the terminal
 
 ## License
 - Do not deploy this application on any cloud platform or machine
