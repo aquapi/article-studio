@@ -15,7 +15,7 @@ $("#created-article").css("display", 'flex');
 $("body").css("display", 'block');
 
 // Check whether user is signed up
-$("#sign").click(() => data.item(0).innerHTML === "undefined" ? location.replace('/signup') : location.replace('/article/profile'));
+$("#sign").click(() => data.item(0).innerHTML === "undefined" || !data.item(0).innerHTML ? location.replace('/signup') : location.replace('/article/profile'));
 
 // Scroll to top
 $("body").scrollTop();  
