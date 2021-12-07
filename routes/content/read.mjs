@@ -2,11 +2,9 @@ import { DB } from "../../resource/resource.mjs";
 import app from "../../app/config.mjs";
 import next from "../../app/next.mjs";
 
-let Csession;
-
 // Read for client
 app.get("/reader/:name", async (req, res) => {
-    Csession = req.session;
+    let userID = req.session?.userID ?? "";
     const r = await DB.sites.findOne({
         name: req.params?.name ?? ""
     });
@@ -16,7 +14,7 @@ app.get("/reader/:name", async (req, res) => {
         return;
     }
     // If another user visits the read site 
-    if (r?.user !== Csession.userID)
+    if (r?.user !== userID)
         await DB.sites.replaceOne(r, {
             user: r.user,
             name: r.name,
@@ -31,9 +29,9 @@ app.get("/reader/:name", async (req, res) => {
     return next.render(req, res, "/article/read", {
         name: req.params.name,
         admin_button: `
-                <button onclick='location.replace("/article/edit/${encodeURIComponent(r.name)}")' style="display: ${r.user === Csession.userID ? 'block' : 'none'};">Edit</button>
-                <button style="display: ${r.user === Csession.userID ? 'block' : 'none'};" id="del">Delete</button>
-                <button onclick='location.replace("/vote/${encodeURIComponent(r.name)}")' style="display: ${r.user === Csession.userID ? 'none' : 'block'};">Vote</button>
+                <button onclick='location.replace("/article/edit/${encodeURIComponent(r.name)}")' style="display: ${r.user === userID ? 'block' : 'none'};">Edit</button>
+                <button style="display: ${r.user === userID ? 'block' : 'none'};" id="del">Delete</button>
+                <button onclick='location.replace("/vote/${encodeURIComponent(r.name)}")' style="display: ${r.user === userID ? 'none' : 'block'};">Vote</button>
                 `,
         content: r.content ?? `This article have no content`,
         views: r.views,

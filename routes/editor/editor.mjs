@@ -9,7 +9,7 @@ let Csession;
 
 app.get("/process", async (req, res) => {
     Csession = req.session;
-    if (!Csession || !Csession.userID)
+    if (!Csession?.userID)
         res.redirect("/login");
     /**
      * @type {string}

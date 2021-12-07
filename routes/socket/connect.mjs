@@ -1,8 +1,12 @@
-import { socket } from "../../app/config.mjs";
 import chatMessage from "./chat.mjs";
 
-// Socket event
-socket.on('connection', (s) => {
-    // Chat event
-    s.on('chat message', chatMessage(s));
-});
+/**
+ * @returns {(socket: import("socket.io").Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>) => void} Socket connection
+ */
+
+export default () => (
+    (socket) => {
+        // Chat event
+        socket.on('chat message', chatMessage(socket));
+    }
+);
