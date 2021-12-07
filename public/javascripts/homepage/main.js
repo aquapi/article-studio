@@ -9,7 +9,7 @@ $(".search-bar").fadeOut(0);
 function contain(str, str1) {
     let pos = 0;
     for (let c of str1) {
-        if (!str.includes(c) || str.indexOf(c) < pos) return false;
+        if (!str.includes(c, pos)) return false;
         pos++;
     }
     return true;
