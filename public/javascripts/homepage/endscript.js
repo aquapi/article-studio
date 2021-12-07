@@ -1,9 +1,9 @@
 const data = document.querySelectorAll("span");
 
 // Create article button listener
-document.querySelector("#new").addEventListener("click", () => {
-    location.replace("/article/new");
-});
+document.querySelector("#new").addEventListener("click", () => 
+    location.replace("/article/new")
+);
 
 // Load page banner
 $(".wait").css("display", "block");
@@ -26,18 +26,16 @@ $("input[type=text]").keyup(() => {
     let count = 0;
     for (let e of $("#created-article").children("div").toArray()) {
         let el = e.querySelector("div");
+        let check = $("input[type=text]").val().toLowerCase();
         // Search method
-        if (!$("input[type=text]").val() || contain(el.id.toLowerCase(), $("input[type=text]").val().toLowerCase()) || contain(el.className.toLowerCase(), $("input[type=text]").val().toLowerCase())) {
+        if (!$("input[type=text]").val() || contain(el.id.toLowerCase(), check) || contain(el.className.toLowerCase(), check)) {
             e.style.display = "block";
             count++;
         } else 
             e.style.display = "none";
     }
     // If articles match is more than 4
-    if (count > 4) 
-        document.querySelector("#created-article").style["justify-content"] = "flex-start";
-    else 
-        document.querySelector("#created-article").style["justify-content"] = "center";
+    document.querySelector("#created-article").style["justify-content"] = (count > 4 ?  "flex-start" :  "center");
 });
 
 // If articles count larger than 4

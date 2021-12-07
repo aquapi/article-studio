@@ -2,9 +2,15 @@
 $(".search-bar").fadeOut(0);
 
 // Search
+/**
+ * @param {string} str 
+ * @param {string} str1 
+ */
 function contain(str, str1) {
+    let pos = 0;
     for (let c of str1) {
-        if (!str.includes(c)) return false;
+        if (!str.includes(c) || str.indexOf(c) < pos) return false;
+        pos++;
     }
     return true;
 }
@@ -12,8 +18,7 @@ function contain(str, str1) {
 // Horizontal scroll events
 const updateScrollPos = (e) => {
     $('#created-article').css('cursor', 'grabbing');
-    let scrollTo = $('#created-article').scrollLeft() + (clickX - e.pageX) / 10;
-    $('#created-article').scrollLeft(scrollTo);
+    $('#created-article').scrollLeft($('#created-article').scrollLeft() + (clickX - e.pageX) / 10);
 }
 
 const initWidthHeight = () => {
@@ -24,7 +29,7 @@ const initWidthHeight = () => {
 // Mouseover and mouseleave
 let clicked = false, clickX, doneEffect = true;
 $(() => {
-    $(".create").each((i, e) => {
+    $(".create").each((_, e) => {
         e.addEventListener("mouseover", () => {
             if (!doneEffect) {
                 // Stop all effects
@@ -58,9 +63,7 @@ $(() => {
     // Drag to scroll
 
     $("#created-article").on({
-        'mousemove': (e) => {
-            clicked ? updateScrollPos(e) : void (0);
-        },
+        'mousemove': (e) => clicked ? updateScrollPos(e) : void (0),
         'mousedown': (e) => {
             clicked = true;
             clickX = e.pageX;
@@ -73,9 +76,9 @@ $(() => {
 });
 
 // Login button
-document.querySelector("#login").addEventListener("click", () => {
-    location.replace("/login");
-});
+document.querySelector("#login").addEventListener("click", () => 
+    location.replace("/login")
+);
 
 // Search bar fade in/out
 $(".input > button").click(() => {
