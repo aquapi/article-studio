@@ -18,6 +18,7 @@
     "start": "nodemon --config nodemon.json index.mjs",
     "build": "next build"
   },
+  "main": "index.mjs",
   "license": "MIT",
   "devDependencies": {
     "@types/cookie-parser": "^1.4.2",
