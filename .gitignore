@@ -1,6 +1,6 @@
 package-lock.json
 node_modules
 .env
-app/bin/package
+app/bin/update
 ssl/*.pem
 .next
