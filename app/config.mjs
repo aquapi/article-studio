@@ -3,8 +3,6 @@ import cookieParser from "cookie-parser";
 import session from "express-session";
 import { config } from "dotenv";
 import * as path from "path";
-import https from "https";
-import fs from "fs";
 import createMemoryStore from "memorystore";
 
 // Memory store
@@ -15,12 +13,6 @@ config();
 
 // create app
 const app = express();
-
-// Server
-export const server = https.createServer({
-    key: fs.readFileSync("ssl/key.pem"),
-    cert: fs.readFileSync('ssl/cert.pem')
-}, app);
 
 // Trust proxy
 app.set('trust proxy', 1);
@@ -53,13 +45,14 @@ app.use(session({
     resave: false, // Prevent the session store from saving unmodified sessions
     store: new MemoryStore({
         checkPeriod: 86400000 // prune expired entries every 24h
-    }) // Prevent memory leaks
+    }), // Prevent memory leaks
+    unset: 'destroy' // Destroy the session after set to null
 }));
 
 // Execute when error detected
 app.use((err, _req, res, _next) => {
     console.error(err.stack);
-    res.status(500).send('Error Detected!');
+    res.status(500).send('Error Detected!'); // Send Error to client
 });
 
 // Export app
