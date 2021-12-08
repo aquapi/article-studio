@@ -35,10 +35,11 @@ Run the project using:
 
 ## Structure
 ```
- server.mjs ---> socket.mjs -------
-     |                            |
- config.mjs ---------             |
-                    |             |
- next.mjs -----> routes -----> app.mjs -----> index.mjs
-     |____________________________|
+ server.mjs ┈┈┈┈ socket.mjs ┈┈┈┈┈┈╮
+     ┊                            ┊
+ config.mjs ┈┈┈┈┈┈┈┈╮             ┊
+                    ┊             ┊
+ next.mjs ┈┈┈┈┈┈ routes ┈┈┈┈┈┈ app.mjs ┈┈┈┈┈┈ index.mjs
+     ┊                            ┊
+     ╰————————————————————————————╯
 ```
