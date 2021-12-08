@@ -33,15 +33,13 @@ Run the project using:
 - Do not deploy this application on any cloud platform or machine
 - Use this project for testing and learning only
 
-## Structure
+## Import structure
 ```
      ╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈╮
      ┊                                             ┊
- server.mjs ┈┈┈┈ socket.mjs ┈┈┈┈┈┈╮                ┊
+ server.mjs ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ socket.mjs             ┊
      ┊                            ┊                ┊
- config.mjs ┈┈┈┈┈┈┈┈╮             ┊                ┊
-                    ┊             ┊                ┊
- next.mjs ┈┈┈┈┈┈ routes ┈┈┈┈┈┈ app.mjs ┈┈┈┈┈┈ index.mjs
-     ┊                            ┊
-     ╰————————————————————————————╯
+ config.mjs                       ┊                ┊
+                                  ┊                ┊
+ next.mjs ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ app.mjs ┈┈┈┈┈┈ index.mjs
 ```
