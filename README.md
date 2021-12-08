@@ -36,10 +36,10 @@ Run the project using:
 ## Import structure
 ```
      ╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈╮
-     ┊                                             ┊
- server.mjs ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ socket.mjs             ┊
-     ┊                            ┊                ┊
- config.mjs                       ┊                ┊
-                                  ┊                ┊
- next.mjs ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ app.mjs ┈┈┈┈┈┈ index.mjs
+     |                                             |
+ server.mjs ——————————————→ socket.mjs             |
+     ↑                            |                |
+ config.mjs                       |                |
+                                  ↓                ↓
+ next.mjs ———————————————————→ app.mjs —————→ index.mjs
 ```
