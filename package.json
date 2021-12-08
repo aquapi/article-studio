@@ -15,7 +15,7 @@
     "socket.io": "^4.4.0"
   },
   "scripts": {
-    "start": "nodemon --config nodemon.json server.mjs",
+    "start": "nodemon --config nodemon.json index.mjs",
     "build": "next build"
   },
   "license": "MIT",
