@@ -1,6 +1,6 @@
 import "./app/app.mjs";
 import { server } from "./app/config.mjs";
-import { hostname, port } from "./resource/resource.mjs";
+import { hostname, port } from "./app/resource.mjs";
 
 // Listen
 server.listen(port, hostname, () => {
