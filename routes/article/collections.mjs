@@ -1,7 +1,7 @@
 import {
 	DB,
 	InitCategory,
-} from "../../resource/resource.mjs";
+} from "../../app/resource.mjs";
 import next from "../../app/next.mjs";
 import app from "../../app/config.mjs";
 

@@ -1,4 +1,4 @@
-import { DB } from "../../resource/resource.mjs";
+import { DB } from "../../app/resource.mjs";
 import app from "../../app/config.mjs";
 import next from "../../app/next.mjs";
 import Article from "../../models/article.mjs";

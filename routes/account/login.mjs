@@ -1,4 +1,4 @@
-import { DB, transporter } from "../../resource/resource.mjs";
+import { DB, transporter } from "../../app/resource.mjs";
 import app from "../../app/config.mjs";
 import User from "../../models/user.mjs";
 import next from "../../app/next.mjs";

@@ -1,4 +1,4 @@
-import { DB } from "../../resource/resource.mjs";
+import { DB } from "../../app/resource.mjs";
 import app from "../../app/config.mjs";
 
 // Delete an user
