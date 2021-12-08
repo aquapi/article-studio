@@ -4,7 +4,7 @@ await next.prepare();
 
 // Connect to database
 import mongoose from 'mongoose';
-import { url, settings } from "../resource/resource.mjs";
+import { url, settings } from "./resource.mjs";
 await mongoose.connect(url, settings).catch(console.log);
 
 // Socket connection
