@@ -4,6 +4,7 @@ import session from "express-session";
 import { config } from "dotenv";
 import * as path from "path";
 import createMemoryStore from "memorystore";
+import helmet from "helmet";
 
 // Memory store
 const MemoryStore = createMemoryStore(session);
@@ -54,6 +55,9 @@ app.use((err, _req, res, _next) => {
     console.error(err.stack);
     res.status(500).send('Error Detected!'); // Send Error to client
 });
+
+// Use helmet middleware
+app.use(helmet());
 
 // Export app
 export default app;
