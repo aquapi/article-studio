@@ -32,3 +32,13 @@ Run the project using:
 ## License
 - Do not deploy this application on any cloud platform or machine
 - Use this project for testing and learning only
+
+## Structure
+```
+ server.mjs ---> socket.mjs -------
+     |                            |
+ config.mjs ---------             |
+                    |             |
+ next.mjs -----> routes -----> app.mjs -----> index.mjs
+     |____________________________|
+```
