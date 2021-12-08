@@ -22,12 +22,12 @@ Provide environment variables:
 Create a directory named `ssl`
 
 Generate an SSL certificate using:
-- `.\bin\ssl\SSL` in CMD or Powershell
-- `./bin/ssl/SSL.sh` in Bash
+- `.\app\bin\ssl\SSL` in CMD or Powershell
+- `./app/bin/ssl/SSL.sh` in Bash
 
 Run the project using:
-- `.\bin\run\run` in CMD or Powershell
-- `./bin/run/run.sh` in Bash
+- `.\app\bin\run\run` in CMD or Powershell
+- `./app/bin/run/run.sh` in Bash
 
 ## License
 - Do not deploy this application on any cloud platform or machine
