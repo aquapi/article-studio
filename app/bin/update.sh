@@ -1,5 +1,5 @@
 #!/bin/bash
 
-npm i nodemailer mongoose express-session express dotenv cookie-parser next nodemon
-npm i @types/cookie-parser @types/express @types/express-session @types/nodemailer --save-dev
+npm i cookie-parser dotenv express express-session hpp memorystore mongoose next nodemailer nodemon socket.io
+npm i @types/cookie-parser @types/express @types/express-session @types/hpp @types/nodemailer --save-dev
 npm fund

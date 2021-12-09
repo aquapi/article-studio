@@ -42,6 +42,7 @@ app.use(session({
     cookie: { 
         maxAge: 1000 * 60 * 60 * 24, // One day
         secure: true, // Secure cookie in HTTPS
+        httpOnly: true
     },
     resave: false, // Prevent the session store from saving unmodified sessions
     store: new MemoryStore({
@@ -58,6 +59,9 @@ app.use((err, _req, res, _next) => {
 
 // Use hpp middleware
 app.use(hpp());
+
+// Blocking others from seeing this app is running
+app.disable('x-powered-by');
 
 // Export app
 export default app;
