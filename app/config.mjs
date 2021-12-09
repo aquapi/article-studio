@@ -4,7 +4,7 @@ import session from "express-session";
 import { config } from "dotenv";
 import * as path from "path";
 import createMemoryStore from "memorystore";
-import helmet from "helmet";
+import hpp from "hpp";
 
 // Memory store
 const MemoryStore = createMemoryStore(session);
@@ -41,13 +41,13 @@ app.use(session({
     saveUninitialized: false, // Prevent the session store from saving uninitialized sessions
     cookie: { 
         maxAge: 1000 * 60 * 60 * 24, // One day
-        secure: true // Secure cookie in HTTPS
+        secure: true, // Secure cookie in HTTPS
     },
     resave: false, // Prevent the session store from saving unmodified sessions
     store: new MemoryStore({
         checkPeriod: 86400000 // prune expired entries every 24h
     }), // Prevent memory leaks
-    unset: 'destroy' // Destroy the session after set to null
+    unset: 'destroy', // Destroy the session after set to null
 }));
 
 // Execute when error detected
@@ -56,8 +56,8 @@ app.use((err, _req, res, _next) => {
     res.status(500).send('Error Detected!'); // Send Error to client
 });
 
-// Use helmet middleware
-app.use(helmet());
+// Use hpp middleware
+app.use(hpp());
 
 // Export app
 export default app;
