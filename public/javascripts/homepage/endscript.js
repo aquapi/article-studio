@@ -5,15 +5,6 @@ document.querySelector("#new").addEventListener("click", () =>
     location.replace("/article/new")
 );
 
-// Load page banner
-$(".wait").css("display", "block");
-
-// Load created article part
-$("#created-article").css("display", 'flex');
-
-// Load body
-$("body").css("display", 'block');
-
 // Check whether user is signed up
 $("#sign").click(() => data.item(0).innerHTML === "undefined" || !data.item(0).innerHTML ? location.replace('/signup') : location.replace('/article/profile'));
 
@@ -41,3 +32,17 @@ $("input[type=text]").keyup(() => {
 // If articles count larger than 4
 if (document.getElementsByClassName("created").length > 4) 
     document.querySelector("#created-article").style["justify-content"] = "flex-start";
+
+// If images cannot load
+document.querySelectorAll("div > div > img").forEach(e => 
+    e.addEventListener("error", () => e.src = 'images/image-icon.jpg')
+)
+
+// Load page banner
+$(".wait").css("display", "block");
+
+// Load created article part
+$("#created-article").css("display", 'flex');
+
+// Load body
+$("body").css("display", 'block');
