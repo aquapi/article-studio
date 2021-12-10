@@ -41,5 +41,5 @@ Run the project using:
      ↑                            |                |
  config.mjs                       |                |
                                   ↓                ↓
- next.mjs ———————————————————→ app.mjs —————→ index.mjs
+ next.mjs ———————————————————→ app.mjs —————→ start.mjs —————→ index..mjs
 ```
