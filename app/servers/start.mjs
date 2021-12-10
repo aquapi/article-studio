@@ -1,6 +1,5 @@
 import server from "./server.mjs";
 import '../app.mjs';
-import { hostname, port } from "../resource.mjs";
 
 /**
  * @param {number} port 
@@ -8,7 +7,7 @@ import { hostname, port } from "../resource.mjs";
  * @returns {Promise<void>}
  */
 
-export default async () =>
+export default async (port, hostname) =>
     new Promise(res =>
         server.listen(port, hostname, () => res(null))
     )
