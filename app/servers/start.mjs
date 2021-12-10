@@ -9,5 +9,5 @@ import '../app.mjs';
 
 export default async (port, hostname) =>
     new Promise(res =>
-        server.listen(port, hostname, () => res(null))
+        server.listen(port, hostname, () => res(server))
     )
