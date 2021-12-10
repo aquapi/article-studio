@@ -1,19 +1,53 @@
 const httpsEvent = [
-    "listening", "close", "checkContinue", "checkExpectation", 
+    "listening", "close", "checkContinue", "checkExpectation",
     "clientError", "connect", "connection", "request", "upgrade",
-    'keylog', 'newSession', 'OCSPRequest', 'resumeSession', 
+    'keylog', 'newSession', 'OCSPRequest', 'resumeSession',
     'secureConnection', 'tlsClientError', 'error'
 ];
 
+/**
+ * Asynchronous HTTPS Node.js Implementation
+ * @example
+ * import https from "https";
+ * import fs from "fs";
+ * import express from "express";
+ * import HttpsServer from "HttpsServer.mjs";
+ * 
+ * // Express server
+ * const app = express();
+ * 
+ * app.get("/", (_, res) => res.end("Hello World"));
+ * 
+ * // Target HTTPS Server
+ * const target = https.createServer({
+ *     key: fs.readFileSync("ssl/key.pem"),
+ *     cert: fs.readFileSync('ssl/cert.pem')
+ * }, app);
+ * 
+ * // HTTPS async server
+ * const server = new HttpsServer(target);
+ * 
+ * // Run right after the server is started
+ * server.onListening(() => console.log("Server is running"));
+ * 
+ * // Start the server
+ * await server.start(443, "0.0.0.0");
+ */
+
 export default class HttpsServer {
     #httpsServer;
-    #timeout;
+    timeout;
+    port;
+    hostname;
 
     /**
      * @param {import("https").Server} server 
+     * 
+     * Constructor
      */
     constructor(server) {
         this.#httpsServer = server;
+        this.timeout = this.port = this.hostname = null;
         for (const ev of httpsEvent) {
             /**
              * @param {(...args: any[]) => void} listener 
@@ -36,44 +70,51 @@ export default class HttpsServer {
     /**
      * @param {number} port 
      * @param {string} hostname 
-     * @returns {Promise<HttpsServer>}
+     * @returns {Promise<HttpsServer>} the current server
+     * 
      * Start the server
      */
     start =
-        async (port, hostname) =>
+        async (port = 443, hostname = "0.0.0.0") =>
             new Promise((res, rej) => {
                 try {
-                    this.server.listen(port, hostname, () => res(new HttpsServer(this.server)));
+                    if (this.timeout)
+                        this.onTimeout();
+                    if (this.server.listening)
+                        rej("Server is listening to another port or another host");
+                    this.server.listen(port, hostname, () => {
+                        this.port = port;
+                        this.hostname = hostname;
+                        res(new HttpsServer(this.server))
+                    });
                 } catch (e) {
                     rej(e);
                 }
             })
 
     /**
-     * @returns {Promise<HttpsServer>}
+     * @returns {Promise<HttpsServer>} the current server
+     * 
      * Close the server
      */
     stop = async () =>
-        new Promise((res, rej) =>
-            this.server.close(err => {
-                if (err) rej(err);
-                res(new HttpsServer(this.server));
-            })
+        new Promise(
+            (res, rej) => {
+                if (!this.server.listening)
+                    res(new HttpsServer(this.server));
+                this.server.close(err => {
+                    if (err) rej(err);
+                    res(new HttpsServer(this.server));
+                });
+            }
         )
 
     /**
-     * @param {number} ms 
-     * @returns {number} timeout
-     * 
-     * Server timeout
-     */
-    setTimeout = ms => this.#timeout = ms;
-
-    /**
      * @param {() => void} listener 
-     * @returns {Promise<HttpsServer>}
+     * @returns {HttpsServer} the current server
+     * 
      * Timeout event
      */
-    timeout = (listener = () => { }) =>
-        new HttpsServer(this.server.setTimeout(this.#timeout, listener));
+    onTimeout = (listener = () => { }) =>
+        new HttpsServer(this.server.setTimeout(this.timeout, listener));
 }
