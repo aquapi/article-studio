@@ -3,14 +3,16 @@ export default class HttpsServer {
     #timeout;
 
     /**
-     * @param {https.Server} server 
+     * @param {import("https").Server} server 
      */
     constructor(server) {
         this.#httpsServer = server;
     }
 
     /**
-     * @type {https.Server}
+     * @type {import("https").Server}
+     * 
+     * get the https server
      */
     get server() {
         return this.#httpsServer;
@@ -20,15 +22,21 @@ export default class HttpsServer {
      * @param {number} port 
      * @param {string} hostname 
      * @returns {Promise<HttpsServer>}
+     * Start the server
      */
     start =
         async (port, hostname) =>
-            new Promise(res =>
-                this.server.listen(port, hostname, () => res(new HttpsServer(this.server)))
-            )
+            new Promise((res, rej) => {
+                try {
+                    this.server.listen(port, hostname, () => res(new HttpsServer(this.server)));
+                } catch (e) {
+                    rej(e);
+                }
+            })
 
     /**
      * @returns {Promise<HttpsServer>}
+     * Close the server
      */
     close = async () =>
         new Promise((res, rej) =>
@@ -41,6 +49,7 @@ export default class HttpsServer {
     /**
      * @param {import("http").RequestListener} listener 
      * @returns {Promise<HttpsServer>}
+     * Listening event
      */
     listening = listener =>
         new HttpsServer(this.server.on('listening', listener));
@@ -48,6 +57,7 @@ export default class HttpsServer {
     /**
      * @param {import("http").RequestListener} listener 
      * @returns {Promise<HttpsServer>}
+     * Close event
      */
     onClose = listener =>
         new HttpsServer(this.server.on('close', listener));
@@ -55,6 +65,7 @@ export default class HttpsServer {
     /**
      * @param {import("http").RequestListener} listener 
      * @returns {Promise<HttpsServer>}
+     * Check continue event
      */
     checkContinue = listener =>
         new HttpsServer(this.server.on('checkContinue', listener));
@@ -62,6 +73,7 @@ export default class HttpsServer {
     /**
      * @param {import("http").RequestListener} listener 
      * @returns {Promise<HttpsServer>}
+     * Check expectation event
      */
     checkExpectation = listener =>
         new HttpsServer(this.server.on('checkExpectation', listener));
@@ -69,6 +81,7 @@ export default class HttpsServer {
     /**
     * @param {import("http").RequestListener} listener 
     * @returns {Promise<HttpsServer>}
+    * Client error event
     */
     clientError = listener =>
         new HttpsServer(this.server.on('clientError', listener));
@@ -76,6 +89,7 @@ export default class HttpsServer {
     /**
     * @param {import("http").RequestListener} listener 
     * @returns {Promise<HttpsServer>}
+    * Connect event
     */
     onConnect = listener =>
         new HttpsServer(this.server.on('connect', listener));
@@ -83,6 +97,7 @@ export default class HttpsServer {
     /**
     * @param {import("http").RequestListener} listener 
     * @returns {Promise<HttpsServer>}
+    * Connection event
     */
     onConnection = listener =>
         new HttpsServer(this.server.on('connection', listener));
@@ -90,6 +105,7 @@ export default class HttpsServer {
     /**
     * @param {import("http").RequestListener} listener 
     * @returns {Promise<HttpsServer>}
+    * Request event
     */
     onRequest = listener =>
         new HttpsServer(this.server.on('request', listener));
@@ -97,6 +113,7 @@ export default class HttpsServer {
     /**
     * @param {import("http").RequestListener} listener 
     * @returns {Promise<HttpsServer>}
+    * Upgrade event
     */
     onUpgrade = listener =>
         new HttpsServer(this.server.on('upgrade', listener));
@@ -104,21 +121,16 @@ export default class HttpsServer {
     /**
      * @param {number} ms 
      * @returns {number} timeout
+     * 
+     * Server timeout
      */
     setTimeout = ms => this.#timeout = ms;
 
     /**
      * @param {() => void} listener 
      * @returns {Promise<HttpsServer>}
+     * Timeout event
      */
     timeout = (listener = () => { }) =>
         new HttpsServer(this.server.setTimeout(this.#timeout, listener));
-
-    /**
-     * @param {https.ServerOptions} option 
-     * @param {import("http").RequestListener} listener
-     * @returns {typeof HttpsServer}
-     */
-    static create = (option, listener = () => { }) =>
-        new HttpsServer(https.createServer(option, listener))
 }
