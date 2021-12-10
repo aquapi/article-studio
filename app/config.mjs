@@ -51,12 +51,6 @@ app.use(session({
     unset: 'destroy', // Destroy the session after set to null
 }));
 
-// Execute when error detected
-app.use((err, _req, res, _next) => {
-    console.error(err.stack);
-    res.status(500).send('Error Detected!'); // Send Error to client
-});
-
 // Use hpp middleware
 app.use(hpp());
 

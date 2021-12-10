@@ -1,3 +1,10 @@
+const httpsEvent = [
+    "listening", "close", "checkContinue", "checkExpectation", 
+    "clientError", "connect", "connection", "request", "upgrade",
+    'keylog', 'newSession', 'OCSPRequest', 'resumeSession', 
+    'secureConnection', 'tlsClientError', 'error'
+];
+
 export default class HttpsServer {
     #httpsServer;
     #timeout;
@@ -7,6 +14,14 @@ export default class HttpsServer {
      */
     constructor(server) {
         this.#httpsServer = server;
+        for (const ev of httpsEvent) {
+            /**
+             * @param {(...args: any[]) => void} listener 
+             * @returns {HttpsServer}
+             */
+            this["on" + ev.charAt(0).toUpperCase() + ev.slice(1)] = listener =>
+                new HttpsServer(this.server.on(ev, listener))
+        }
     }
 
     /**
@@ -38,85 +53,13 @@ export default class HttpsServer {
      * @returns {Promise<HttpsServer>}
      * Close the server
      */
-    close = async () =>
+    stop = async () =>
         new Promise((res, rej) =>
             this.server.close(err => {
                 if (err) rej(err);
                 res(new HttpsServer(this.server));
             })
         )
-
-    /**
-     * @param {import("http").RequestListener} listener 
-     * @returns {Promise<HttpsServer>}
-     * Listening event
-     */
-    listening = listener =>
-        new HttpsServer(this.server.on('listening', listener));
-
-    /**
-     * @param {import("http").RequestListener} listener 
-     * @returns {Promise<HttpsServer>}
-     * Close event
-     */
-    onClose = listener =>
-        new HttpsServer(this.server.on('close', listener));
-
-    /**
-     * @param {import("http").RequestListener} listener 
-     * @returns {Promise<HttpsServer>}
-     * Check continue event
-     */
-    checkContinue = listener =>
-        new HttpsServer(this.server.on('checkContinue', listener));
-
-    /**
-     * @param {import("http").RequestListener} listener 
-     * @returns {Promise<HttpsServer>}
-     * Check expectation event
-     */
-    checkExpectation = listener =>
-        new HttpsServer(this.server.on('checkExpectation', listener));
-
-    /**
-    * @param {import("http").RequestListener} listener 
-    * @returns {Promise<HttpsServer>}
-    * Client error event
-    */
-    clientError = listener =>
-        new HttpsServer(this.server.on('clientError', listener));
-
-    /**
-    * @param {import("http").RequestListener} listener 
-    * @returns {Promise<HttpsServer>}
-    * Connect event
-    */
-    onConnect = listener =>
-        new HttpsServer(this.server.on('connect', listener));
-
-    /**
-    * @param {import("http").RequestListener} listener 
-    * @returns {Promise<HttpsServer>}
-    * Connection event
-    */
-    onConnection = listener =>
-        new HttpsServer(this.server.on('connection', listener));
-
-    /**
-    * @param {import("http").RequestListener} listener 
-    * @returns {Promise<HttpsServer>}
-    * Request event
-    */
-    onRequest = listener =>
-        new HttpsServer(this.server.on('request', listener));
-
-    /**
-    * @param {import("http").RequestListener} listener 
-    * @returns {Promise<HttpsServer>}
-    * Upgrade event
-    */
-    onUpgrade = listener =>
-        new HttpsServer(this.server.on('upgrade', listener));
 
     /**
      * @param {number} ms 
