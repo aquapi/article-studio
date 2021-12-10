@@ -9,5 +9,6 @@ const server = new HttpsServer(target);
 // Start the server
 await server.start(port, hostname);
 
-// Server data
-console.log("Server is listening on port " + port + ", address https://" + hostname);
+// Print server data
+console.log("Server is listening on port " + port + ", address https://" + hostname)
+
