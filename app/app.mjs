@@ -1,5 +1,5 @@
 // Next server config
-import next from './next.mjs';
+import next from './servers/next.mjs';
 await next.prepare();
 
 // Connect to database
@@ -8,7 +8,7 @@ import { url, settings } from "./resource.mjs";
 await mongoose.connect(url, settings).catch(console.log);
 
 // Socket connection
-import './socket.mjs';
+import './servers/socket.mjs';
 
 // Display articles
 import '../routes/article/collections.mjs';
