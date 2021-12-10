@@ -27,7 +27,7 @@ const httpsEvent = [
  * // HTTPS async server
  * const server = new HttpsServer(target);
  * 
- * // Run right after the server is started
+ * // Run right after the server is started ('listening event')
  * server.onListening(() => console.log("Server is running"));
  * 
  * // Start the server
@@ -78,8 +78,11 @@ export default class HttpsServer {
         async (port = 443, hostname = "0.0.0.0") =>
             new Promise((res, rej) => {
                 try {
-                    if (this.timeout)
+                    if (this.timeout) {
+                        if (!(this.timeout instanceof Number))
+                            rej("Time out must be a number");
                         this.onTimeout();
+                    }
                     if (this.server.listening)
                         rej("Server is listening to another port or another host");
                     this.server.listen(port, hostname, () => {

@@ -18,6 +18,9 @@ export const hostname = process.env.LAN_IP || "0.0.0.0";
 export const url = process.env.DB_URL;
 
 // Connection settings
+/**
+ * @type {import("mongoose").ConnectOptions}
+ */
 export const settings = {
     useNewUrlParser: true,
     useUnifiedTopology: true
