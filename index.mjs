@@ -4,11 +4,11 @@ import HttpsServer from "./app/dependencies/HttpsServer.mjs";
 import "./app/app.mjs";
 
 // Server
-const server = new HttpsServer(target);
+const server = new HttpsServer(target, port, hostname);
 
 // Start the server
-await server.start(port, hostname);
+await server.start();
 
 // Print server data
-console.log("Server is listening on port " + port + ", address https://" + hostname)
+console.log("Server is listening on port " + server.port + ", address https://" + server.hostname)
 
