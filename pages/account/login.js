@@ -6,8 +6,6 @@ export default () =>
         <Head page="Login"/>
         {/*Go back to homepage*/}
         <button id="back">Back</button>
-        {/*Script*/}
-        <script src="/javascripts/account/sign.js"></script>
         {/*Login form*/}
         <form action="/loginprocess" method="POST">
             <div style={{ width: "100%", textAlign: "center" }}>
@@ -19,6 +17,9 @@ export default () =>
             {/*Submit form to server to check login data*/}
             <input type="submit" value="Login" />
         </form>
+        
+        {/*Script*/}
+        <script src="/javascripts/account/sign.js"></script>
     </>
 )
 

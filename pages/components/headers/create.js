@@ -15,8 +15,6 @@ export default () => (
         <title>Create new article</title>
         {/*Stylesheet*/}
         <link rel="stylesheet" href="/stylesheets/create/main.css" />
-        {/*Socket.io*/}
-        <script src="https://cdn.socket.io/4.3.2/socket.io.min.js" integrity="sha384-KAZ4DtjNhLChOB/hxXuKqhMLYvx3b5MlT55xPEiNmREKRzeEm+RVPlTnAn0ajQNs" crossOrigin="anonymous"></script>
     </Head>
 );
 

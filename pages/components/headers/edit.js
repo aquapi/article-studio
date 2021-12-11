@@ -20,12 +20,9 @@ export default ({ name }) => (
         <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.js"
             integrity="sha512-bvV1V1YSjP1fbfKJjTlNmdnUO2XpsLYUdKwmz5UXBi5U+x40rx9JpA0ooQUMZfpz1MaaBC0ydNLoC6r0sitPUQ=="
             crossOrigin="anonymous" referrerPolicy="no-referrer"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.js.map"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js.map"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
         {/*Axios*/}
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        {/*Socket.io*/}
-        <script src="https://cdn.socket.io/4.3.2/socket.io.min.js" integrity="sha384-KAZ4DtjNhLChOB/hxXuKqhMLYvx3b5MlT55xPEiNmREKRzeEm+RVPlTnAn0ajQNs" crossOrigin="anonymous"></script>
     </Head>
 )
 

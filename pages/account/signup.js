@@ -6,8 +6,6 @@ export default () =>
         <Head page="Signup"/>
         {/*Go back to homepage*/}
         <button id="back">Back</button>
-        {/*Script*/}
-        <script src="/javascripts/account/sign.js"></script>
         {/*Login form*/}
         <form action="/signupprocess" method="POST">
             {/*Header*/}
@@ -21,6 +19,8 @@ export default () =>
             <input type="password" name="pass" required placeholder="Password" />
             <input type="submit" value="Sign up" />
         </form>
+        {/*Script*/}
+        <script src="/javascripts/account/sign.js"></script>
     </>
 )
 

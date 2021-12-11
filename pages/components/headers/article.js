@@ -28,10 +28,6 @@ export default () => (
             integrity="sha256-hlKLmzaRlE8SCJC1Kw8zoUbU8BxA+8kR3gseuKfMjxA=" crossOrigin="anonymous"></script>
         {/*Stylesheets*/}
         <link rel="stylesheet" href="/stylesheets/article/main.css" />
-        {/*Socket.io*/}
-        <script src="https://cdn.socket.io/4.3.2/socket.io.min.js"
-            integrity="sha384-KAZ4DtjNhLChOB/hxXuKqhMLYvx3b5MlT55xPEiNmREKRzeEm+RVPlTnAn0ajQNs"
-            crossOrigin="anonymous"></script>
         <title>Articles</title>
     </Head>
 );

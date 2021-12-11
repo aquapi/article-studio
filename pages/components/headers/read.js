@@ -22,10 +22,6 @@ export default ({ name }) => (
         <script src="https://cdn.jsdelivr.net/npm/less@4.1.1"></script>
         {/*Axios*/}
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        {/*Socket.io*/}
-        <script src="https://cdn.socket.io/4.3.2/socket.io.min.js"
-        integrity="sha384-KAZ4DtjNhLChOB/hxXuKqhMLYvx3b5MlT55xPEiNmREKRzeEm+RVPlTnAn0ajQNs"
-        crossOrigin="anonymous"></script>
     </Head>
 );
 
