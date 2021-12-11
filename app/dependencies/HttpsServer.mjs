@@ -1,10 +1,3 @@
-const httpsEvent = [
-    "listening", "close", "checkContinue", "checkExpectation",
-    "clientError", "connect", "connection", "request", "upgrade",
-    'keylog', 'newSession', 'OCSPRequest', 'resumeSession',
-    'secureConnection', 'tlsClientError', 'error'
-];
-
 /**
  * Asynchronous HTTPS Node.js Implementation
  * @example
@@ -45,10 +38,17 @@ export default class HttpsServer {
      * 
      * Constructor
      */
-    constructor(server) {
+    constructor(server, port = 443, hostname = "0.0.0.0") {
         this.#httpsServer = server;
-        this.timeout = this.port = this.hostname = null;
-        for (const ev of httpsEvent) {
+        this.port = port;
+        this.hostname = hostname;
+        this.timeout = null;
+        for (const ev of [
+            "listening", "close", "checkContinue", "checkExpectation",
+            "clientError", "connect", "connection", "request", "upgrade",
+            'keylog', 'newSession', 'OCSPRequest', 'resumeSession',
+            'secureConnection', 'tlsClientError', 'error'
+        ]) {
             /**
              * @param {(...args: any[]) => void} listener 
              * @returns {HttpsServer}
@@ -75,7 +75,7 @@ export default class HttpsServer {
      * Start the server
      */
     start =
-        async (port = 443, hostname = "0.0.0.0") =>
+        async () =>
             new Promise((res, rej) => {
                 try {
                     if (this.timeout) {
@@ -85,9 +85,7 @@ export default class HttpsServer {
                     }
                     if (this.server.listening)
                         rej("Server is listening to another port or another host");
-                    this.server.listen(port, hostname, () => {
-                        this.port = port;
-                        this.hostname = hostname;
+                    this.server.listen(this.port, this.hostname, () => {
                         res(new HttpsServer(this.server))
                     });
                 } catch (e) {
