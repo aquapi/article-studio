@@ -48,7 +48,7 @@ export default class HttpsServer {
     /**
      * @type {string}
      */
-    hostname;    
+    hostname;
 
     /**
      * @param {import("https").Server} server 
@@ -78,8 +78,9 @@ export default class HttpsServer {
              *     // Code here
              * }) 
              */
-            this["on" + ev.charAt(0).toUpperCase() + ev.slice(1)] = listener =>
-                new HttpsServer(this.server.on(ev, listener))
+            this["on" + ev.charAt(0).toUpperCase() + ev.slice(1)] = listener => (
+                this.server.on(ev, listener), this
+            )
         }
     }
 
@@ -117,7 +118,7 @@ export default class HttpsServer {
             (res, rej) =>
                 (!this.server.listening) ?
                     res(this)
-                    : this.server.close(err => 
+                    : this.server.close(err =>
                         (err) ? rej(err) : res(this)
                     )
         )
@@ -128,6 +129,7 @@ export default class HttpsServer {
      * 
      * Timeout event
      */
-    onTimeout = (listener = () => { }) =>
-        new HttpsServer(this.server.setTimeout(this.timeout, listener));
+    onTimeout = (listener = () => { }) => (
+        this.server.setTimeout(this.timeout, listener), this
+    )
 }
