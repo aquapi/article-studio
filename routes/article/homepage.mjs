@@ -4,7 +4,6 @@ import {
 } from "../../app/resource.mjs";
 import next from "../../app/servers/next.mjs";
 import app from "../../app/config.mjs";
-import fs from "fs";
 
 let Csession;
 // Homepage
@@ -19,7 +18,7 @@ app.get("/article", async (req, res) => {
      */
     let article = [];
     // Created articles
-    for (let i of r) {
+    for (let i of r) 
         article.push({
             name: i.name,
             views: i.views ?? 0,
@@ -27,9 +26,9 @@ app.get("/article", async (req, res) => {
             votes: i.votes,
             data: i
         });
-    }
     // Sort articles
     article = InitCategory("views", article);
+    // Render
     return next.render(req, res, "/article/article", {
         Csession: Csession,
         headerName: "Discover",
