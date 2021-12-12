@@ -44,25 +44,26 @@ export const transporter = nodemailer.createTransport({
 /**
  * @param {string} ct category name
  * @param {Response<any, Record<string, any>, number>} res to write the result to the client
- * @param {any[]} articles list
+ * @param {{name: string, content: string, views: number, author: string, votes: number}[]} articles list
  */
 
 export const InitCategory = (ct, articles) => {
-    const length = articles.length;
-    const sorted = [];
-    for (let i = 0; i < length; i++) {
-        let mostViewsIndex = 0;
-        let currentMost = Number.MIN_VALUE;
-        let index = 0;
-        for (let e of articles) {
-            if (e[ct] > currentMost) {
-                mostViewsIndex = index;
-                currentMost = e[ct];
-            }
-            index++;
-        }
-        sorted.push(articles[mostViewsIndex]);
-        articles.splice(mostViewsIndex, 1);
-    }
-    return sorted;
+    if (articles.length < 2)
+        return articles;
+    const
+        pivotIndex = articles.length - 1,
+        pivot = articles[pivotIndex],
+        /**
+         * @type {{name: string, content: string, views: number, author: string, votes: number}[]}
+         */
+        left = [],
+        /**
+         * @type {{name: string, content: string, views: number, author: string, votes: number}[]}
+         */
+        right = [];
+
+    for (let i = 0; i < pivotIndex; i++)
+        (articles[i][ct] < pivot[ct] ? right : left).push(articles[i]);
+
+    return [...InitCategory(ct, left), pivot, ...InitCategory(ct, right)];
 }
