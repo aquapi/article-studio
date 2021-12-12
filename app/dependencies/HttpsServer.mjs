@@ -11,20 +11,20 @@
  * 
  * app.get("/", (_, res) => res.end("Hello World"));
  * 
- * // Target HTTPS Server
- * const target = https.createServer({
- *     key: fs.readFileSync("ssl/key.pem"),
- *     cert: fs.readFileSync('ssl/cert.pem')
- * }, app);
- * 
  * // HTTPS async server
- * const server = new HttpsServer(target);
+ * const server = new HttpsServer(
+ *     https.createServer({
+ *         key: fs.readFileSync("ssl/key.pem"),
+ *         cert: fs.readFileSync('ssl/cert.pem')
+ *     }, app), 
+ *     443, "0.0.0.0"
+ * );
  * 
  * // Run right after the server is started ('listening event')
  * server.onListening(() => console.log("Server is running"));
  * 
  * // Start the server
- * await server.start(443, "0.0.0.0");
+ * await server.start();
  */
 
 export default class HttpsServer {
@@ -76,22 +76,13 @@ export default class HttpsServer {
      */
     start =
         async () =>
-            new Promise((res, rej) => {
-                try {
-                    if (this.timeout) {
-                        if (!(this.timeout instanceof Number))
-                            rej("Time out must be a number");
-                        this.onTimeout();
-                    }
-                    if (this.server.listening)
-                        rej("Server is listening to another port or another host");
-                    this.server.listen(this.port, this.hostname, () => {
+            new Promise((res, rej) =>
+                (this.server.listening) ?
+                    rej("Server is listening to another port or another host")
+                    : this.server.listen(this.port, this.hostname, () =>
                         res(new HttpsServer(this.server))
-                    });
-                } catch (e) {
-                    rej(e);
-                }
-            })
+                    )
+            )
 
     /**
      * @returns {Promise<HttpsServer>} the current server
@@ -100,14 +91,12 @@ export default class HttpsServer {
      */
     stop = async () =>
         new Promise(
-            (res, rej) => {
-                if (!this.server.listening)
-                    res(new HttpsServer(this.server));
-                this.server.close(err => {
-                    if (err) rej(err);
-                    res(new HttpsServer(this.server));
-                });
-            }
+            (res, rej) =>
+                (!this.server.listening) ?
+                    res(new HttpsServer(this.server))
+                    : this.server.close(err => 
+                        (err) ? rej(err) : res(new HttpsServer(this.server))
+                    )
         )
 
     /**
