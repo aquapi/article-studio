@@ -70,7 +70,13 @@ export default class HttpsServer {
         ]) {
             /**
              * @param {(...args: any[]) => void} listener 
-             * @returns {HttpsServer}
+             * @returns {HttpsServer} this server
+             * 
+             * @example
+             * // Handle server close event
+             * server.onClose(() => {
+             *     // Code here
+             * }) 
              */
             this["on" + ev.charAt(0).toUpperCase() + ev.slice(1)] = listener =>
                 new HttpsServer(this.server.on(ev, listener))
@@ -97,7 +103,7 @@ export default class HttpsServer {
                 (this.server.listening) ?
                     rej("Server is listening to another port or another host")
                     : this.server.listen(this.port, this.hostname, () =>
-                        res(new HttpsServer(this.server))
+                        res(this)
                     )
             )
 
@@ -110,9 +116,9 @@ export default class HttpsServer {
         new Promise(
             (res, rej) =>
                 (!this.server.listening) ?
-                    res(new HttpsServer(this.server))
+                    res(this)
                     : this.server.close(err => 
-                        (err) ? rej(err) : res(new HttpsServer(this.server))
+                        (err) ? rej(err) : res(this)
                     )
         )
 
