@@ -1,3 +1,5 @@
+// @ts-check
+
 /**
  * Asynchronous HTTPS Node.js Implementation
  * @example
@@ -28,13 +30,30 @@
  */
 
 export default class HttpsServer {
+    /**
+     * @type {import("https").Server}
+     */
     #httpsServer;
+
+    /**
+     * @type {number | null}
+     */
     timeout;
+
+    /**
+     * @type {number}
+     */
     port;
-    hostname;
+
+    /**
+     * @type {string}
+     */
+    hostname;    
 
     /**
      * @param {import("https").Server} server 
+     * @param {number} port
+     * @param {string} hostname
      * 
      * Constructor
      */
@@ -68,8 +87,6 @@ export default class HttpsServer {
     }
 
     /**
-     * @param {number} port 
-     * @param {string} hostname 
      * @returns {Promise<HttpsServer>} the current server
      * 
      * Start the server
