@@ -1,9 +1,12 @@
 import mongoose from "mongoose";
 
 // User model
-export default mongoose.model("User", 
+const User = mongoose.model("User", 
     new mongoose.Schema({
         username: String,
         password: String
     })
 );
+
+// Export user model
+export default User;

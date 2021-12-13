@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 // Article model
-export default mongoose.model("Site", 
+const Article = mongoose.model("Site", 
     new mongoose.Schema({
         user: String,
         name: String,
@@ -13,4 +13,7 @@ export default mongoose.model("Site",
         votes: Number
     })
 );
+
+// Export model
+export default Article;
 
