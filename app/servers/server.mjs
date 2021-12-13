@@ -6,7 +6,7 @@ import fs from "fs";
 const target = https.createServer({
     key: fs.readFileSync("ssl/key.pem"),
     cert: fs.readFileSync('ssl/cert.pem')
-}, app)
+}, app);
 
 // Export server
 export default target;

@@ -36,20 +36,22 @@ app.use(cookieParser());
 app.use(express.static(path.resolve()));
 
 // Use session middleware
-app.use(session({
-    secret: process.env.SESSION_SECRET, // Secret
-    saveUninitialized: false, // Prevent the session store from saving uninitialized sessions
-    cookie: { 
-        maxAge: 1000 * 60 * 60 * 24, // One day
-        secure: true, // Secure cookie in HTTPS
-        httpOnly: true
-    },
-    resave: false, // Prevent the session store from saving unmodified sessions
-    store: new MemoryStore({
-        checkPeriod: 86400000 // prune expired entries every 24h
-    }), // Prevent memory leaks
-    unset: 'destroy', // Destroy the session after set to null
-}));
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET, // Secret
+        saveUninitialized: false, // Prevent the session store from saving uninitialized sessions
+        cookie: {
+            maxAge: 1000 * 60 * 60 * 24, // One day
+            secure: true, // Secure cookie in HTTPS
+            httpOnly: true
+        },
+        resave: false, // Prevent the session store from saving unmodified sessions
+        store: new MemoryStore({
+            checkPeriod: 86400000 // prune expired entries every 24h
+        }), // Prevent memory leaks
+        unset: 'destroy', // Destroy the session after set to null
+    })
+);
 
 // Use hpp middleware
 app.use(hpp());

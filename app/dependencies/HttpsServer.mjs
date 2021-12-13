@@ -82,7 +82,7 @@ export default class HttpsServer {
                 this.server.on(ev, listener), this
             )
         }
-    }
+    };
 
     /**
      * @type {import("https").Server}
@@ -91,7 +91,7 @@ export default class HttpsServer {
      */
     get server() {
         return this.#httpsServer;
-    }
+    };
 
     /**
      * @returns {Promise<HttpsServer>} the current server
@@ -106,7 +106,7 @@ export default class HttpsServer {
                     : this.server.listen(this.port, this.hostname, () =>
                         res(this)
                     )
-            )
+            );
 
     /**
      * @returns {Promise<HttpsServer>} the current server
@@ -121,7 +121,7 @@ export default class HttpsServer {
                     : this.server.close(err =>
                         (err) ? rej(err) : res(this)
                     )
-        )
+        );
 
     /**
      * @param {() => void} listener 
@@ -131,5 +131,5 @@ export default class HttpsServer {
      */
     onTimeout = (listener = () => { }) => (
         this.server.setTimeout(this.timeout, listener), this
-    )
-}
+    );
+};
