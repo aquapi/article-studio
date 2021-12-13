@@ -2,7 +2,7 @@ import { DB, transporter } from "../../app/resource.mjs";
 import app from "../../app/servers/express.mjs";
 import User from "../../models/user.mjs";
 import next from "../../app/servers/next.mjs";
-import createMailSender from "../../app/dependencies/SendMail.mjs";
+import { createMailSender, remove } from "../../app/dependencies/Util.mjs";
 
 // Send mail
 const sendMail = createMailSender(transporter);
@@ -55,7 +55,7 @@ app.post("/signupprocess", async (req, res) => {
 	const r = await DB.users.findOne({
 		username: req.body.name,
 	});
-	if (!r) 
+	if (!r)
 		await Promise.all([
 			sendMail({
 				from: 'aquaplmc@gmail.com',
@@ -81,8 +81,8 @@ app.post("/signupprocess", async (req, res) => {
 });
 
 // Log out
-app.get("/logout", (req, res) => {
-	req.session.destroy();
+app.get("/logout", async (req, res) => {
+	await remove(req.session);
 	CurrentUser = undefined;
 	res.redirect("/article");
 });
