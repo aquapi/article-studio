@@ -3,11 +3,17 @@ button {
     font-size: 13px;
     letter-spacing: 0.5px; 
     color: white;
-    background-color: #111;
+    background-color: #333;
     border: 0px;
     font-family: "Oxygen", sans-serif;
+    cursor: pointer;
 }
 
 button:hover {
+    background-color: #555;
+}
+
+#buttons {
     background-color: #333;
+    display: flex;
 }
