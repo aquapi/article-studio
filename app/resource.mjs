@@ -8,12 +8,6 @@ import "../models/user.mjs";
 // Load ENV
 config();
 
-// Server port
-export const port = Number(process.env.PORT) || 443;
-
-// Server name
-export const hostname = process.env.LAN_IP || "0.0.0.0";
-
 // Database URL
 export const url = process.env.DB_URL;
 
