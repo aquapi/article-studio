@@ -4,7 +4,7 @@ import { config } from 'dotenv';
 config();
 
 // Next server config
-import next from './servers/next.mjs';
+import { next } from './servers/servers.mjs';
 await next.prepare();
 
 // Connect to database
