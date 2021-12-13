@@ -1,6 +1,3 @@
-// Data
-const data = document.querySelectorAll("span");
-
 // HTML Decoder
 const htmlDecode = input =>
     new DOMParser().parseFromString(input, "text/html").documentElement.textContent;

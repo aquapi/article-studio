@@ -5,7 +5,6 @@ let socket = io();
 let messages = document.getElementById('messages');
 let form = document.getElementById('form');
 let input = document.getElementById('input');
-let data = document.querySelectorAll("span");
 
 // User ID if they haven't signed in
 let rnd = Math.round(Math.random() * 1000000);
