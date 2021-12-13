@@ -1,6 +1,6 @@
 import { DB } from "../../app/resource.mjs";
 import app from "../../app/servers/express.mjs";
-import next from "../../app/servers/next.mjs";
+import { next } from "../../app/servers/servers.mjs";
 
 // Read for client
 app.get("/reader/:name", async (req, res) => {

@@ -15,7 +15,7 @@ app.post("/delete", async (req, res) =>
             res.redirect("/logout")
         )
     : res.redirect("/logout")
-);
+); 
 
 // Delete an article
 app.post("/article/delete", async (req, res) =>

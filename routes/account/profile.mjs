@@ -1,5 +1,5 @@
 import app from "../../app/servers/express.mjs";
-import next from "../../app/servers/next.mjs";
+import { next } from "../../app/servers/servers.mjs";
 import mongoose from "mongoose";
 
 // User's Profile
