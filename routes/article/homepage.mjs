@@ -3,7 +3,7 @@ import {
     InitCategory,
 } from "../../app/resource.mjs";
 import next from "../../app/servers/next.mjs";
-import app from "../../app/config.mjs";
+import app from "../../app/servers/express.mjs";
 
 // Homepage
 // https://localhost/article

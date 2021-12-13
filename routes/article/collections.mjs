@@ -3,7 +3,7 @@ import {
 	InitCategory,
 } from "../../app/resource.mjs";
 import next from "../../app/servers/next.mjs";
-import app from "../../app/config.mjs";
+import app from "../../app/servers/express.mjs";
 
 // My article subpage: Show all articles created not by others
 // https://localhost/myarticle

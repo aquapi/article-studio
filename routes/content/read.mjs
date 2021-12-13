@@ -1,5 +1,5 @@
 import { DB } from "../../app/resource.mjs";
-import app from "../../app/config.mjs";
+import app from "../../app/servers/express.mjs";
 import next from "../../app/servers/next.mjs";
 
 // Read for client

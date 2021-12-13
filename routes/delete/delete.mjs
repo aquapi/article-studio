@@ -1,5 +1,5 @@
 import { DB } from "../../app/resource.mjs";
-import app from "../../app/config.mjs";
+import app from "../../app/servers/express.mjs";
 
 // Delete an user
 app.post("/delete", async (req, res) =>
