@@ -5,12 +5,10 @@ import {
 import next from "../../app/servers/next.mjs";
 import app from "../../app/config.mjs";
 
-let Csession;
 // Homepage
 // https://localhost/article
 
 app.get("/article", async (req, res) => {
-    Csession = req.session;
 	// Search all articles which belongs to current user
 	const r = await DB.sites.find({});
     /**
@@ -30,7 +28,7 @@ app.get("/article", async (req, res) => {
     article = InitCategory("views", article);
     // Render
     return next.render(req, res, "/article/article", {
-        Csession: Csession,
+        Csession: req.session,
         headerName: "Discover",
         articles: article
     });
@@ -40,7 +38,6 @@ app.get("/article", async (req, res) => {
 // https://localhost/mostvote
 
 app.get("/mostvote", async (req, res) => {
-    Csession = req.session;
 	// Search all articles which belongs to current user
 	const r = await DB.sites.find({});
     /**
@@ -48,7 +45,7 @@ app.get("/mostvote", async (req, res) => {
      */
     let article = [];
     // Add articles from database
-    for (let i of r) {
+    for (let i of r) 
         article.push({
             views: i.views ?? 0,
             author: i.user,
@@ -56,12 +53,12 @@ app.get("/mostvote", async (req, res) => {
             name: i.name,
             data: i
         });
-    }
 
     // Init articles
     article = InitCategory("votes", article);
+    // Render
     return next.render(req, res, "/article/article", {
-        Csession: Csession,
+        Csession: req.session,
         headerName: "Most Voted",
         articles: article
     });

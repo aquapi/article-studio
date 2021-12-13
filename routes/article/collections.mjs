@@ -5,21 +5,19 @@ import {
 import next from "../../app/servers/next.mjs";
 import app from "../../app/config.mjs";
 
-let Csession;
 // My article subpage: Show all articles created not by others
 // https://localhost/myarticle
 
 app.get("/myarticle", async (req, res) => {
-	Csession = req.session;
 	// Search all articles which belongs to current user
 	const r = await DB.sites.find({
-		user: Csession.userID
+		user: req.session.userID
 	});
 	// Check whether no article found
 	if (r.length === 0)
 		res.redirect('/article');
 	// Check whether the user is logged in
-	else if (!Csession.userID)
+	else if (!req.session?.userID)
 		res.redirect("/login");
 	/**
 	 * @type {{name: string, content: string, views: number, author: string, votes: number}[]}
@@ -35,8 +33,9 @@ app.get("/myarticle", async (req, res) => {
 	}
 	// Init articles
 	article = InitCategory("views", article);
+	// Render
 	return next.render(req, res, "/article/article", {
-        Csession: Csession,
+        Csession: req.session,
         headerName: "My Article",
         articles: article
     });
@@ -46,23 +45,22 @@ app.get("/myarticle", async (req, res) => {
 // https://localhost/otherarticle
 
 app.get("/otherarticle", async (req, res) => {
-	Csession = req.session;
 	// Search all articles which belongs to current user
 	const r = await DB.sites.find({
-		user: { $ne: Csession.userID }
+		user: { $ne: req.session?.userID ?? "" }
 	});
 	// Check whether no article found
 	if (r.length === 0)
 		res.redirect('/article');
 	// Check whether the user is logged in
-	else if (!Csession.userID)
+	else if (!req.session?.userID)
 		res.redirect("/login");
 	/**
 	 * @type {{name: string, content: string, views: number, author: string, votes: number}[]}
 	 */
 	let article = [];
 	for (let i of r) {
-		if (i.user !== Csession.userID) {
+		if (i.user !== req.session?.userID) {
 			article.push({
 				views: i.views ?? 0,
 				author: i.user,
@@ -75,7 +73,7 @@ app.get("/otherarticle", async (req, res) => {
 	// Init articles
 	article = InitCategory("views", article);
 	return next.render(req, res, "/article/article", {
-        Csession: Csession,
+        Csession: req.session,
         headerName: "Other Articles",
         articles: article
     });
