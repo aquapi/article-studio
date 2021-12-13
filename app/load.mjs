@@ -1,11 +1,20 @@
+import { config } from 'dotenv';
+
+// Load ENV
+config();
+
 // Next server config
 import next from './servers/next.mjs';
 await next.prepare();
 
 // Connect to database
 import mongoose from 'mongoose';
-import { url, settings } from "./resource.mjs";
-await mongoose.connect(url, settings).catch(console.log);
+await mongoose
+    .connect(process.env.DB_URL, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
+    .catch(console.log);
 
 // Socket connection
 import './servers/socket.mjs';

@@ -8,18 +8,6 @@ import "../models/user.mjs";
 // Load ENV
 config();
 
-// Database URL
-export const url = process.env.DB_URL;
-
-// Connection settings
-/**
- * @type {import("mongoose").ConnectOptions}
- */
-export const settings = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-};
-
 // Database models
 export const DB = {
     users: mongoose.model("User"),
