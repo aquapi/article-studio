@@ -1,5 +1,5 @@
 import { config } from "dotenv";
-import target from "./app/servers/server.mjs";
+import { target } from "./app/servers/servers.mjs";
 import HttpsServer from "./app/dependencies/HttpsServer.mjs";
 import "./app/load.mjs";
 
