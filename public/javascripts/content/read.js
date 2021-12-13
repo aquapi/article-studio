@@ -2,10 +2,8 @@
 const data = document.querySelectorAll("span");
 
 // HTML Decoder
-function htmlDecode(input) {
-    var doc = new DOMParser().parseFromString(input, "text/html");
-    return doc.documentElement.textContent;
-}
+const htmlDecode = input =>
+    new DOMParser().parseFromString(input, "text/html").documentElement.textContent;
 
 // Initialize buttons
 document.getElementById("buttons").innerHTML += htmlDecode(data.item(1).innerHTML);
@@ -15,13 +13,30 @@ document.getElementById("content").innerHTML = htmlDecode(data.item(2).innerHTML
 
 // Event listeners
 document.getElementById("back").addEventListener("click", () => location.replace('/article'));
+
+// Discuss
 document.getElementById("discuss_redirect").addEventListener("click", () => location.replace(`/discuss/${encodeURIComponent(data.item(0).innerHTML)}`));
+
+// Delete article
 document.getElementById("del").addEventListener("click", async () => {
     let delName = data.item(0).innerHTML;
-    if (confirm("Confirm delete?")) {
+    if (confirm("Confirm delete?"))
         await axios.post("/article/delete", {
             name: delName
-        });
-        location.replace(`/article`);
-    }
+        }).then(
+            () =>
+                location.replace(`/article`)
+        );
 });
+
+// Vote action
+const vote = () => (
+    document.getElementById("votesDetail").innerHTML = "Votes: " + (
+        Number(
+            document.getElementById("votesDetail").innerHTML
+                .replaceAll("Votes: ", "") 
+                .replaceAll("<\!-- -->", "") // Remove all non-numerical character and parse to number
+        ) + 1
+    ), axios
+        .get(`/vote/${encodeURIComponent(data.item(0).innerHTML)}`)
+);
