@@ -23,22 +23,21 @@ app.get("/myarticle", async (req, res) => {
 	 * @type {{name: string, content: string, views: number, author: string, votes: number}[]}
 	 */
 	let article = [];
-	for (let i of r) {
+	for (let i of r)
 		article.push({
 			views: i.views ?? 0,
 			author: i.user,
 			name: i.name,
 			data: i
 		});
-	}
 	// Init articles
 	article = InitCategory("views", article);
 	// Render
 	return next.render(req, res, "/article/article", {
-        Csession: req.session,
-        headerName: "My Article",
-        articles: article
-    });
+		Csession: req.session,
+		headerName: "My Article",
+		articles: article
+	});
 });
 
 // Other article subpage: Show all articles created by others
@@ -59,22 +58,19 @@ app.get("/otherarticle", async (req, res) => {
 	 * @type {{name: string, content: string, views: number, author: string, votes: number}[]}
 	 */
 	let article = [];
-	for (let i of r) {
-		if (i.user !== req.session?.userID) {
-			article.push({
-				views: i.views ?? 0,
-				author: i.user,
-				name: i.name,
-				data: i
-			});
-		}
-	}
+	for (let i of r)
+		article.push({
+			views: i.views ?? 0,
+			author: i.user,
+			name: i.name,
+			data: i
+		});
 
 	// Init articles
 	article = InitCategory("views", article);
 	return next.render(req, res, "/article/article", {
-        Csession: req.session,
-        headerName: "Other Articles",
-        articles: article
-    });
+		Csession: req.session,
+		headerName: "Other Articles",
+		articles: article
+	});
 });

@@ -3,13 +3,9 @@ import app from "../../app/config.mjs";
 import next from "../../app/servers/next.mjs";
 import Article from "../../models/article.mjs";
 
-let Csession;
-
 // Add article data to database
-
 app.get("/process", async (req, res) => {
-    Csession = req.session;
-    if (!Csession?.userID)
+    if (!req.session?.userID)
         res.redirect("/login");
     /**
      * @type {string}
@@ -25,9 +21,9 @@ app.get("/process", async (req, res) => {
     } else if (req.query?.name?.includes("§")) {
         res.contentType("text/html");
         res.write("<code>Illegal character §, please choose another name</code>");
-    } else if (req.query?.name && Csession.userID) {
-        const data = new Article({
-            user: Csession.userID ? Csession.userID : "None",
+    } else if (req.query?.name && req.session?.userID) {
+        await new Article({
+            user: req.session?.userID ?? "None",
             name: req.query.name,
             content: '',
             display_img: '',
@@ -35,8 +31,7 @@ app.get("/process", async (req, res) => {
             views: 0,
             tag: req.query.tag,
             votes: 0
-        });
-        await data.save();
+        }).save();
         res.redirect(`/article/edit/${encodeURIComponent(req.query.name)}`);
         return;
     } else {
@@ -48,7 +43,6 @@ app.get("/process", async (req, res) => {
 
 // Edit articles
 // https://localhost/article/edit
-
 app.get("/article/edit/:name", async (req, res) => {
     const r = await DB.sites.findOne({
         name: req.params?.name ?? ""
@@ -64,22 +58,24 @@ app.get("/article/edit/:name", async (req, res) => {
 });
 
 // Save changes of articles
-
 app.post("/article/save", async (req, res) => {
     // Check whether the user is logged in
-    Csession = req.session;
-    if (!Csession?.userID)
+    if (!req.session?.userID)
         res.redirect("/login");
     const r = await DB.sites.findOne({
         name: req.body?.name ?? ""
     })
-    if (Csession.userID === r?.user) {
+    if (!r) {
+        res.redirect("/article");
+        return;
+    }
+    if (req.session?.userID === r.user) {
         await DB.sites.replaceOne(r,
             {
                 user: r.user,
-                name: req.body.name,
-                content: req.body.content,
-                display_img: req.body?.display_img !== "Display image url" ? req.body.display_img : "",
+                name: req.body?.name,
+                content: req.body?.content,
+                display_img: req.body?.display_img && req.body.display_img !== "Display image url" ? req.body.display_img : "",
                 description: r.description,
                 views: r.views,
                 tag: r.tag ?? "",
@@ -93,7 +89,6 @@ app.post("/article/save", async (req, res) => {
 
 // Create articles
 // https://localhost/article/new
-
 app.get("/article/new", (req, res) => 
     req.session?.userID ? next.render(req, res, "/article/create") : res.redirect("/article")
 );

@@ -58,7 +58,7 @@ app.get("/mostvote", async (req, res) => {
     article = InitCategory("votes", article);
     // Render
     return next.render(req, res, "/article/article", {
-        Csession: req.session,
+        Csession: req.session, 
         headerName: "Most Voted",
         articles: article
     });

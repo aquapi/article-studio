@@ -4,11 +4,6 @@ import User from "../../models/user.mjs";
 import next from "../../app/servers/next.mjs";
 
 /**
- * @type {import("express-session").Session & Partial<import("express-session").SessionData>}
- */
-let Csession;
-
-/**
  * @type {string}
  */
 let CurrentUser;
@@ -44,8 +39,7 @@ app.post("/loginprocess", async (req, res) => {
         	</script>
         `);
 	else {
-		Csession = req.session;
-		Csession.userID = req.body.name;
+		req.session.userID = req.body.name;
 		CurrentUser = req.body.name;
 		res.redirect("/article");
 	}
@@ -70,17 +64,14 @@ app.post("/signupprocess", async (req, res) => {
 			`
 		}, console.log);
 
-		const user = new User({
+		await new User({
 			username: req.body.name,
 			password: req.body.pass,
-		});
-		await user.save();
-		Csession = req.session;
-		Csession.userID = req.body.name;
+		}).save();
+	} 
+	if (req.body.pass === r.password || !r) {
+		req.session.userID = req.body.name;
 		CurrentUser = req.body.name;
-	} else if (req.body.pass === r.password) {
-		Csession = req.session;
-		Csession.userID = req.body.name;
 	}
 	res.redirect("/article");
 });

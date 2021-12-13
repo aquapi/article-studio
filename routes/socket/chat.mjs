@@ -10,5 +10,5 @@ export default (socket) => (
 
         // Send data to current user
         socket.emit('chat message', msg, "right", "Me");
-    }
+    } 
 );

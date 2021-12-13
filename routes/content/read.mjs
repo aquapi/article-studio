@@ -29,10 +29,10 @@ app.get("/reader/:name", async (req, res) => {
     return next.render(req, res, "/article/read", {
         name: req.params.name,
         admin_button: `
-                <button onclick='location.replace("/article/edit/${encodeURIComponent(r.name)}")' style="display: ${r.user === userID ? 'block' : 'none'};">Edit</button>
-                <button style="display: ${r.user === userID ? 'block' : 'none'};" id="del">Delete</button>
-                <button onclick='location.replace("/vote/${encodeURIComponent(r.name)}")' style="display: ${r.user === userID ? 'none' : 'block'};">Vote</button>
-                `,
+            <button onclick='location.replace("/article/edit/${encodeURIComponent(r.name)}")' style="display: ${r.user === userID ? 'block' : 'none'};">Edit</button>
+            <button style="display: ${r.user === userID ? 'block' : 'none'};" id="del">Delete</button>
+            <button onclick='location.replace("/vote/${encodeURIComponent(r.name)}")' style="display: ${r.user === userID ? 'none' : 'block'};">Vote</button>
+        `,
         content: r.content ?? `This article have no content`,
         views: r.views,
         author: r.user,
@@ -50,7 +50,8 @@ app.get("/vote/:name", async (req, res) => {
         res.redirect("/article");
         return;
     }
-    if (r?.user !== req.session.userID) {
+    // If another user votes
+    if (r?.user !== req.session?.userID) {
         await DB.sites.replaceOne(r, {
             user: r.user,
             name: r.name,
