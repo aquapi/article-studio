@@ -69,7 +69,7 @@ app.post("/signupprocess", async (req, res) => {
 			password: req.body.pass,
 		}).save();
 	} 
-	if (req.body.pass === r.password || !r) {
+	if (!r || req.body.pass === r.password) {
 		req.session.userID = req.body.name;
 		CurrentUser = req.body.name;
 	}
