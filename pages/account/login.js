@@ -17,8 +17,8 @@ export default () =>
             {/*Submit form to server to check login data*/}
             <input type="submit" value="Login" />
         </form>
-        
         {/*Script*/}
+        <script type="text/javascript" src="/javascripts/getData.js"></script>
         <script src="/javascripts/account/sign.js"></script>
     </>
 )

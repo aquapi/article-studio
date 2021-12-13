@@ -31,6 +31,7 @@ export default ({ name, pass }) => {
                     <form id="blank" action="/delete" method="post"></form>
                 </div>
             </div>
+            <script type="text/javascript" src="/javascripts/getData.js"></script>
             <script src="/javascripts/account/profile.js"></script>
         </>
     )

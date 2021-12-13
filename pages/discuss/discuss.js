@@ -25,6 +25,7 @@ export default ({ name, user }) => {
                 <button>Send</button>
             </form>
             {/*Scripts*/}
+            <script type="text/javascript" src="/javascripts/getData.js"></script>
             <script src="/socket.io/socket.io.js"></script>
             <script src="/javascripts/content/discuss.js"></script>
         </>

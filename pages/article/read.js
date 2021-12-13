@@ -37,6 +37,7 @@ export default ({ name, admin_button, content, views, author, tag, votes }) => (
             <div style={detailStyle} id="tagDetail">Tag: {tag}</div>
             <div style={detailStyle} id="votesDetail">Votes: {votes}</div>
         </div>
+        <script type="text/javascript" src="/javascripts/getData.js"></script>
         <script src="/javascripts/content/read.js"></script>
     </>
 );

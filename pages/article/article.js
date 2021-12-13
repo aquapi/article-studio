@@ -47,6 +47,7 @@ export default ({ Csession, headerName, articles }) => (
         <span style={{ display: 'none' }}>{Csession}</span>
         <span style={{ display: 'none' }}>{headerName}</span>
         <span style={{ display: 'none' }}>{articles.map(d => d.name).join("§")}</span>
+        <script type="text/javascript" src="/javascripts/getData.js"></script>
         <script src="/javascripts/homepage/main.js"></script>
         {/*Article collections links*/}
         <div id="sort">

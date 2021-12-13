@@ -20,6 +20,7 @@ export default () =>
             <input type="submit" value="Sign up" />
         </form>
         {/*Script*/}
+        <script type="text/javascript" src="/javascripts/getData.js"></script>
         <script src="/javascripts/account/sign.js"></script>
     </>
 )
