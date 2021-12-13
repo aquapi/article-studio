@@ -1,6 +1,7 @@
 package-lock.json
 node_modules
 .env
-app/bin/sync.*
+app/bin/sync.sh
+app/bin/sync.bat
 ssl/*.pem
 .next
