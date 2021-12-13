@@ -39,7 +39,7 @@ Run the project using:
      |                                             |
  server.mjs ——————————————→ socket.mjs             |
      ↑                            |                |
- config.mjs                       |                |
+ express.mjs                      |                |
                                   ↓                ↓
- next.mjs ———————————————————→ app.mjs —————→ index.mjs
+ next.mjs ——————————————————→ load.mjs —————→ index.mjs
 ```
