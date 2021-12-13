@@ -32,10 +32,10 @@ export default ({ name, admin_button, content, views, author, tag, votes }) => (
             {/*Article*/}
             <div id="content"></div>
             {/*Article data*/}
-            <div style={detailStyle}> Views: {views} </div>
-            <div style={detailStyle}>Author: {author}</div>
-            <div style={detailStyle}>Tag: {tag}</div>
-            <div style={detailStyle}>Votes: {votes}</div>
+            <div style={detailStyle} id="viewsDetail"> Views: {views} </div>
+            <div style={detailStyle} id="authorDetail">Author: {author}</div>
+            <div style={detailStyle} id="tagDetail">Tag: {tag}</div>
+            <div style={detailStyle} id="votesDetail">Votes: {votes}</div>
         </div>
         <script src="/javascripts/content/read.js"></script>
     </>
