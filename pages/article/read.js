@@ -16,7 +16,7 @@ export default ({ name, admin_button, content, views, author, tag, votes }) => (
         <span>{admin_button}</span>
         <span>{content}</span>
         {/*Navbar*/}
-        <div style={{ display: 'flex', backgroundColor: '#111' }} id="buttons">
+        <div id="buttons">
             <button id="back">Back</button><br />
             <button id="discuss_redirect">Discuss</button><br />
         </div>
