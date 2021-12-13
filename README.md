@@ -35,11 +35,11 @@ Run the project using:
 
 ## Import structure
 ```
-                           ╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈╮
-                           |                                          |
-    ╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈ servers.mjs —————————————→ socket.mjs             |
-    |                      ↑                         |                |
-    |               express.mjs                      |                |
-    |                                                ↓                ↓
-    ╰——————————————————————————————————————————→ load.mjs —————→ index.mjs
+                           ╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈╮
+                           |                                   |
+express.mjs ——————→ servers.mjs ——————→ socket.mjs             |
+                           |                  |                |
+                           |                  |                |
+                           |                  ↓                ↓
+                           ╰————————————→ load.mjs —————→ index.mjs
 ```
