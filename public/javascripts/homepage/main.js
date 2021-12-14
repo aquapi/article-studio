@@ -27,18 +27,16 @@ const initWidthHeight = () => {
 }
 
 // Mouseover and mouseleave
-let clicked = false, clickX, doneEffect = true;
+let clicked = false, clickX;
 $(() => {
     $(".create").each((_, e) => {
         e.addEventListener("mouseover", () => {
-            if (!doneEffect) {
-                // Stop all effects
-                $("#hover-action").stop(true, true);
-                // Hide 
-                $("#hover-action").css("display", "none");
-                // Done effect
-                doneEffect = true;
-            }
+            // Stop all effects
+            $("#hover-action").stop(true, true);
+            // Set width to 0
+            $("#hover-action").css("width", "0px");
+            // Hide 
+            $("#hover-action").css("display", "none");
             // Set top equals 50px
             $("#hover-action").css("top", "50px");
             // Show
@@ -48,15 +46,23 @@ $(() => {
             // Animate 
             $("#hover-action").animate({
                 "width": $(e).width()
-            }, 600, () => { doneEffect = false });
+            }, 600);
         });
         e.addEventListener("mouseleave", () => {
-            // Stop effect even if it hasn't done
+            // Stop all effects
             $("#hover-action").stop(true, true);
+            // Set width to 0
+            $("#hover-action").css("width", $(e).width() + "px");
+            // Hide 
+            $("#hover-action").css("display", "none");
+            // Show
+            $("#hover-action").css("display", "block");
             // Animate width to 0px
             $("#hover-action").animate({
                 "width": 0
-            }, 600, () => { doneEffect = true });
+            }, 600, () => 
+                $("#hover-action").stop(true, true)
+            );
         })
     });
 
@@ -76,7 +82,7 @@ $(() => {
 });
 
 // Login button
-document.querySelector("#login").addEventListener("click", () => 
+document.querySelector("#login").addEventListener("click", () =>
     location.replace("/login")
 );
 
