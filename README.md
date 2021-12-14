@@ -35,9 +35,9 @@ Run the project using:
 
 ## Import structure
 ```                               
-express.mjs ——————→ servers.mjs —————————————————————————╮                               
-       |                   |                             |
-       |                   |                             |
-       |                   |                             ↓
-       ╰———————————————————┻——————→ load.mjs —————→ index.mjs
+    express.mjs ————→ servers.mjs ———————————————————————╮                               
+           |                 |                           |
+           |                 |                           |
+           |                 |                           ↓
+           ╰————————————— routes ———→ load.mjs ———→ index.mjs
 ```
