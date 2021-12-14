@@ -1,16 +1,5 @@
-import { config } from "dotenv";
-import { target } from "./app/servers/servers.mjs";
-import HttpsServer from "./app/dependencies/HttpsServer.mjs";
 import "./app/load.mjs";
-
-// Load ENV
-config();
-
-// Server
-const server = new HttpsServer(
-    target, Number(process.env.PORT) || 443, 
-    process.env.LAN_IP || "0.0.0.0"
-);
+import { server } from "./app/servers/servers.mjs";
 
 // Start the server
 await server.start();
