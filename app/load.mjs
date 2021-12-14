@@ -16,9 +16,6 @@ await mongoose
     })
     .catch(console.log);
 
-// Socket connection
-import './servers/socket.mjs';
-
 // Display articles
 import '../routes/article/collections.mjs';
 import '../routes/article/homepage.mjs';
