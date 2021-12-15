@@ -38,6 +38,6 @@ Run the project using:
     express.mjs ————→ servers.mjs ———————————————————————╮                               
            |                 |                           |
            |                 |                           |
-           |                 |                           ↓
-           ╰————————————— routes ———→ load.mjs ———→ index.mjs
+           |                 ↓                           ↓
+           ╰————————————→ routes ———→ load.mjs ———→ index.mjs
 ```
