@@ -28,12 +28,12 @@ app.get("/signup", (req, res) =>
 );
 
 // login process
-app.post("/loginprocess", auth.local, async (req, res) => {
-		const r = req.user;
-		req.session.userID = CurrentUser = r.username
-		res.redirect("/article");
-		res.end();
-	});
+app.post("/loginprocess", auth.login, async (req, res) => {
+	const r = req.user;
+	req.session.userID = CurrentUser = r.username
+	res.redirect("/article");
+	res.end();
+});
 
 // sign up process
 app.post("/signupprocess", async (req, res) => {
