@@ -3,6 +3,9 @@ import { config } from 'dotenv';
 // Load ENV
 config();
 
+// Load passport.js
+import "./servers/passport.mjs";
+
 // Next server config
 import { next } from './servers/servers.mjs';
 await next.prepare();

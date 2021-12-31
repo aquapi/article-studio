@@ -5,6 +5,7 @@ import { config } from "dotenv";
 import * as path from "path";
 import createMemoryStore from "memorystore";
 import hpp from "hpp";
+import passport from "passport";
 
 // Memory store
 const MemoryStore = createMemoryStore(session);
@@ -52,6 +53,8 @@ app.use(
         unset: 'destroy', // Destroy the session after set to null
     })
 );
+
+app.use(passport.initialize());
 
 // Use hpp middleware
 app.use(hpp());
