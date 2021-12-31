@@ -3,6 +3,7 @@ import app from "../../app/servers/express.mjs";
 import User from "../../models/user.mjs";
 import { next } from "../../app/servers/servers.mjs";
 import { createMailSender, remove } from "../../app/dependencies/Util.mjs";
+import auth from "../../app/servers/passport.mjs";
 
 // Send mail
 const sendMail = createMailSender(transporter);
@@ -27,28 +28,12 @@ app.get("/signup", (req, res) =>
 );
 
 // login process
-app.post("/loginprocess", async (req, res) => {
-	const r = await DB.users.findOne({
-		username: req.body.name,
-		password: req.body.pass,
-	});
-	res.contentType("html");
-	if (!r)
-		res.write(`
-            <code>Incorrect username or password, try again</code>
-            <script>
-                setTimeout(() => {
-                    location.replace("/login");
-                }, 3000);
-        	</script>
-        `);
-	else {
-		req.session.userID = req.body.name;
-		CurrentUser = req.body.name;
+app.post("/loginprocess", auth.local, async (req, res) => {
+		const r = req.user;
+		req.session.userID = CurrentUser = r.username
 		res.redirect("/article");
-	}
-	res.end();
-});
+		res.end();
+	});
 
 // sign up process
 app.post("/signupprocess", async (req, res) => {
