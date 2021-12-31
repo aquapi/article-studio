@@ -12,8 +12,8 @@ export default () =>
                 <h3>Login</h3>
             </div>
             <hr style={{ width: "70%" }} />
-            <input type="text" name="name" required placeholder="Name" />
-            <input type="password" name="pass" required placeholder="Password" />
+            <input type="text" name="username" required placeholder="Name" />
+            <input type="password" name="password" required placeholder="Password" />
             {/*Submit form to server to check login data*/}
             <input type="submit" value="Login" />
         </form>
