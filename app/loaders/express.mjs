@@ -13,10 +13,10 @@ const MemoryStore = createMemoryStore(session);
 // Load ENV
 config();
 
-// create app
+// Init app
 const app = express();
 
-// Trust proxy
+// Trust first proxy
 app.set('trust proxy', 1);
 
 // Use resources in public directory
