@@ -1,9 +1,5 @@
-import mongoose from "mongoose";
 import nodemailer from "nodemailer";
 import { config } from "dotenv";
-// Register mongoose models
-import "../models/article.mjs";
-import "../models/user.mjs";
 
 // Load ENV
 config();

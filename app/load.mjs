@@ -1,23 +1,23 @@
 import { config } from 'dotenv';
+import mongoose from 'mongoose';
+import { next } from './loaders/servers.mjs';
 
 // Load ENV
 config();
 
-// Load passport.js
-import "./loaders/passport.mjs";
-
-// Next server config
-import { next } from './loaders/servers.mjs';
+// Start the next server 
 await next.prepare();
 
 // Connect to database
-import mongoose from 'mongoose';
 await mongoose
     .connect(process.env.DB_URL, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
     .catch(console.log);
+
+// Load passport.js
+import "./loaders/passport.mjs";
 
 // Socket connection
 import "../routes/socket/connect.mjs";
@@ -26,22 +26,34 @@ import "../routes/socket/connect.mjs";
 import '../routes/render/homepage/collections.mjs';
 import '../routes/render/homepage/homepage.mjs';
 
-// Editor
+// Display editor
 import '../routes/render/editor.mjs';
+
+// All edit processes
 import '../routes/process/edit.mjs';
 
 // Article content
 import '../routes/render/read.mjs';
-import '../routes/process/vote.mjs'
+
+// Vote process
+import '../routes/process/vote.mjs';
+
+// Display discuss page
 import '../routes/render/discuss.mjs';
 
-// Account
+// Display login and signup page
 import '../routes/render/login.mjs';
+
+// Diplay profile
 import '../routes/render/profile.mjs';
+
+// Logout processes
 import '../routes/process/logout.mjs';
+
+// Verify accounts processes
 import '../routes/process/verify-account.mjs';
 
-// Delete
+// Delete process
 import '../routes/process/delete.mjs';
 
 // 404 Error
