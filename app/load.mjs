@@ -23,23 +23,26 @@ await mongoose
 import "../routes/socket/connect.mjs";
 
 // Display articles
-import '../routes/article/collections.mjs';
-import '../routes/article/homepage.mjs';
+import '../routes/render/homepage/collections.mjs';
+import '../routes/render/homepage/homepage.mjs';
 
 // Editor
-import '../routes/editor/editor.mjs';
+import '../routes/render/editor.mjs';
+import '../routes/process/edit.mjs';
 
 // Article content
-import '../routes/content/read.mjs';
-import '../routes/content/discuss.mjs';
+import '../routes/render/read.mjs';
+import '../routes/process/vote.mjs'
+import '../routes/render/discuss.mjs';
 
 // Account
-import '../routes/account/login.mjs';
-import '../routes/account/profile.mjs';
-import '../routes/account/verify.mjs';
+import '../routes/render/login.mjs';
+import '../routes/render/profile.mjs';
+import '../routes/process/logout.mjs';
+import '../routes/process/verify-account.mjs';
 
 // Delete
-import '../routes/delete/delete.mjs';
+import '../routes/process/delete.mjs';
 
 // 404 Error
-import '../routes/404/404.mjs';
+import '../routes/error/404.mjs';

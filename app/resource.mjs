@@ -8,12 +8,6 @@ import "../models/user.mjs";
 // Load ENV
 config();
 
-// Database models
-export const DB = {
-    users: mongoose.model("User"),
-    sites: mongoose.model("Site")
-}
-
 // Email sender
 export const transporter = nodemailer.createTransport({
     service: 'gmail',
