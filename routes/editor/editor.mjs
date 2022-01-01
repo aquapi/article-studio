@@ -1,6 +1,6 @@
 import { DB } from "../../app/resource.mjs";
-import app from "../../app/servers/express.mjs";
-import { next } from "../../app/servers/servers.mjs";
+import app from "../../app/loaders/express.mjs";
+import { next } from "../../app/loaders/servers.mjs";
 import Article from "../../models/article.mjs";
 
 // Add article data to database

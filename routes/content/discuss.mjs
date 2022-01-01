@@ -1,5 +1,5 @@
-import app from "../../app/servers/express.mjs";
-import { next } from "../../app/servers/servers.mjs";
+import app from "../../app/loaders/express.mjs";
+import { next } from "../../app/loaders/servers.mjs";
 
 // Discuss page
 app.get("/discuss/:name", async (req, res) => 

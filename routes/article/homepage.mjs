@@ -2,8 +2,8 @@ import {
     DB,
     InitCategory,
 } from "../../app/resource.mjs";
-import { next } from "../../app/servers/servers.mjs";
-import app from "../../app/servers/express.mjs";
+import { next } from "../../app/loaders/servers.mjs";
+import app from "../../app/loaders/express.mjs";
 
 // Homepage
 // https://localhost/article
