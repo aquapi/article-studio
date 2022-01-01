@@ -1,11 +1,11 @@
-import { DB } from "../../app/resource.mjs";
 import app from "../../app/loaders/express.mjs";
 import { next } from "../../app/loaders/servers.mjs";
+import Article from "../../models/article.mjs";
 
 // Read for client
 app.get("/reader/:name", async (req, res) => {
     let userID = req.session?.userID ?? "";
-    const r = await DB.sites.findOne({
+    const r = await Article.findOne({
         name: req.params?.name ?? ""
     });
     // If reader can't find target article
@@ -15,7 +15,7 @@ app.get("/reader/:name", async (req, res) => {
     }
     // If another user visits the read site 
     if (r?.user !== userID)
-        await DB.sites.replaceOne(r, {
+        await Article.replaceOne(r, {
             user: r.user,
             name: r.name,
             content: r.content,
@@ -39,29 +39,4 @@ app.get("/reader/:name", async (req, res) => {
         tag: r.tag,
         votes: r.votes
     });
-});
-
-// Vote
-app.get("/vote/:name", async (req, res) => {
-    const r = await DB.sites.findOne({
-        name: req.params?.name ?? ""
-    });
-    if (!r) {
-        res.redirect("/article");
-        return;
-    }
-    // If another user votes
-    if (r?.user !== req.session?.userID) {
-        await DB.sites.replaceOne(r, {
-            user: r.user,
-            name: r.name,
-            content: r.content,
-            display_img: r.display_img,
-            description: r.description,
-            views: r.views,
-            tag: r.tag,
-            votes: r.votes + 1
-        });
-    }
-    res.redirect(`/reader/${encodeURIComponent(req.params.name)}`);
 });

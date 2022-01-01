@@ -1,0 +1,7 @@
+import app from "../../app/loaders/express.mjs";
+
+// Log out
+app.get("/logout", async (req, res) => {
+	req.session.destroy();
+	res.redirect("/article");
+});

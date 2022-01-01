@@ -1,16 +1,14 @@
-import {
-    DB,
-    InitCategory,
-} from "../../app/resource.mjs";
-import { next } from "../../app/loaders/servers.mjs";
-import app from "../../app/loaders/express.mjs";
+import { InitCategory } from "../../../app/resource.mjs";
+import Article from "../../../models/article.mjs";
+import { next } from "../../../app/loaders/servers.mjs";
+import app from "../../../app/loaders/express.mjs";
 
 // Homepage
 // https://localhost/article
 
 app.get("/article", async (req, res) => {
 	// Search all articles which belongs to current user
-	const r = await DB.sites.find({});
+	const r = await Article.find({});
     /**
      * @type {{name: string, content: string, views: number, author: string, votes: number}[]}
      */
@@ -39,7 +37,7 @@ app.get("/article", async (req, res) => {
 
 app.get("/mostvote", async (req, res) => {
 	// Search all articles which belongs to current user
-	const r = await DB.sites.find({});
+	const r = await Article.find({});
     /**
      * @type {{content: string, views: number, author: string, votes: number}[]}
      */

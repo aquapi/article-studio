@@ -1,16 +1,14 @@
-import {
-	DB,
-	InitCategory,
-} from "../../app/resource.mjs";
-import { next } from "../../app/loaders/servers.mjs";
-import app from "../../app/loaders/express.mjs";
+import { InitCategory } from "../../../app/resource.mjs";
+import Article from "../../../models/article.mjs";
+import { next } from "../../../app/loaders/servers.mjs";
+import app from "../../../app/loaders/express.mjs";
 
 // My article subpage: Show all articles created not by others
 // https://localhost/myarticle
 
 app.get("/myarticle", async (req, res) => {
 	// Search all articles which belongs to current user
-	const r = await DB.sites.find({
+	const r = await Article.find({
 		user: req.session.userID
 	});
 	// Check whether no article found
@@ -45,7 +43,7 @@ app.get("/myarticle", async (req, res) => {
 
 app.get("/otherarticle", async (req, res) => {
 	// Search all articles which belongs to current user
-	const r = await DB.sites.find({
+	const r = await Article.find({
 		user: { $ne: req.session?.userID ?? "" }
 	});
 	// Check whether no article found

@@ -1,6 +1,4 @@
-import { DB } from "../../app/resource.mjs";
 import app from "../../app/loaders/express.mjs";
-import { next } from "../../app/loaders/servers.mjs";
 import Article from "../../models/article.mjs";
 
 // Add article data to database
@@ -10,7 +8,7 @@ app.get("/process", async (req, res) => {
     /**
      * @type {string}
      */
-    const result = await DB.sites.findOne({
+    const result = await Article.findOne({
         name: req.query?.name ?? ""
     });
 
@@ -41,28 +39,13 @@ app.get("/process", async (req, res) => {
     res.end("<script>setTimeout(() => location.replace('/article/new'), 2000)</script>");
 });
 
-// Edit articles
-// https://localhost/article/edit
-app.get("/article/edit/:name", async (req, res) => {
-    const r = await DB.sites.findOne({
-        name: req.params?.name ?? ""
-    });
-    if (r?.user == req.session?.userID) 
-        return next.render(req, res, "/edit/edit", {
-            name: req.params?.name,
-            image_url: r.display_img && r.display_img !== "undefined" ? r.display_img : "Display image url",
-            md_content: r.content.split("<style>body {font-family: Corbel}</style>")[0]
-        });
-    else
-        res.redirect("/login");
-});
 
 // Save changes of articles
 app.post("/article/save", async (req, res) => {
     // Check whether the user is logged in
     if (!req.session?.userID)
         res.redirect("/login");
-    const r = await DB.sites.findOne({
+    const r = await Article.findOne({
         name: req.body?.name ?? ""
     })
     if (!r) {
@@ -70,7 +53,7 @@ app.post("/article/save", async (req, res) => {
         return;
     }
     if (req.session?.userID === r.user) {
-        await DB.sites.replaceOne(r,
+        await Article.replaceOne(r,
             {
                 user: r.user,
                 name: req.body?.name,
@@ -86,9 +69,3 @@ app.post("/article/save", async (req, res) => {
     } else
         res.redirect("/login");
 });
-
-// Create articles
-// https://localhost/article/new
-app.get("/article/new", (req, res) => 
-    req.session?.userID ? next.render(req, res, "/article/create") : res.redirect("/article")
-);
