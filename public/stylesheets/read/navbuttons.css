@@ -1,5 +1,5 @@
 button {
-    padding: 20px;
+    padding: 18px;
     font-size: 13px;
     letter-spacing: 0.5px; 
     color: white;
@@ -10,7 +10,7 @@ button {
 }
 
 button:hover {
-    background-color: #555;
+    background-color: #111;
 }
 
 #buttons {
