@@ -4,10 +4,10 @@ import { config } from 'dotenv';
 config();
 
 // Load passport.js
-import "./servers/passport.mjs";
+import "./loaders/passport.mjs";
 
 // Next server config
-import { next } from './servers/servers.mjs';
+import { next } from './loaders/servers.mjs';
 await next.prepare();
 
 // Connect to database
@@ -36,6 +36,7 @@ import '../routes/content/discuss.mjs';
 // Account
 import '../routes/account/login.mjs';
 import '../routes/account/profile.mjs';
+import '../routes/account/verify.mjs';
 
 // Delete
 import '../routes/delete/delete.mjs';
