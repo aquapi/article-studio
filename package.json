@@ -15,10 +15,12 @@
     "nodemon": "^2.0.15",
     "passport": "^0.5.2",
     "passport-local": "^1.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "socket.io": "^4.4.0"
   },
   "scripts": {
-    "start": "nodemon --config nodemon.json index.mjs",
+    "start": "nodemon --config nodemon.json .",
     "build": "next build"
   },
   "main": "index.mjs",
