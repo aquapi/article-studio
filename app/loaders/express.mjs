@@ -54,6 +54,7 @@ app.use(
     })
 );
 
+// Passport auth
 app.use(passport.initialize());
 
 // Use hpp middleware

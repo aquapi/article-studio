@@ -1,11 +1,11 @@
-import nodemailer from "nodemailer";
+import { createTransport } from "nodemailer";
 import { config } from "dotenv";
 
 // Load ENV
 config();
 
 // Email sender
-export const transporter = nodemailer.createTransport({
+export const transporter = createTransport({
     service: 'gmail',
     auth: {
         user: process.env.EMAIL,
