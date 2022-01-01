@@ -5,5 +5,5 @@ import { target as server } from "./app/loaders/servers.mjs";
 process.setMaxListeners(0);
 
 // Listen to port 443
-server.listen(process.env.PORT || 443, "0.0.0.0");
+server.listen(process.env.PORT || 443, "192.168.1.57");
 
