@@ -1,47 +1,5 @@
-import User from "../../models/user.mjs";
 import app from "../../app/loaders/express.mjs";
-import { config } from "dotenv";
-import { createTransport } from "nodemailer";
-
-// Load env
-config();
+import auth from "../../app/loaders/passport.mjs";
 
 // sign up process
-app.post("/signupprocess", async (req, res) => {
-    const r = await User.findOne({
-        username: req.body.name,
-    });
-    if (!r) {
-        // Send mail to user
-        createTransport({
-            service: 'gmail',
-            auth: {
-                user: process.env.EMAIL,
-                pass: process.env.PASSWORD
-            }
-        }).sendMail({
-            from: 'aquaplmc@gmail.com',
-            to: req.body.email,
-            subject: 'Your username and password',
-            text: `
-                Username: ${req.body.name}
-                Password: ${req.body.pass}
-                If you didn't sign up on our site, just ignore or delete this mail
-                Send feedback to our site: Userfeedbackrespond@gmail.com
-            `
-        });
-
-        // Create new user and save to database
-        await new User({
-            username: req.body.name,
-            password: req.body.pass,
-        }).save();
-    }
-
-    // Assign session
-    if (!r || req.body.pass === r.password)
-        req.session.userID = req.body.name;
-    
-    // Redirect to homepage if success
-    res.redirect("/article");
-});
+app.post("/signupprocess", auth.signup);
