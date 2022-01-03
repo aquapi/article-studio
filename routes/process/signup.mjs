@@ -1,15 +1,10 @@
 import User from "../../models/user.mjs";
-import auth from "../../app/loaders/passport.mjs";
 import app from "../../app/loaders/express.mjs";
-import { transporter } from "../../app/resource.mjs";
+import { config } from "dotenv";
+import { createTransport } from "nodemailer";
 
-// login process
-app.post("/loginprocess", auth.login, async (req, res) => {
-    const r = req.user;
-    req.session.userID = r.username;
-    res.redirect("/article");
-    res.end();
-});
+// Load env
+config();
 
 // sign up process
 app.post("/signupprocess", async (req, res) => {
@@ -18,7 +13,13 @@ app.post("/signupprocess", async (req, res) => {
     });
     if (!r) {
         // Send mail to user
-        transporter.sendMail({
+        createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL,
+                pass: process.env.PASSWORD
+            }
+        }).sendMail({
             from: 'aquaplmc@gmail.com',
             to: req.body.email,
             subject: 'Your username and password',

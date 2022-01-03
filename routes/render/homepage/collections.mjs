@@ -66,6 +66,7 @@ app.get("/otherarticle", async (req, res) => {
 
 	// Init articles
 	article = InitCategory("views", article);
+	// Render
 	return next.render(req, res, "/article/article", {
 		Csession: req.session,
 		headerName: "Other Articles",
