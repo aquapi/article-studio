@@ -8,7 +8,7 @@ export default ({ name }) => (
     <Head>
         <meta charSet="UTF-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <link rel="icon" href="https://iconarchive.com/download/i97950/thehoth/seo/seo-article.ico" />
+        <link rel="icon" href="/icon/Article.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{name}</title>
         {/*Stylesheet*/}
@@ -17,10 +17,6 @@ export default ({ name }) => (
         <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"
             integrity="sha512-L03kznCrNOfVxOUovR6ESfCz9Gfny7gihUX/huVbQB9zjODtYpxaVtIaAkpetoiyV2eqWbvxMH9fiSv5enX7bw=="
             crossOrigin="anonymous" referrerPolicy="no-referrer"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.js"
-            integrity="sha512-bvV1V1YSjP1fbfKJjTlNmdnUO2XpsLYUdKwmz5UXBi5U+x40rx9JpA0ooQUMZfpz1MaaBC0ydNLoC6r0sitPUQ=="
-            crossOrigin="anonymous" referrerPolicy="no-referrer"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
         {/*Axios*/}
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     </Head>

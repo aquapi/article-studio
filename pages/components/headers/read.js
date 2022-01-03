@@ -16,7 +16,7 @@ export default ({ name }) => (
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href={`https://fonts.googleapis.com/css2?family=Lora&display=swap`} rel="stylesheet" />
         <title>{name}</title>
-        <link rel="icon" href="https://iconarchive.com/download/i97950/thehoth/seo/seo-article.ico" />
+        <link rel="icon" href="/icon/Article.ico" />
         {/*Stylesheet*/}
         <link rel="stylesheet" href="/stylesheets/read/main.css" />
         <script src="https://cdn.jsdelivr.net/npm/less@4.1.1"></script>

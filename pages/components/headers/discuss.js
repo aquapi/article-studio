@@ -17,7 +17,7 @@ export default ({ name }) => (
         {/*Title*/}
         <title>{name} Discuss</title>
         {/*Icon*/}
-        <link rel="icon" href="https://iconarchive.com/download/i97950/thehoth/seo/seo-article.ico" />
+        <link rel="icon" href="/icon/Article.ico" />
     </Head>
 );
 

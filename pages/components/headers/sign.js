@@ -7,7 +7,7 @@ import Head from "next/head";
 export default ({ page }) => (
     <Head>
         <meta charSet="UTF-8" />
-        <link rel="icon" href="https://iconarchive.com/download/i97950/thehoth/seo/seo-article.ico" />
+        <link rel="icon" href="/icon/Article.ico" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
