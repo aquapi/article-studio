@@ -50,8 +50,11 @@ import '../routes/render/profile.mjs';
 // Logout processes
 import '../routes/process/logout.mjs';
 
-// Verify accounts processes
-import '../routes/process/verify-account.mjs';
+// Login process
+import '../routes/process/login.mjs';
+
+// Signpu process
+import '../routes/process/signup.mjs';
 
 // Delete process
 import '../routes/process/delete.mjs';

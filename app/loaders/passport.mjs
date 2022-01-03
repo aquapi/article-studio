@@ -13,11 +13,19 @@ passport.use(new LocalStrategy(
 
 // Middleware
 export default {
-    login: passport.authenticate("local",
-        {
-            session: false,
-            failureMessage: "Invalid username or password",
-            failureRedirect: "/login"
-        }
-    )
+    // Login process
+    login: (req, res, next) =>
+        passport.authenticate("local", { session: false },
+            (err, user) => {
+                if (
+                    (
+                        err ? next(err)
+                            : (!user ? res.redirect("/login") : 1)
+                    ) === 1
+                ) {
+                    req.session.userID = user.username;
+                    res.redirect("/article");
+                }
+            }
+        )(req, res, next)
 }

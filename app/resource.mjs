@@ -1,18 +1,3 @@
-import { createTransport } from "nodemailer";
-import { config } from "dotenv";
-
-// Load ENV
-config();
-
-// Email sender
-export const transporter = createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.EMAIL,
-        pass: process.env.PASSWORD
-    }
-});
-
 /**
  * @param {string} ct category name
  * @param {Response<any, Record<string, any>, number>} res to write the result to the client
