@@ -19,6 +19,9 @@ export default ({ name }) => (
             crossOrigin="anonymous" referrerPolicy="no-referrer"></script>
         {/*Axios*/}
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        {/*Highlight*/}
+        <script src="/external/highlight/highlight.min.js"></script>
+        <link rel="stylesheet" href="/external/highlight/styles/vs2015.min.css" />
     </Head>
 )
 

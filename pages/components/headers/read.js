@@ -12,16 +12,16 @@ export default ({ name }) => (
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href={`https://fonts.googleapis.com/css2?family=Lora&family=Oxygen:wght@300&display=swap`} rel="stylesheet" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href={`https://fonts.googleapis.com/css2?family=Lora&display=swap`} rel="stylesheet" />
         <title>{name}</title>
         <link rel="icon" href="/icon/Article.ico" />
         {/*Stylesheet*/}
         <link rel="stylesheet" href="/stylesheets/read/main.css" />
-        <script src="https://cdn.jsdelivr.net/npm/less@4.1.1"></script>
         {/*Axios*/}
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        {/*Highlight*/}
+        <script src="/external/highlight/highlight.min.js"></script>
+        <link rel="stylesheet" href="/external/highlight/styles/vs2015.min.css" />
     </Head>
 );
 

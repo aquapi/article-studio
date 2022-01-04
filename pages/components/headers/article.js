@@ -9,19 +9,11 @@ export default () => (
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="icon" href="/icon/Article.ico" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href={`https://fonts.googleapis.com/css2?family=Arvo&family=Merriweather:wght@300&display=swap`}
             rel="stylesheet" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href={`https://fonts.googleapis.com/css2?family=Lora&family=Oxygen:wght@300&display=swap`} rel="stylesheet" />
         <link href={`https://fonts.googleapis.com/css2?family=Arvo&display=swap`} rel="stylesheet" />
         <link href={`https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap`} rel="stylesheet" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href={`https://fonts.googleapis.com/css2?family=Lora&display=swap`} rel="stylesheet" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"
