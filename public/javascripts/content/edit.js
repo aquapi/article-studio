@@ -4,12 +4,9 @@ async function getBase64(file) {
     return new Promise((res, rej) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onload = () => {
+        reader.onload = () => 
             res(reader.result);
-        }
-        reader.onerror = (err) => {
-            rej(err);
-        }
+        reader.onerror = rej;
     })
 }
 
@@ -71,8 +68,10 @@ async function main() {
     /* Test markdown listener */
     document.querySelector('#run').addEventListener('click', () => {
         document.querySelector("iframe").srcdoc = `
-            <script src="/external/highlight/highlight.min.js"></script>
-            <link rel="stylesheet" href="/external/highlight/styles/vs2015.min.css" />
+            <style>body {font-family: Corbel}</style>
+            <link rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/vs2015.min.css" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
         ` + new showdown.Converter({
             tables: true,
             strikethrough: true,
@@ -81,8 +80,7 @@ async function main() {
             ghCompatibleHeaderId: true,
             noHeaderId: true
         }).makeHtml(document.querySelector('textarea').value) +
-            `<style>body {font-family: Corbel}</style>
-             <script>hljs.highlightAll()</script>`;
+            `<script>hljs.highlightAll()</script>`;
     });
 
     // Back button
