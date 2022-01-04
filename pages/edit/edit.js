@@ -25,7 +25,7 @@ export default ({ name, md_content, image_url }) => (
         </nav>
         {/*Write and test*/}
         <div style={{ width: '100%', display: 'flex' }}>
-            <textarea style={{ width: '48%', padding: '10px', height: '248.6px' }} defaultValue={md_content}></textarea>
+            <textarea style={{ width: '48%', padding: '10px', height: '248.6px' }} value={md_content}></textarea>
             <iframe style={{ width: '50%', border: '1px solid #555', height: '268.6px' }}></iframe>
         </div>
         {/*All data will be here before sending to the server*/}

@@ -20,8 +20,9 @@ export default ({ name }) => (
         {/*Axios*/}
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         {/*Highlight*/}
-        <script src="/external/highlight/highlight.min.js"></script>
-        <link rel="stylesheet" href="/external/highlight/styles/vs2015.min.css" />
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/vs2015.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
     </Head>
 );
 
