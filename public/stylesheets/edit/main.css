@@ -10,6 +10,6 @@ form#result {
     display: none;
 }
 
-span {
+nav > span {
     display: none;
 }

@@ -8,6 +8,9 @@ document.getElementById("buttons").innerHTML += htmlDecode(data.item(1).innerHTM
 // Initialize content
 document.getElementById("content").innerHTML = htmlDecode(data.item(2).innerHTML);
 
+// Highlight all code 
+hljs.highlightAll();
+
 // Event listeners
 document.getElementById("back").addEventListener("click", () => location.replace('/article'));
 
