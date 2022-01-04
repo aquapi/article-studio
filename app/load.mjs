@@ -1,6 +1,7 @@
 import { config } from 'dotenv';
 import mongoose from 'mongoose';
 import { next } from './loaders/servers.mjs';
+import "./loaders/passport.mjs";
 
 // Load ENV
 config();
@@ -15,9 +16,6 @@ await mongoose
         useUnifiedTopology: true
     })
     .catch(console.log);
-
-// Load passport.js
-import "./loaders/passport.mjs";
 
 // Socket connection
 import "../routes/socket/connect.mjs";
