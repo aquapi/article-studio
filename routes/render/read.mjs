@@ -14,7 +14,7 @@ app.get("/reader/:name", async (req, res) => {
         return;
     }
     // If another user visits the read site 
-    if (r?.user !== userID)
+    if (r.user !== userID)
         await Article.replaceOne(r, {
             user: r.user,
             name: r.name,

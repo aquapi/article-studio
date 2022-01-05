@@ -20,6 +20,6 @@ app.get("/article/edit/:name", async (req, res) => {
 
 // Create articles
 // https://localhost/article/new
-app.get("/article/new", (req, res) => 
+app.get("/article/new", async (req, res) => 
     req.session?.userID ? next.render(req, res, "/article/create") : res.redirect("/article")
 );
