@@ -1,7 +1,7 @@
-import { InitCategory } from "../../../app/resource.mjs";
 import Article from "../../../models/article.mjs";
 import { next } from "../../../app/loaders/servers.mjs";
 import app from "../../../app/loaders/express.mjs";
+import sort from "./sort.mjs";
 
 // Homepage
 // https://localhost/article
@@ -23,7 +23,7 @@ app.get("/article", async (req, res) => {
             data: i
         });
     // Sort articles
-    article = InitCategory("views", article);
+    article = sort("views", article);
     // Render
     return next.render(req, res, "/article/article", {
         Csession: req.session,
@@ -53,7 +53,7 @@ app.get("/mostvote", async (req, res) => {
         });
 
     // Init articles
-    article = InitCategory("votes", article);
+    article = sort("votes", article);
     // Render
     return next.render(req, res, "/article/article", {
         Csession: req.session, 

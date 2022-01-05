@@ -1,7 +1,7 @@
-import { InitCategory } from "../../../app/resource.mjs";
 import Article from "../../../models/article.mjs";
 import { next } from "../../../app/loaders/servers.mjs";
 import app from "../../../app/loaders/express.mjs";
+import sort from "./sort.mjs";
 
 // My article subpage: Show all articles created not by others
 // https://localhost/myarticle
@@ -29,7 +29,7 @@ app.get("/myarticle", async (req, res) => {
 			data: i
 		});
 	// Init articles
-	article = InitCategory("views", article);
+	article = sort("views", article);
 	// Render
 	return next.render(req, res, "/article/article", {
 		Csession: req.session,
@@ -65,7 +65,7 @@ app.get("/otherarticle", async (req, res) => {
 		});
 
 	// Init articles
-	article = InitCategory("views", article);
+	article = sort("views", article);
 	// Render
 	return next.render(req, res, "/article/article", {
 		Csession: req.session,
