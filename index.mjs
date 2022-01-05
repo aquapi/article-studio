@@ -1,6 +1,5 @@
 import "./app/load.mjs";
 import { target as server } from "./app/loaders/servers.mjs";
 
-// Listen to port 443
+// Listen to port 443 in HTTPS
 server.listen(process.env.PORT || 443);
-
