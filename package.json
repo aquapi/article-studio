@@ -9,7 +9,7 @@
     "express-session": "^1.17.2",
     "hpp": "^0.2.3",
     "memorystore": "^1.6.6",
-    "mongoose": "^6.1.4",
+    "mongoose": "^6.1.5",
     "next": "^12.0.7",
     "nodemailer": "^6.7.2",
     "nodemon": "^2.0.15",
@@ -17,7 +17,7 @@
     "passport-local": "^1.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "socket.io": "^4.4.0"
+    "socket.io": "^4.4.1"
   },
   "scripts": {
     "start": "nodemon --config nodemon.json .",
