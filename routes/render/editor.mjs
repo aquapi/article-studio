@@ -8,7 +8,7 @@ app.get("/article/edit/:name", async (req, res) => {
     const r = await Article.findOne({
         name: req.params?.name ?? ""
     });
-    if (r?.user == req.session?.userID) 
+    if ((r?.user ?? "") === (req.session?.userID ?? "None")) 
         return next.render(req, res, "/edit", {
             name: req.params?.name,
             image_url: r.display_img && r.display_img !== "undefined" ? r.display_img : "Display image url",
