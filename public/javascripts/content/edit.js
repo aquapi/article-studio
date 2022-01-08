@@ -21,7 +21,11 @@ async function main() {
         parseImgDimensions: true,
         ghCompatibleHeaderId: true,
         noHeaderId: true
-    }).makeMarkdown(document.querySelector('textarea').value.split('<style>* {font-family: Corbel}</style>')[0]);
+    }).makeMarkdown(
+        document.querySelector('textarea').value
+            .split('<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>')[1]
+            .split('<script>hljs.highlightAll()</script>')[0]
+        );
 
     /* Remove <!-- --> */
 

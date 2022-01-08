@@ -44,7 +44,8 @@ const vote = () => (
         data.item(3).innerHTML, 
         document.getElementById("authorDetail").innerHTML
             .replaceAll("Author: ", "") 
-            .replaceAll("<\!-- -->", "")
+            .replaceAll("<\!-- -->", ""),
+        data.item(0).innerHTML
     )
 );
 
