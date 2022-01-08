@@ -4,7 +4,7 @@ async function getBase64(file) {
     return new Promise((res, rej) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onload = () => 
+        reader.onload = () =>
             res(reader.result);
         reader.onerror = rej;
     })
@@ -21,17 +21,20 @@ async function main() {
         parseImgDimensions: true,
         ghCompatibleHeaderId: true,
         noHeaderId: true
-    }).makeMarkdown(
-        document.querySelector('textarea').value
-            .split('<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>')[1]
-            .split('<script>hljs.highlightAll()</script>')[0]
-        );
+    }).makeMarkdown(document.querySelector('textarea').value);
 
-    /* Remove <!-- --> */
+    /* Clean content*/
+    document.querySelector('textarea').value = document.querySelector('textarea').value
+            .replaceAll("<!-- -->", "")
+            .replaceAll('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/vs2015.min.css">', '')
+            .replaceAll('<style>body {font-family: Corbel}</style>', '')
+            .replaceAll('<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>', '')
+            .replaceAll('<script>hljs.highlightAll()</script>', '')
+    
+    document.querySelector('textarea').value = document.querySelector('textarea').value
+            .slice(6, document.querySelector('textarea').value.length - 4)
 
-    while (document.querySelector('textarea').value.includes('<!-- -->'))
-        document.querySelector('textarea').value = document.querySelector('textarea').value.replace("<!-- -->", "");
-
+    /* Highlight */
     hljs.highlightAll();
 
     /* Trigger when "Save" button is clicked */
