@@ -49,5 +49,5 @@ const vote = () => (
     )
 );
 
-socket.on("failed", () => console.log("failed"))
+socket.on("failed", console.log);
 
