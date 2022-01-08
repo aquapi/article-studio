@@ -1,3 +1,6 @@
+// Socket
+const socket = io();
+
 // HTML Decoder
 const htmlDecode = input =>
     new DOMParser().parseFromString(input, "text/html").documentElement.textContent;
@@ -37,6 +40,13 @@ const vote = () => (
                 .replaceAll("Votes: ", "") 
                 .replaceAll("<\!-- -->", "") // Remove all non-numerical character and parse to number
         ) + 1
-    ), axios
-        .get(`/vote/${encodeURIComponent(data.item(0).innerHTML)}`)
+    ), socket.emit("vote", 
+        data.item(3).innerHTML, 
+        document.getElementById("authorDetail").innerHTML
+            .replaceAll("Author: ", "") 
+            .replaceAll("<\!-- -->", "")
+    )
 );
+
+socket.on("failed", () => console.log("failed"))
+
