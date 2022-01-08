@@ -12,7 +12,7 @@ export default socket =>
             user: author ?? ""
         });
         if (!r) {
-            socket.emit("failed");
+            socket.emit("failed", "Cannot find the article to vote");
             return;
         }
         // If another user votes
