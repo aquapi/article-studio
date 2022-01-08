@@ -25,7 +25,7 @@ app.get("/article", async (req, res) => {
     // Sort articles
     article = sort("views", article);
     // Render
-    return next.render(req, res, "/article/article", {
+    return next.render(req, res, "/article", {
         Csession: req.session,
         headerName: "Discover",
         articles: article
@@ -55,7 +55,7 @@ app.get("/mostvote", async (req, res) => {
     // Init articles
     article = sort("votes", article);
     // Render
-    return next.render(req, res, "/article/article", {
+    return next.render(req, res, "/article", {
         Csession: req.session, 
         headerName: "Most Voted",
         articles: article

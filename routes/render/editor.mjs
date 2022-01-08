@@ -9,7 +9,7 @@ app.get("/article/edit/:name", async (req, res) => {
         name: req.params?.name ?? ""
     });
     if (r?.user == req.session?.userID) 
-        return next.render(req, res, "/edit/edit", {
+        return next.render(req, res, "/edit", {
             name: req.params?.name,
             image_url: r.display_img && r.display_img !== "undefined" ? r.display_img : "Display image url",
             md_content: r.content.slice(308)
@@ -21,5 +21,5 @@ app.get("/article/edit/:name", async (req, res) => {
 // Create articles
 // https://localhost/article/new
 app.get("/article/new", async (req, res) => 
-    req.session?.userID ? next.render(req, res, "/article/create") : res.redirect("/article")
+    req.session?.userID ? next.render(req, res, "/create") : res.redirect("/article")
 );

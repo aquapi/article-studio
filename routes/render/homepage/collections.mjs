@@ -31,7 +31,7 @@ app.get("/myarticle", async (req, res) => {
 	// Init articles
 	article = sort("views", article);
 	// Render
-	return next.render(req, res, "/article/article", {
+	return next.render(req, res, "/article", {
 		Csession: req.session,
 		headerName: "My Article",
 		articles: article
@@ -67,7 +67,7 @@ app.get("/otherarticle", async (req, res) => {
 	// Init articles
 	article = sort("views", article);
 	// Render
-	return next.render(req, res, "/article/article", {
+	return next.render(req, res, "/article", {
 		Csession: req.session,
 		headerName: "Other Articles",
 		articles: article

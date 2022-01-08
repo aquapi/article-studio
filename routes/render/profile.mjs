@@ -4,7 +4,7 @@ import User from "../../models/user.mjs";
 
 // User's Profile
 app.get("/article/profile", async (req, res) =>
-    next.render(req, res, "/account/profile", {
+    next.render(req, res, "/profile", {
         name: req.session?.userID ?? "None",
         pass: await User.findOne({
             username: req.session?.userID ?? ""
