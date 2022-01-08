@@ -8,13 +8,14 @@ const detailStyle = {
 /**
  * @param {{name: string, admin_button: string, content: string, views: number, author: string, tag: string, votes: number}}
  */
-export default ({ name, admin_button, content, views, author, tag, votes }) => (
+export default ({ name, admin_button, content, views, author, tag, votes, user }) => (
     <>
         <Head name={name} />
         {/*Data*/}
         <span>{name}</span>
         <span>{admin_button}</span>
         <span>{content}</span>
+        <span>{user}</span>
         {/*Navbar*/}
         <div id="buttons">
             <button id="back">Back</button><br />
@@ -50,6 +51,7 @@ export const getServerSideProps = async (context) => ({
         views: context.query.views, 
         author: context.query.author, 
         tag: context.query.tag, 
-        votes: context.query.votes
+        votes: context.query.votes,
+        user: context.query.user
     }
 });
