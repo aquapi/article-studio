@@ -12,7 +12,7 @@ app.get("/article/edit/:name", async (req, res) => {
         return next.render(req, res, "/edit", {
             name: req.params?.name,
             image_url: r.display_img && r.display_img !== "undefined" ? r.display_img : "Display image url",
-            md_content: r.content.slice(308)
+            md_content: r.content
         });
     else
         res.redirect("/login");

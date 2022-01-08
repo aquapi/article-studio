@@ -5,10 +5,10 @@ import Article from "../../models/article.mjs";
  * @returns {(username: string, password: string) => Promise<void>} Vote event listener
  */
 export default socket =>
-    // TODO
     // Vote
-    async (username, author) => {
+    async (username, author, name) => {
         const r = await Article.findOne({
+            name,
             user: author ?? ""
         });
         if (!r) {
