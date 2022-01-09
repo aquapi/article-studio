@@ -8,10 +8,12 @@ app.get("/article/edit/:name", async (req, res) => {
     const r = await Article.findOne({
         name: req.params?.name ?? ""
     });
-    if ((r?.user ?? "") === (req.session?.userID ?? "None")) 
+    if ((r?.user ?? "") === (req.session?.userID ?? "None"))
         return next.render(req, res, "/edit", {
             name: req.params?.name,
-            image_url: r.display_img && r.display_img !== "undefined" ? r.display_img : "Display image url",
+            image_url: r.display_img && r.display_img !== "undefined" 
+                ? r.display_img 
+                : "Display image url",
             md_content: r.content
         });
     else
@@ -20,6 +22,9 @@ app.get("/article/edit/:name", async (req, res) => {
 
 // Create articles
 // https://localhost/article/new
-app.get("/article/new", async (req, res) => 
-    req.session?.userID ? next.render(req, res, "/create") : res.redirect("/article")
+app.get("/article/new",
+    async (req, res) =>
+        req.session?.userID
+            ? next.render(req, res, "/create")
+            : res.redirect("/article")
 );
