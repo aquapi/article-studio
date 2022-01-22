@@ -1,5 +1,5 @@
 // Create article button listener
-document.querySelector("#new").addEventListener("click", () => 
+document.querySelector("#new").addEventListener("click", () =>
     location.replace("/article/new")
 );
 
@@ -7,7 +7,7 @@ document.querySelector("#new").addEventListener("click", () =>
 $("#sign").click(() => data.item(0).innerHTML === "undefined" || !data.item(0).innerHTML ? location.replace('/signup') : location.replace('/article/profile'));
 
 // Scroll to top
-$("body").scrollTop();  
+$("body").scrollTop();
 
 // Search 
 $("input[type=text]").keyup(() => {
@@ -20,19 +20,19 @@ $("input[type=text]").keyup(() => {
         if (!$("input[type=text]").val() || contain(el.id.toLowerCase(), check) || contain(el.className.toLowerCase(), check)) {
             e.style.display = "block";
             count++;
-        } else 
+        } else
             e.style.display = "none";
     }
     // If articles match is more than 4
-    document.querySelector("#created-article").style["justify-content"] = (count > 4 ?  "flex-start" :  "center");
+    document.querySelector("#created-article").style["justify-content"] = (count > 4 ? "flex-start" : "center");
 });
 
 // If articles count larger than 4
-if (document.getElementsByClassName("created").length > 4) 
+if (document.getElementsByClassName("created").length > 4)
     document.querySelector("#created-article").style["justify-content"] = "flex-start";
 
 // If images cannot load
-document.querySelectorAll("div > div > img").forEach(e => 
+document.querySelectorAll("div > div > img").forEach(e =>
     e.addEventListener("error", () => e.src = 'images/image-icon.jpg')
 )
 
