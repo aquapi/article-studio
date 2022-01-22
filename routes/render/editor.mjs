@@ -1,6 +1,6 @@
 import app from "../../app/loaders/express.mjs";
 import { next } from "../../app/loaders/servers.mjs";
-import Article from "../../models/article.mjs";
+import Article from "../../app/models/article.mjs";
 
 // Edit articles
 // https://localhost/article/edit

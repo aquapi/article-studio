@@ -1,6 +1,6 @@
 import app from "../../app/loaders/express.mjs";
 import passport from "passport";
-import User from "../../models/user.mjs";
+import User from "../../app/models/user.mjs";
 import { config } from "dotenv";
 import { createTransport } from "nodemailer";
 

@@ -1,4 +1,4 @@
-import Article from "../../models/article.mjs";
+import Article from "../../app/models/article.mjs";
 
 /**
  * @param {import("socket.io").Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>} socket

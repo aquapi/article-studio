@@ -1,6 +1,6 @@
 import app from "../../app/loaders/express.mjs";
 import { next } from "../../app/loaders/servers.mjs";
-import User from "../../models/user.mjs";
+import User from "../../app/models/user.mjs";
 
 // User's Profile
 app.get("/article/profile", async (req, res) =>

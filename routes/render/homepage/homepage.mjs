@@ -1,4 +1,4 @@
-import Article from "../../../models/article.mjs";
+import Article from "../../../app/models/article.mjs";
 import { next } from "../../../app/loaders/servers.mjs";
 import app from "../../../app/loaders/express.mjs";
 import sort from "./sort.mjs";

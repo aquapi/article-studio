@@ -1,5 +1,5 @@
 import app from "../../app/loaders/express.mjs";
-import Article from "../../models/article.mjs";
+import Article from "../../app/models/article.mjs";
 
 // Add article data to database
 app.get("/process", async (req, res) => {

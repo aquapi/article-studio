@@ -1,5 +1,5 @@
-import Article from "../../models/article.mjs";
-import User from "../../models/user.mjs";
+import Article from "../../app/models/article.mjs";
+import User from "../../app/models/user.mjs";
 import app from "../../app/loaders/express.mjs";
 
 // Delete an user
