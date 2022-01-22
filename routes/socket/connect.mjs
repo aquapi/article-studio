@@ -5,10 +5,17 @@ import { target } from "../../app/loaders/servers.mjs";
 import voteEvent from "./vote.mjs";
 
 // Socket.io server
-new SocketServer(target).on("connection", socket => {
+const server = new SocketServer(target);
+    
+// Listen to '/discuss' namespace requests
+server.of("/discuss").on("connection", socket => {
     // Chat event
     socket.on('chat message', chatMessage(socket));
+});
+
+// Listen to '/read' namespace requests
+server.of("/read").on("connection", socket => {
     // Vote event
-    socket.on('vote', voteEvent(socket))
+    socket.on('vote', voteEvent(socket));
 });
 
