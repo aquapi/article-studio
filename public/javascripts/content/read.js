@@ -1,5 +1,5 @@
 // Socket
-const socket = io();
+const socket = io("/read");
 
 // HTML Decoder
 const htmlDecode = input =>

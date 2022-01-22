@@ -1,5 +1,5 @@
 // Socket
-let socket = io();
+const socket = io("/discuss");
 
 // Elements
 let messages = document.getElementById('messages');
