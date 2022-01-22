@@ -21,8 +21,8 @@ await mongoose
 import "../routes/socket/connect.mjs";
 
 // Display articles
-import '../routes/render/homepage/collections.mjs';
-import '../routes/render/homepage/homepage.mjs';
+import '../routes/render/collections.mjs';
+import '../routes/render/homepage.mjs';
 
 // Display editor
 import '../routes/render/editor.mjs';
