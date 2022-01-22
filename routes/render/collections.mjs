@@ -1,7 +1,7 @@
-import Article from "../../../app/models/article.mjs";
-import { next } from "../../../app/loaders/servers.mjs";
-import app from "../../../app/loaders/express.mjs";
-import sort from "./sort.mjs";
+import Article from "../../app/models/article.mjs";
+import { next } from "../../app/loaders/servers.mjs";
+import app from "../../app/loaders/express.mjs";
+import sort from "../../app/util/sort.mjs";
 
 // My article subpage: Show all articles created not by others
 // https://localhost/myarticle
