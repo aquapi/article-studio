@@ -48,7 +48,7 @@ import '../routes/process/logout.mjs';
 // Login process
 import '../routes/process/login.mjs';
 
-// Signpu process
+// Signup process
 import '../routes/process/signup.mjs';
 
 // Delete process

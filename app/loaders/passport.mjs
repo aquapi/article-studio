@@ -1,5 +1,5 @@
 import passport from "passport";
-import User from "../../models/user.mjs";
+import User from "../models/user.mjs";
 import { Strategy as LocalStrategy } from "passport-local";
 
 // Strategies
