@@ -11,7 +11,7 @@ export default ({ Csession, headerName, articles }) => (
             <div id="hover-action"></div>
             {/*Search bar*/}
             <div className="search-bar">
-                <input type="text" placeholder="Search" />
+                <input type="text" placeholder="Search an article or a tag" />
             </div>
             {/*Navbar*/}
             <nav id="nav">
@@ -46,7 +46,7 @@ export default ({ Csession, headerName, articles }) => (
         {/*Data*/}
         <span style={{ display: 'none' }}>{Csession}</span>
         <span style={{ display: 'none' }}>{headerName}</span>
-        <span style={{ display: 'none' }}>{articles.map(d => d.name).join("§")}</span>
+        <span style={{ display: 'none' }}>{JSON.stringify(articles.map(d => d.name))}</span>
         <script type="text/javascript" src="/javascripts/getData.js"></script>
         <script src="/javascripts/homepage/main.js"></script>
         {/*Article collections links*/}
@@ -64,7 +64,7 @@ export default ({ Csession, headerName, articles }) => (
         <hr style={{ width: '10%' }} />
         {/*Created article*/}
         <div id='created-article'>
-            {articles.map(d => <ArticleTemplate data={d.data} key={d.data.name}/>)}
+            {articles.map(d => <ArticleTemplate data={d} key={d.name}/>)}
         </div>
         {/*Scripts*/}
         <script src="/javascripts/homepage/links.js"></script>
