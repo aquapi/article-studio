@@ -20,7 +20,9 @@ app.get("/article", async (req, res) => {
             views: i.views ?? 0,
             author: i.user,
             votes: i.votes,
-            data: i
+            tag: i.tag,
+            description: i.description,
+            display_img: i.display_img
         });
     // Sort articles
     article = sort("views", article);
@@ -49,7 +51,9 @@ app.get("/mostvote", async (req, res) => {
             author: i.user,
             votes: i.votes,
             name: i.name,
-            data: i
+            tag: i.tag,
+            description: i.description,
+            display_img: i.display_img
         });
 
     // Init articles

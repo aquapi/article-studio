@@ -26,7 +26,9 @@ app.get("/myarticle", async (req, res) => {
 			views: i.views ?? 0,
 			author: i.user,
 			name: i.name,
-			data: i
+			tag: i.tag,
+            description: i.description,
+            display_img: i.display_img
 		});
 	// Init articles
 	article = sort("views", article);
@@ -61,7 +63,9 @@ app.get("/otherarticle", async (req, res) => {
 			views: i.views ?? 0,
 			author: i.user,
 			name: i.name,
-			data: i
+			tag: i.tag,
+            description: i.description,
+            display_img: i.display_img
 		});
 
 	// Init articles

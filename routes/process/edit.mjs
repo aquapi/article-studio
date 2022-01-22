@@ -16,9 +16,6 @@ app.get("/process", async (req, res) => {
     if (result) {
         res.contentType("text/html");
         res.write("<code>Some articles have the same name as yours, please choose another name</code>");
-    } else if (req.query?.name?.includes("§")) {
-        res.contentType("text/html");
-        res.write("<code>Illegal character §, please choose another name</code>");
     } else if (req.query?.name && req.session?.userID) {
         await new Article({
             user: req.session?.userID ?? "None",
