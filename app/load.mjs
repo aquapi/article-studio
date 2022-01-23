@@ -18,41 +18,41 @@ await mongoose
     .catch(console.log);
 
 // Socket connection
-import "../routes/socket/connect.mjs";
+import "./routes/socket/connect.mjs";
 
 // Display articles
-import '../routes/render/collections.mjs';
-import '../routes/render/homepage.mjs';
+import './routes/render/collections.mjs';
+import './routes/render/homepage.mjs';
 
 // Display editor
-import '../routes/render/editor.mjs';
+import './routes/render/editor.mjs';
 
 // All edit processes
-import '../routes/process/edit.mjs';
+import './routes/process/edit.mjs';
 
 // Article content
-import '../routes/render/read.mjs';
+import './routes/render/read.mjs';
 
 // Display discuss page
-import '../routes/render/discuss.mjs';
+import './routes/render/discuss.mjs';
 
 // Display login and signup page
-import '../routes/render/login.mjs';
+import './routes/render/login.mjs';
 
 // Diplay profile
-import '../routes/render/profile.mjs';
+import './routes/render/profile.mjs';
 
 // Logout processes
-import '../routes/process/logout.mjs';
+import './routes/process/logout.mjs';
 
 // Login process
-import '../routes/process/login.mjs';
+import './routes/process/login.mjs';
 
 // Signup process
-import '../routes/process/signup.mjs';
+import './routes/process/signup.mjs';
 
 // Delete process
-import '../routes/process/delete.mjs';
+import './routes/process/delete.mjs';
 
 // 404 Error
-import '../routes/error/404.mjs';
+import './routes/error/404.mjs';
