@@ -64,8 +64,8 @@ app.post("/article/save", async (req, res) => {
     // Save the changes
     await Article.replaceOne(r, {
         user: r.user,
-        name: req.body?.name,
-        content: req.body?.content,
+        name: req.body.name,
+        content: req.body?.content ?? "",
         display_img: req.body?.display_img && req.body.display_img !== "Display image url" ? req.body.display_img : "",
         description: r.description,
         views: r.views,
