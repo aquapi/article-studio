@@ -7,7 +7,7 @@ export default () =>
         {/*Go back to homepage*/}
         <button id="back">Back</button>
         {/*Login form*/}
-        <form action="/signupprocess" method="POST">
+        <form>
             {/*Header*/}
             <div style={{ width: "100%", textAlign: "center" }}>
                 <h3>Sign up</h3>
@@ -21,7 +21,7 @@ export default () =>
         </form>
         {/*Script*/}
         <script type="text/javascript" src="/javascripts/getData.js"></script>
-        <script src="/javascripts/account/sign.js"></script>
+        <script src="/javascripts/account/signup.js"></script>
     </>
 )
 
