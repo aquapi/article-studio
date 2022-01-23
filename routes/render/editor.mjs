@@ -5,19 +5,23 @@ import Article from "../../app/models/article.mjs";
 // Edit articles
 // https://localhost/article/edit
 app.get("/article/edit/:name", async (req, res) => {
-    const r = await Article.findOne({
-        name: req.params?.name ?? ""
-    });
-    if ((r?.user ?? "") === (req.session?.userID ?? "None"))
-        return next.render(req, res, "/edit", {
+    // Get data
+    const { display_img, content, user } = await Article.findOne({
+        name: req.params?.name ?? "",
+        user: req.session?.userID ?? ""
+    }) ?? {};
+    // Check whether the current user is the author
+    return user
+        // Render the page
+        ? next.render(req, res, "/edit", {
             name: req.params?.name,
-            image_url: r.display_img && r.display_img !== "undefined" 
-                ? r.display_img 
+            image_url: display_img
+                ? display_img 
                 : "Display image url",
-            md_content: r.content
-        });
-    else
-        res.redirect("/login");
+            md_content: content ?? ""
+        })
+        // Redirect to login page
+        : res.redirect("/login");
 });
 
 // Create articles
