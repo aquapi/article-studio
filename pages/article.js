@@ -1,5 +1,5 @@
 import Head from "../components/headers/article";
-import ArticleTemplate from "../components/homepage/articleTemplate";
+import Article from "../components/homepage/Article";
 
 /**
  * @param {{Csession: import("express-session").Session & Partial<import("express-session").SessionData>, headerName: string, articles: {name: string, content: string, views: number, author: string, votes: number}[]}} 
@@ -64,7 +64,7 @@ export default ({ Csession, headerName, articles }) => (
         <hr style={{ width: '10%' }} />
         {/*Created article*/}
         <div id='created-article'>
-            {articles.map(d => <ArticleTemplate data={d} key={d.name}/>)}
+            {articles.map(d => <Article data={d} key={d.name}/>)}
         </div>
         {/*Scripts*/}
         <script src="/javascripts/homepage/links.js"></script>
