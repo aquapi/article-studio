@@ -1,5 +1,5 @@
 import app from "../../app/loaders/express.mjs";
-import { next } from "../../app/loaders/servers.mjs";
+import next from "../../app/loaders/next.mjs";
 import Article from "../../app/models/article.mjs";
 
 // Read for client

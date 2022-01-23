@@ -1,5 +1,5 @@
 import Article from "../../app/models/article.mjs";
-import { next } from "../../app/loaders/servers.mjs";
+import next from "../../app/loaders/next.mjs";
 import app from "../../app/loaders/express.mjs";
 import sort from "../../app/util/sort.mjs";
 

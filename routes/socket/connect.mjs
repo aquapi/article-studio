@@ -1,7 +1,7 @@
 // Socket server
 import { Server as SocketServer } from "socket.io";
 import chatMessage from "../../routes/socket/chat.mjs";
-import { target } from "../../app/loaders/servers.mjs";
+import target from "../../app/loaders/server.mjs";
 import voteEvent from "./vote.mjs";
 
 // Socket.io server

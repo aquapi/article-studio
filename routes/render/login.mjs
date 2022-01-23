@@ -1,5 +1,5 @@
 import app from "../../app/loaders/express.mjs";
-import { next } from "../../app/loaders/servers.mjs";
+import next from "../../app/loaders/next.mjs";
 
 // Login page
 // https://localhost/login
