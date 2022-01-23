@@ -7,7 +7,7 @@ export default () =>
         {/*Go back to homepage*/}
         <button id="back">Back</button>
         {/*Login form*/}
-        <form>
+        <form action="/signupprocess" method="POST">
             {/*Header*/}
             <div style={{ width: "100%", textAlign: "center" }}>
                 <h3>Sign up</h3>
