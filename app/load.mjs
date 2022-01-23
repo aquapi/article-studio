@@ -1,6 +1,6 @@
 import { config } from 'dotenv';
 import mongoose from 'mongoose';
-import { next } from './loaders/servers.mjs';
+import next from './loaders/next.mjs';
 import "./loaders/passport.mjs";
 
 // Load ENV
