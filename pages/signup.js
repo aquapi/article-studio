@@ -1,4 +1,4 @@
-import Head from "../components/headers/sign";
+import Head from "../app/components/headers/sign";
 
 export default () =>
 (

@@ -1,4 +1,4 @@
-import Head from "../components/headers/discuss";
+import Head from "../app/components/headers/discuss";
 
 /**
  * @param {{name: string, user: string}}

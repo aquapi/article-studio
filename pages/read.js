@@ -1,4 +1,4 @@
-import Head from "../components/headers/read";
+import Head from "../app/components/headers/read";
 
 const detailStyle = {
     fontSize: '12px !important',

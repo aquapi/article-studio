@@ -1,4 +1,4 @@
-import Head from "../components/headers/edit"
+import Head from "../app/components/headers/edit"
 
 /**
  * @param {{name: string, md_content: string, image_url: string}}
