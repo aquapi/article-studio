@@ -13,7 +13,7 @@ document.querySelector("form").addEventListener("submit", async e => {
         // If error occured
         .catch(() => 403) !== 200
         // Alert duplicate error
-        ? alert("Some articles have the same name as yours, please choose another name")
+        ? alert("Another article has the same name as yours, please choose another name")
         // Else go to edit
         : location.replace("/article/edit/" + encodeURIComponent(
             document.querySelector("input[name='name']").value
