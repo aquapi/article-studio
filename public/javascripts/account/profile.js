@@ -1,4 +1,6 @@
-document.getElementById("back").addEventListener("click", () => location.replace("/article"));
+document.getElementById("back").addEventListener("click", () => 
+    location.replace(sessionStorage.getItem("prevLocation"))
+);
 
 // Delete profile
 document.getElementById("delete").addEventListener("click", () => {

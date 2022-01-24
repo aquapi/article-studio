@@ -89,9 +89,10 @@ $(() => {
 });
 
 // Login button
-document.querySelector("#login").addEventListener("click", () =>
-    location.replace("/login")
-);
+document.querySelector("#login").addEventListener("click", () => {
+    location.replace("/login");
+    sessionStorage.setItem("prevLocation", location.pathname);
+});
 
 // Search bar fade in/out
 $(".input > button").click(() => {

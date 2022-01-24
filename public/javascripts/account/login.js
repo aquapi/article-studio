@@ -1,4 +1,6 @@
-document.getElementById("back").addEventListener("click", () => location.replace("/article"));
+document.getElementById("back").addEventListener("click", () => 
+    location.replace(sessionStorage.getItem("prevLocation"))
+);
 
 document.querySelector("form").addEventListener("submit", async e => {
     e.preventDefault();
@@ -10,5 +12,5 @@ document.querySelector("form").addEventListener("submit", async e => {
         body: new URLSearchParams(data)
     }).then(res => res.status) === 401
         ? alert("Wrong username or password")
-        : location.replace("/article");
+        : location.replace(sessionStorage.getItem("prevLocation"));
 });

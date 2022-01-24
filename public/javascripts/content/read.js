@@ -15,7 +15,9 @@ document.getElementById("content").innerHTML = htmlDecode(data.item(2).innerHTML
 hljs.highlightAll();
 
 // Event listeners
-document.getElementById("back").addEventListener("click", () => location.replace('/article'));
+document.getElementById("back").addEventListener("click", () => 
+    location.replace(sessionStorage.getItem("prevLocation"))
+);
 
 // Discuss
 document.getElementById("discuss_redirect").addEventListener("click", () => location.replace(`/discuss/${encodeURIComponent(data.item(0).innerHTML)}`));

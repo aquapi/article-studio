@@ -13,8 +13,17 @@ if (sessionStorage.getItem("isSearching")) {
     document.querySelector("input[type=text]").value = sessionStorage.getItem("search");
 }
 
-// Check whether user is signed up
-$("#sign").click(() => data.item(0).innerHTML === "undefined" || !data.item(0).innerHTML ? location.replace('/signup') : location.replace('/article/profile'));
+// Check whether user is signed in
+$("#sign").click(() => {
+    // Check whether user is signed in
+    data.item(0).innerHTML === "undefined"
+        || !data.item(0).innerHTML
+        // Go to /signup if click SIGNUP
+        ? location.replace('/signup')
+        // Go to /profile if click PROFILE
+        : location.replace('/article/profile')
+    sessionStorage.setItem("prevLocation", location.pathname);
+});
 
 // Search 
 $("input[type=text]").keyup(() => {
