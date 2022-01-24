@@ -15,6 +15,13 @@ function contain(str, str1) {
     return true;
 }
 
+function containAll(strs, str1) {
+    for (const str of strs) 
+        if (contain(str, str1))
+            return true;
+    return false;
+}
+
 // Horizontal scroll events
 const updateScrollPos = (e) => {
     $('#created-article').css('cursor', 'grabbing');
