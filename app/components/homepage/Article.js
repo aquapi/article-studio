@@ -1,5 +1,5 @@
 /**
- * @param {{data: {name: string, content: string, views: number, author: string, votes: number}[]}}   
+ * @param {{data: {user: string, name: string, content: string, display_img: string, description: string, views: number, tag: string, votes: number}}}
  */
 
 export default ({ data }) => (
@@ -8,7 +8,7 @@ export default ({ data }) => (
         <div id={data.name} style={{ 
             display: 'flex', flexDirection: 'column', justifyContent: 'center', 
             overflow: 'hidden', maxHeight: '480.63px' 
-        }} className={data.tag}>
+        }} className={data.tag + " " + data.user + " " + data.votes + " " + data.views}>
             {/*Display image*/}
             <img src={
                 data.display_img && data.display_img !== "undefined" && data.display_img !== "Display image url" ? 
