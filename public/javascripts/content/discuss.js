@@ -26,7 +26,7 @@ form.addEventListener('submit', (e) => {
         input.value = '';
     }
 
-    // Stop user from typing messages
+    // Stop user from typing messages 
     input.readOnly = true;
     input.placeholder = "Wait for 5 seconds to type messages again";
 
