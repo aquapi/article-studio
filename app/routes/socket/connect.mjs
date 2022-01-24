@@ -1,11 +1,9 @@
 // Socket server
-import { Server as SocketServer } from "socket.io";
+import server from "../../loaders/socket.mjs";
+// Chat message event handler
 import chatMessage from "../../routes/socket/chat.mjs";
-import target from "../../loaders/server.mjs";
+// Vote event handler
 import voteEvent from "./vote.mjs";
-
-// Socket.io server
-const server = new SocketServer(target);
     
 // Listen to '/discuss' namespace requests
 server.of("/discuss").on("connection", socket => {
