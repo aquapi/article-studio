@@ -2,43 +2,38 @@ import app from "../../loaders/express.mjs";
 import Article from "../../models/article.mjs";
 
 // Add article data to database
-app.get("/process", async (req, res) => {
+app.post("/process", async (req, res) => {
+    // Check whether user is logged in
     if (!req.session?.userID)
         res.redirect("/login");
-    /**
-     * @type {string}
-     * 
-     * Find the matching article
-     */
-    const result = await Article.findOne({
-        name: req.query?.name ?? ""
-    });
 
-    // Check whether req.query.name is duplicated 
-    if (result) {
-        res.contentType("text/html");
-        res.write("<code>Some articles have the same name as yours, please choose another name</code>");
-        res.end("<script>setTimeout(() => location.replace('/article/new'), 2000)</script>");
-    } 
+    // Find matches article
+    const r = await Article.findOne({
+        name: req.body?.name ?? ""
+    })
+
+    // Check whether req.body.name is duplicated 
+    if (r)
+        // 403 Forbidden
+        res.writeHead(403);
     // Check whether user is logged in
-    else if (req.query?.name && req.session?.userID) {
+    else if (req.body.name) {
         // Create an article
         await new Article({
             user: req.session?.userID ?? "None",
-            name: req.query.name,
+            name: req.body.name,
             content: '',
             display_img: '',
-            description: req.query.description,
+            description: req.body.description,
             views: 0,
-            tag: req.query.tag,
+            tag: req.body.tag,
             votes: 0
         }).save();
-        // Redirect to edit page
-        res.redirect(`/article/edit/${encodeURIComponent(req.query.name)}`);
-    } 
-    // Redirect back to log in
-    else 
-        res.redirect("/login");
+        // 200 OK
+        res.writeHead(200);
+    }
+    // End the response
+    res.end();
 });
 
 

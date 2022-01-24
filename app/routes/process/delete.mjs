@@ -19,8 +19,8 @@ app.post("/delete", async (req, res) =>
 ); 
 
 // Delete an article
-app.post("/article/delete", async (req, res) =>
-    (
+app.post("/article/delete", 
+    async (req, res) => (
         await Article.deleteOne({
             user: req.session?.userID ?? "",
             name: req.body.name
