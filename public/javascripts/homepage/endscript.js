@@ -47,7 +47,4 @@ $("#created-article").css("display", 'flex');
 $("body").css("display", 'block');
 
 // Scroll to top
-document.documentElement.scrollTop = Number(
-    new URLSearchParams(location.search)
-        .get("scroll")
-);
+document.documentElement.scrollTop = Number(sessionStorage.getItem("scroll"));
