@@ -11,7 +11,7 @@ app.get("/article", async (req, res) =>
     next.render(req, res, "/article", {
         Csession: req.session,
         headerName: "Discover",
-        articles: sort("views", await Article.find({}))
+        articles: sort("views", await Article.find({}).exec())
     })
 );
 
@@ -23,6 +23,6 @@ app.get("/mostvote", async (req, res) =>
     next.render(req, res, "/article", {
         Csession: req.session, 
         headerName: "Most Voted",
-        articles: sort("votes", await Article.find({}))
+        articles: sort("votes", await Article.find({}).exec())
     })
 );

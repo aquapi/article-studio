@@ -10,7 +10,7 @@ app.post("/process", async (req, res) => {
     // Find matches article
     const r = await Article.findOne({
         name: req.body?.name ?? ""
-    })
+    }).exec();
 
     // Check whether req.body.name is duplicated 
     if (r)
@@ -46,7 +46,7 @@ app.post("/article/save", async (req, res) => {
     const r = await Article.findOne({
         name: req.body?.name ?? "",
         user: req.session?.userID ?? ""
-    });
+    }).exec();
     // Check whether the target article is found
     if (!r) {
         // 401 Unauthorized
@@ -66,7 +66,7 @@ app.post("/article/save", async (req, res) => {
         views: r.views,
         tag: r.tag ?? "",
         votes: r.votes
-    });
+    }).exec();
     // 200 OK
     res.writeHead(200);
     // End the response

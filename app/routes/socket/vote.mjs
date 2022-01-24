@@ -10,7 +10,7 @@ export default socket =>
         const r = await Article.findOne({
             name,
             user: author ?? ""
-        });
+        }).exec();
         if (!r) {
             socket.emit("failed", "Cannot find the article to vote");
             return;
@@ -26,5 +26,5 @@ export default socket =>
                 views: r.views,
                 tag: r.tag,
                 votes: r.votes + 1
-            });
+            }).exec();
     };

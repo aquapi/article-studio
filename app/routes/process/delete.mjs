@@ -9,9 +9,10 @@ app.post("/delete", async (req, res) =>
             await Promise.all([
                 Article.deleteMany({
                     user: req.session.userID
-                }), User.deleteOne({
+                }).exec(), 
+                User.deleteOne({
                     username: req.session.userID
-                })
+                }).exec()
             ]), 
             res.redirect("/logout")
         )
@@ -24,7 +25,7 @@ app.post("/article/delete",
         await Article.deleteOne({
             user: req.session?.userID ?? "",
             name: req.body.name
-        }), 
+        }).exec(), 
         res.redirect("/article") 
     )
 );

@@ -7,7 +7,7 @@ app.get("/reader/:name", async (req, res) => {
     let userID = req.session?.userID ?? "";
     const r = await Article.findOne({
         name: req.params?.name ?? ""
-    });
+    }).exec();
     // If reader can't find target article
     if (!r) {
         res.redirect("/article");

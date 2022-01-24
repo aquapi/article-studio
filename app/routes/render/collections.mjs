@@ -16,7 +16,7 @@ app.get("/myarticle", async (req, res) =>
 			articles: sort("views",
 				await Article.find({
 					user: req.session.userID
-				})
+				}).exec()
 			)
 		})
 );
@@ -34,7 +34,7 @@ app.get("/otherarticle", async (req, res) =>
 			articles: sort("views",
 				await Article.find({
 					user: { $ne: req.session.userID ?? "" }
-				})
+				}).exec()
 			)
 		})
 );

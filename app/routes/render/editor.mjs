@@ -9,7 +9,7 @@ app.get("/article/edit/:name", async (req, res) => {
     const { display_img, content, user } = await Article.findOne({
         name: req.params?.name ?? "",
         user: req.session?.userID ?? ""
-    }) ?? {};
+    }).exec() ?? {};
     // Check whether the current user is the author
     return user
         // Render the page

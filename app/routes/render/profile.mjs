@@ -8,7 +8,7 @@ app.get("/article/profile", async (req, res) =>
         name: req.session?.userID ?? "None",
         pass: await User.findOne({
             username: req.session?.userID ?? ""
-        }).then(r => r?.password ?? "No password")
+        }).exec().then(r => r?.password ?? "No password")
     })
 );
  
