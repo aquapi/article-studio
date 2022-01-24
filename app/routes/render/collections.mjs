@@ -30,7 +30,7 @@ app.get("/otherarticle", async (req, res) =>
 		? res.redirect("/login")
 		: next.render(req, res, "/article", {
 			Csession: req.session,
-			headerName: "Other Article",
+			headerName: "Other Articles",
 			articles: sort("views",
 				await Article.find({
 					user: { $ne: req.session.userID ?? "" }
