@@ -8,49 +8,59 @@ import { createTransport } from "nodemailer";
 config();
 
 // Sign up process
-app.post("/signupprocess", 
-    (req, res, next) => 
-        passport.authenticate("local", { session: false },
-            async (err, user) => {
-                if (err) next(err);
-                if (!user) {
-                    // Create a transporter
-                    const transporter = createTransport({
-                        service: 'gmail',
-                        auth: {
-                            user: process.env.EMAIL,
-                            pass: process.env.PASSWORD
-                        }
-                    });
-
-                    // Send mail to user
-                    transporter.sendMail({
-                        from: 'aquaplmc@gmail.com',
-                        to: req.body.email,
-                        subject: 'Your username and password',
-                        text: `
-                            Username: ${req.body.name}
-                            Password: ${req.body.pass}
-                            If you didn't sign up on our site, just ignore or delete this mail
-                            Send feedback to our site: Userfeedbackrespond@gmail.com
-                        `
-                    });
-            
-                    // Create new user and save to database
-                    await new User({
-                        username: req.body.name,
-                        password: req.body.pass,
-                    }).save();
-
-                    // Assign session
-                    req.session.userID = req.body.name;
+app.post("/signupprocess",
+    async (req, res, next) => {
+        const user = await User.findOne({
+            username: req.body.name
+        }).exec();
+        if (!user) {
+            // Create a transporter
+            const transporter = createTransport({
+                service: 'gmail',
+                auth: {
+                    user: process.env.EMAIL,
+                    pass: process.env.PASSWORD
                 }
-                // Assign session
-                else if (req.body.pass === user.password) 
-                    req.session.userID = req.body.name;
-                
-                // Redirect to homepage if success
-                res.redirect("/article");
-            }
-        )(req, res, next)
+            });
+
+            // Send mail to user
+            transporter.sendMail({
+                from: 'aquaplmc@gmail.com',
+                to: req.body.email,
+                subject: 'Your username and password',
+                text: `
+                    Username: ${req.body.name}
+                    Password: ${req.body.pass}
+                    If you didn't sign up on our site, just ignore or delete this mail
+                    Send feedback to our site: Userfeedbackrespond@gmail.com
+                `
+            });
+
+            // Create new user and save to database
+            await new User({
+                username: req.body.name,
+                password: req.body.pass,
+            }).save();
+
+            // Assign session
+            req.session.userID = req.body.name;
+            // 200 OK
+            res.writeHead(200);
+        }
+        // Assign session
+        else if (req.body.pass === user.password) {
+            req.session.userID = req.body.name;
+            // 200 OK
+            res.writeHead(200);
+        }
+
+        // Not success
+        else {
+            // 401 Unauthorized
+            res.writeHead(401);
+        }
+
+        // Redirect to homepage if success
+        res.end();
+    }
 );
