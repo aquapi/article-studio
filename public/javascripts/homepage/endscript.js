@@ -48,6 +48,6 @@ $("body").css("display", 'block');
 
 // Scroll to top
 document.documentElement.scrollTop = Number(
-    new URLSearchParams(window.location.search)
+    new URLSearchParams(location.search)
         .get("scroll")
 );
