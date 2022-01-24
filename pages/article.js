@@ -11,7 +11,7 @@ export default ({ Csession, headerName, articles }) => (
             <div id="hover-action"></div>
             {/*Search bar*/}
             <div className="search-bar">
-                <input type="text" placeholder="Search an article or a tag" />
+                <input type="text" placeholder="Search article name, tag, views, votes or author" />
             </div>
             {/*Navbar*/}
             <nav id="nav">
