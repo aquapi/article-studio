@@ -37,7 +37,7 @@ Run the project using:
 ```                               
     express.mjs ————→ servers.mjs ———————————————————————╮                               
            |                 |                           |
-           |                 |                           |
+           |           socket.mjs                        |
            |                 ↓                           ↓
            ╰————————————→ routes ———→ load.mjs ———→ index.mjs
 ```
