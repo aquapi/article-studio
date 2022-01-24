@@ -3,11 +3,12 @@ document.querySelector("#new").addEventListener("click", () =>
     location.replace("/article/new")
 );
 
+// Set hover status
+document.getElementById(location.pathname).style.backgroundColor = "whitesmoke";
+document.getElementById(location.pathname).style.boxShadow = "none";
+
 // Check whether user is signed up
 $("#sign").click(() => data.item(0).innerHTML === "undefined" || !data.item(0).innerHTML ? location.replace('/signup') : location.replace('/article/profile'));
-
-// Scroll to top
-$("body").scrollTop();
 
 // Search 
 $("input[type=text]").keyup(() => {
@@ -44,3 +45,9 @@ $("#created-article").css("display", 'flex');
 
 // Load body
 $("body").css("display", 'block');
+
+// Scroll to top
+document.documentElement.scrollTop = Number(
+    new URLSearchParams(window.location.search)
+        .get("scroll")
+);
