@@ -5,7 +5,8 @@ nav {
     color: white;
     background-color: #333;
     overflow-y: hidden;
-    justify-content: space-between
+    justify-content: space-between;
+    font-family: Corbel;
 }
 
 .nav-item { 

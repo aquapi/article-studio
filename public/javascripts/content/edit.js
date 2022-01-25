@@ -12,27 +12,29 @@ async function getBase64(file) {
 
 /* Main */
 async function main() {
+    const iframe = document.querySelector("iframe");
+    const textarea = document.querySelector("textarea");
     /* Load content as markdown */
 
-    document.querySelector('textarea').value = new showdown.Converter({
+    textarea.value = new showdown.Converter({
         tables: true,
         strikethrough: true,
         simpleLineBreaks: true,
         parseImgDimensions: true,
         ghCompatibleHeaderId: true,
         noHeaderId: true
-    }).makeMarkdown(document.querySelector('textarea').value);
+    }).makeMarkdown(textarea.value);
 
     /* Clean content*/
-    document.querySelector('textarea').value = document.querySelector('textarea').value
+    textarea.value = textarea.value
             .replaceAll("<!-- -->", "")
-            .replaceAll('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/vs2015.min.css">', '')
-            .replaceAll('<style>body {font-family: Corbel}</style>', '')
+            .replaceAll('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/github.min.css">', '')
+            .replaceAll('<style>body {font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"} h1, h2, h3, h4, h5, h6 {font-weight: 400;}</style>', '')
             .replaceAll('<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>', '')
             .replaceAll('<script>hljs.highlightAll()</script>', '')
     
-    document.querySelector('textarea').value = document.querySelector('textarea').value
-            .slice(6, document.querySelector('textarea').value.length - 4)
+    textarea.value = textarea.value
+            .slice(6, textarea.value.length - 4)
 
     /* Highlight */
     hljs.highlightAll();
@@ -41,7 +43,7 @@ async function main() {
 
     document.querySelector('#save').addEventListener('click', () => {
         document.querySelector('#run').click();
-        document.querySelector("textarea.save").value = document.querySelector("iframe").srcdoc;
+        document.querySelector("textarea.save").value = iframe.srcdoc;
         document.querySelector("input.save").value = document.getElementById("img_url").value;
         document.querySelector("#submit").click();
     });
@@ -74,10 +76,10 @@ async function main() {
 
     /* Test markdown listener */
     document.querySelector('#run').addEventListener('click', () => {
-        document.querySelector("iframe").srcdoc = `
-            <style>body {font-family: Corbel}</style>
+        iframe.srcdoc = `
+        <style>body {font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"} h1, h2, h3, h4, h5, h6 {font-weight: 400;}</style>
             <link rel="stylesheet"
-                href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/vs2015.min.css" />
+                href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/github.min.css" />
             <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
         ` + new showdown.Converter({
             tables: true,
@@ -86,7 +88,7 @@ async function main() {
             parseImgDimensions: true,
             ghCompatibleHeaderId: true,
             noHeaderId: true
-        }).makeHtml(document.querySelector('textarea').value) +
+        }).makeHtml(textarea.value) +
             `<script>hljs.highlightAll()</script>`;
     });
 
@@ -94,6 +96,14 @@ async function main() {
     document.querySelector('#back').addEventListener('click', () => {
         const name = document.querySelectorAll("span").item(0).innerHTML;
         location.replace(`/reader/${encodeURIComponent(name)}`);
+    });
+
+    // Parallel scroll
+    textarea.addEventListener('scroll', () => {
+        iframe.contentDocument.scrollingElement.scroll({
+            top: textarea.scrollTop,
+            left: textarea.scrollLeft
+        });
     });
 }
 
