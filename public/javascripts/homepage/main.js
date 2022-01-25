@@ -1,6 +1,3 @@
-if (sessionStorage.getItem("prevLocation") && location.pathname !== sessionStorage.getItem("prevLocation"))
-    location.replace(sessionStorage.getItem("prevLocation"));
-
 // Hide the search bar
 $(".search-bar").fadeOut(0);
 
