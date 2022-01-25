@@ -28,7 +28,6 @@ async function main() {
     /* Clean content*/
     textarea.value = textarea.value
             .replaceAll("<!-- -->", "")
-            .replaceAll('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/github.min.css">', '')
             .replaceAll('<link rel="stylesheet" href="/stylesheets/edit/framestyle.css">', '')
             .replaceAll('<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>', '')
             .replaceAll('<script>hljs.highlightAll()</script>', '')
@@ -78,8 +77,6 @@ async function main() {
     document.querySelector('#run').addEventListener('click', () => {
         iframe.srcdoc = `
         <link rel="stylesheet" href="/stylesheets/edit/framestyle.css">
-            <link rel="stylesheet"
-                href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/github.min.css" />
             <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
         ` + new showdown.Converter({
             tables: true,
