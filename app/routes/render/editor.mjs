@@ -13,7 +13,7 @@ app.get("/article/edit/:name", async (req, res) => {
     // Check whether the current user is the author
     return user
         // Render the page
-        ? next.render(req, res, "/edit", {
+        ? next.render(req, res, "/views/edit", {
             name: req.params?.name,
             image_url: display_img
                 ? display_img 
@@ -29,6 +29,6 @@ app.get("/article/edit/:name", async (req, res) => {
 app.get("/article/new",
     async (req, res) =>
         req.session?.userID
-            ? next.render(req, res, "/create")
+            ? next.render(req, res, "/views/create")
             : res.redirect("/article")
 );

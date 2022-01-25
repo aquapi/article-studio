@@ -10,7 +10,7 @@ app.get("/myarticle", async (req, res) =>
 	// Render
 	!req.session?.userID
 		? res.redirect("/login")
-		: next.render(req, res, "/article", {
+		: next.render(req, res, "/views/article", {
 			Csession: req.session,
 			headerName: "My Article",
 			articles: sort("views",
@@ -28,7 +28,7 @@ app.get("/otherarticle", async (req, res) =>
 	// Render
 	!req.session?.userID
 		? res.redirect("/login")
-		: next.render(req, res, "/article", {
+		: next.render(req, res, "/views/article", {
 			Csession: req.session,
 			headerName: "Other Articles",
 			articles: sort("views",

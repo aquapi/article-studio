@@ -8,7 +8,7 @@ import sort from "../../utils/sort.mjs";
 
 app.get("/article", async (req, res) => 
     // Render
-    next.render(req, res, "/article", {
+    next.render(req, res, "/views/article", {
         Csession: req.session,
         headerName: "Discover",
         articles: sort("views", await Article.find({}).exec())
@@ -20,7 +20,7 @@ app.get("/article", async (req, res) =>
 
 app.get("/mostvote", async (req, res) => 
     // Render
-    next.render(req, res, "/article", {
+    next.render(req, res, "/views/article", {
         Csession: req.session, 
         headerName: "Most Voted",
         articles: sort("votes", await Article.find({}).exec())
