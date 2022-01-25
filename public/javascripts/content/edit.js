@@ -21,8 +21,7 @@ async function main() {
         strikethrough: true,
         simpleLineBreaks: true,
         parseImgDimensions: true,
-        ghCompatibleHeaderId: true,
-        noHeaderId: true
+        ghCompatibleHeaderId: true
     }).makeMarkdown(textarea.value);
 
     /* Clean content*/
@@ -33,7 +32,7 @@ async function main() {
             .replaceAll('<script>hljs.highlightAll()</script>', '')
     
     textarea.value = textarea.value
-            .slice(6, textarea.value.length - 4)
+            .slice(4, textarea.value.length - 4)
 
     /* Highlight */
     hljs.highlightAll();
@@ -83,8 +82,7 @@ async function main() {
             strikethrough: true,
             simpleLineBreaks: true,
             parseImgDimensions: true,
-            ghCompatibleHeaderId: true,
-            noHeaderId: true
+            ghCompatibleHeaderId: true
         }).makeHtml(textarea.value) +
             `<script>hljs.highlightAll()</script>`;
     });
