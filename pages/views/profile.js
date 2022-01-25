@@ -1,4 +1,4 @@
-import Head from "../app/components/headers/profile";
+import Head from "../components/headers/profile";
 
 /**
  * @param {{name: string, pass: string}}

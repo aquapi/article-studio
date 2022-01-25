@@ -1,4 +1,4 @@
-import Head from "../app/components/headers/create";
+import Head from "../components/headers/create";
 
 export default () => (
     <>

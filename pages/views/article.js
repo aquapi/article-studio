@@ -1,5 +1,5 @@
-import Head from "../app/components/headers/article";
-import Article from "../app/components/homepage/Article";
+import Head from "../components/headers/article";
+import Article from "../components/homepage/Article";
 
 /**
  * @param {{Csession: import("express-session").Session & Partial<import("express-session").SessionData>, headerName: string, articles: {name: string, content: string, views: number, author: string, votes: number}[]}} 
