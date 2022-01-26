@@ -12,7 +12,7 @@ app.get("/myarticle", async (req, res) =>
 		? res.redirect("/login")
 		: next.render(req, res, "/views/article", {
 			Csession: req.session,
-			headerName: "My Article",
+			headerName: "My Articles",
 			articles: sort("views",
 				await Article.find({
 					user: req.session.userID
