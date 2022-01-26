@@ -1,17 +1,17 @@
 @import "./navbuttons.css";
 
 body {
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
     font-size: 13px;
     letter-spacing: 0.5px;
     padding: 5vh;
-} 
+}
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: 400;
 }
 
-#__next > span {
+#__next>span {
     display: none;
 }
 
