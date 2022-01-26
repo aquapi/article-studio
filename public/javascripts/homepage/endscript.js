@@ -21,8 +21,7 @@ $("#sign").click(() => {
         // Go to /signup if click SIGNUP
         ? location.replace('/signup')
         // Go to /profile if click PROFILE
-        : location.replace('/article/profile')
-    sessionStorage.setItem("prevLocation", location.pathname);
+        : location.replace('/article/profile');
 });
 
 // Search 

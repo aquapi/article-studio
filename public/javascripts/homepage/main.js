@@ -1,3 +1,14 @@
+if (
+    sessionStorage.getItem("prevLocation") 
+    && sessionStorage.getItem("prevLocation") !== location.pathname 
+    && document.referrer.slice(document.referrer.lastIndexOf("/")) !== sessionStorage.getItem("prevLocation")
+) {
+    location.replace(sessionStorage.getItem("prevLocation"));
+}
+
+// Set location
+sessionStorage.setItem("prevLocation", location.pathname);
+
 // Hide the search bar
 $(".search-bar").fadeOut(0);
 
@@ -74,7 +85,6 @@ $(() => {
     });
 
     // Drag to scroll
-
     $("#created-article").on({
         'mousemove': (e) => clicked ? updateScrollPos(e) : void (0),
         'mousedown': (e) => {

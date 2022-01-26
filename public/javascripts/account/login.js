@@ -1,5 +1,5 @@
-document.getElementById("back").addEventListener("click", () => 
-    location.replace(sessionStorage.getItem("prevLocation"))
+document.getElementById("back").addEventListener("click", () =>
+    location.replace(sessionStorage.getItem("prevLocation") ? sessionStorage.getItem("prevLocation") : "/article")
 );
 
 document.querySelector("form").addEventListener("submit", async e => {
@@ -8,7 +8,7 @@ document.querySelector("form").addEventListener("submit", async e => {
     data.append("username", document.querySelector("input[name='username']").value);
     data.append("password", document.querySelector("input[name='password']").value);
     await fetch("/loginprocess", {
-        method: "POST", 
+        method: "POST",
         body: new URLSearchParams(data)
     }).then(res => res.status) === 401
         ? alert("Wrong username or password")
