@@ -54,7 +54,7 @@ export default ({ Csession, headerName, articles }) => (
             <div className="list" id="/article">Discover</div>
             <div className="list" id="/mostvote">Most Voted</div>
             {Csession ? <>
-                <div className='list' id="/myarticle">My Article</div>
+                <div className='list' id="/myarticle">My Articles</div>
                 <div className='list' id="/otherarticle">Other Articles</div>
             </> : <></>}
             <script src="/javascripts/homepage/collections.js"></script>
