@@ -7,6 +7,7 @@ button {
     border: 0px;
     font-family: "Oxygen", sans-serif;
     cursor: pointer;
+    height: 52.8px;
 }
 
 button:hover {
@@ -16,4 +17,32 @@ button:hover {
 #buttons {
     background-color: #333;
     display: flex;
+    height: 52.8px;
+}
+
+select {
+    color: white;
+    background-color: #333;
+    border: 0px;
+    font-family: "Oxygen", sans-serif;
+    text-align: center;
+    cursor: pointer;
+    width: 17.5px;
+    outline: none;
+    height: 52.8px;
+}
+
+label {
+    padding: 18px;
+    padding-right: 5px;
+    background-color: #333;
+    color: white;
+}
+
+label:hover {
+    background-color: #111;
+}
+
+select:hover {
+    background-color: #111;
 }

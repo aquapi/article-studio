@@ -9,13 +9,44 @@ const htmlDecode = input =>
 document.getElementById("buttons").innerHTML += htmlDecode(data.item(1).innerHTML);
 
 // Initialize content
-document.getElementById("content").innerHTML = htmlDecode(data.item(2).innerHTML);
+document.getElementById("content").innerHTML =
+    "<link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/"
+    + document.querySelector("select").options.item(
+        Number(
+            localStorage.getItem("favTheme") ? localStorage.getItem("favTheme") : "0"
+        )
+    ).id
+    + ".min.css'>"
+    + htmlDecode(data.item(2).innerHTML);
+
+// Change highlighter
+document.querySelector("select").addEventListener("change", () => {
+    document.getElementById("content").innerHTML =
+        "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/"
+        + document.querySelector("select").options.item(
+            document.querySelector("select").options.selectedIndex >= 0
+                ? document.querySelector("select").options.selectedIndex
+                : 0
+        ).id
+        + ".min.css'>"
+        + htmlDecode(data.item(2).innerHTML);
+
+    // Save to localStorage
+    localStorage.setItem("favTheme",
+        document.querySelector("select").options.selectedIndex >= 0
+            ? document.querySelector("select").options.selectedIndex
+            : 0
+    )
+
+    // Highlight all code 
+    hljs.highlightAll();
+})
 
 // Highlight all code 
 hljs.highlightAll();
 
 // Event listeners
-document.getElementById("back").addEventListener("click", () => 
+document.getElementById("back").addEventListener("click", () =>
     location.replace(sessionStorage.getItem("prevLocation") ? sessionStorage.getItem("prevLocation") : "/article")
 );
 
@@ -39,13 +70,13 @@ const vote = () => (
     document.getElementById("votesDetail").innerHTML = "Votes: " + (
         Number(
             document.getElementById("votesDetail").innerHTML
-                .replaceAll("Votes: ", "") 
+                .replaceAll("Votes: ", "")
                 .replaceAll("<\!-- -->", "") // Remove all non-numerical character and parse to number
         ) + 1
-    ), socket.emit("vote", 
-        data.item(3).innerHTML, 
+    ), socket.emit("vote",
+        data.item(3).innerHTML,
         document.getElementById("authorDetail").innerHTML
-            .replaceAll("Author: ", "") 
+            .replaceAll("Author: ", "")
             .replaceAll("<\!-- -->", ""),
         data.item(0).innerHTML
     )
