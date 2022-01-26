@@ -13,8 +13,14 @@ const next = Next({
         modern: true,
         experimental: {
             esmExternals: true,
+            styledComponents: true,
         },
         useFileSystemPublicRoutes: false,
+        poweredByHeader: false,
+        httpAgentOptions: {
+            keepAlive: false
+        },
+        swcMinify: true,
     }
 });
 
