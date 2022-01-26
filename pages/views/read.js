@@ -30,6 +30,9 @@ export default ({ name, admin_button, content, views, author, tag, votes, user }
                 <option id="androidstudio">Android Studio</option>
                 <option id="atom-one-dark">Atom Dark</option>
                 <option id="atom-one-light">Atom Light</option>
+                <option id="stackoverflow-dark">Stackoverflow Dark</option>
+                <option id="stackoverflow-light">Stackoverflow Light</option>
+                <option id="xcode">XCode</option>
             </select>
         </div>
         {/*Content and article data*/}
