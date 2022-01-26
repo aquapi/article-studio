@@ -29,10 +29,11 @@ async function main() {
             .replaceAll("<!-- -->", "")
             .replaceAll('<link rel="stylesheet" href="/stylesheets/edit/framestyle.css">', '')
             .replaceAll('<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>', '')
+            .replaceAll('<style>@import url(https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/base16/ocean.min.css)</style>', '')
             .replaceAll('<script>hljs.highlightAll()</script>', '')
     
     textarea.value = textarea.value
-            .slice(4, textarea.value.length - 4)
+            .slice(6, textarea.value.length - 4)
 
     /* Highlight */
     hljs.highlightAll();
@@ -76,7 +77,8 @@ async function main() {
     document.querySelector('#run').addEventListener('click', () => {
         iframe.srcdoc = `
         <link rel="stylesheet" href="/stylesheets/edit/framestyle.css">
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+        <style>@import url(https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/base16/ocean.min.css)</style>
         ` + new showdown.Converter({
             tables: true,
             strikethrough: true,

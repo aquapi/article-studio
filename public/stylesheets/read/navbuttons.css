@@ -27,9 +27,8 @@ select {
     font-family: "Oxygen", sans-serif;
     text-align: center;
     cursor: pointer;
-    width: 17.5px;
+    max-width: 17.5px;
     outline: none;
-    height: 52.8px;
 }
 
 label {
