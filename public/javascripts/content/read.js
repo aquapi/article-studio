@@ -10,14 +10,15 @@ document.getElementById("buttons").innerHTML += htmlDecode(data.item(1).innerHTM
 
 // Initialize content
 document.getElementById("content").innerHTML =
-    "<link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/"
+    "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/"
     + document.querySelector("select").options.item(
         Number(
             localStorage.getItem("favTheme") ? localStorage.getItem("favTheme") : "0"
         )
     ).id
     + ".min.css'>"
-    + htmlDecode(data.item(2).innerHTML);
+    + htmlDecode(data.item(2).innerHTML)
+        .replace('<style>@import url(https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/base16/ocean.min.css)</style>', '');
 
 // Change highlighter
 document.querySelector("select").addEventListener("change", () => {
@@ -29,7 +30,8 @@ document.querySelector("select").addEventListener("change", () => {
                 : 0
         ).id
         + ".min.css'>"
-        + htmlDecode(data.item(2).innerHTML);
+        + htmlDecode(data.item(2).innerHTML)
+            .replace('<style>@import url(https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/base16/ocean.min.css)</style>', '');
 
     // Save to localStorage
     localStorage.setItem("favTheme",
