@@ -19,8 +19,7 @@ const next = Next({
         poweredByHeader: false,
         httpAgentOptions: {
             keepAlive: false
-        },
-        swcMinify: true,
+        }
     }
 });
 
