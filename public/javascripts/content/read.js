@@ -5,9 +5,6 @@ const socket = io("/read");
 const htmlDecode = input =>
     new DOMParser().parseFromString(input, "text/html").documentElement.textContent;
 
-// Initialize buttons
-document.getElementById("buttons").innerHTML += htmlDecode(data.item(1).innerHTML);
-
 // Initialize content
 document.getElementById("content").innerHTML =
     "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/"
@@ -23,7 +20,7 @@ document.getElementById("content").innerHTML =
         strikethrough: true,
         parseImgDimensions: true,
         ghCompatibleHeaderId: true
-    }).makeHtml(htmlDecode(data.item(2).innerHTML));
+    }).makeHtml(htmlDecode(data.item(1).innerHTML));
 
 // Change highlighter
 document.querySelector("select").addEventListener("change", () => {
@@ -41,7 +38,7 @@ document.querySelector("select").addEventListener("change", () => {
             strikethrough: true,
             parseImgDimensions: true,
             ghCompatibleHeaderId: true
-        }).makeHtml(htmlDecode(data.item(2).innerHTML));
+        }).makeHtml(htmlDecode(data.item(1).innerHTML));
 
     // Save to localStorage
     localStorage.setItem("favTheme",
@@ -88,7 +85,7 @@ const vote = () => (
                 .replaceAll("<\!-- -->", "") // Remove all non-numerical character and parse to number
         ) + 1
     ), socket.emit("vote",
-        data.item(3).innerHTML,
+        data.item(2).innerHTML,
         document.getElementById("authorDetail").innerHTML
             .replaceAll("Author: ", "")
             .replaceAll("<\!-- -->", ""),
@@ -96,5 +93,8 @@ const vote = () => (
     )
 );
 
+document.getElementById("vote").addEventListener("click", vote);
+
+// If failed
 socket.on("failed", console.log);
 
