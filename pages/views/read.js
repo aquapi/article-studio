@@ -8,12 +8,11 @@ const detailStyle = {
 /**
  * @param {{name: string, admin_button: string, content: string, views: number, author: string, tag: string, votes: number}}
  */
-export default ({ name, admin_button, content, views, author, tag, votes, user }) => (
+export default ({ name, content, views, author, tag, votes, user }) => (
     <>
         <Head name={name} />
         {/*Data*/}
         <span>{name}</span>
-        <span>{admin_button}</span>
         <span>{content}</span>
         <span>{user}</span>
         {/*Navbar*/}
@@ -34,16 +33,23 @@ export default ({ name, admin_button, content, views, author, tag, votes, user }
                 <option id="stackoverflow-light">Stackoverflow Light</option>
                 <option id="xcode">XCode</option>
             </select>
+            <button style={
+                {display: user === author ? 'block' : 'none'}
+            }>Edit</button>
+            <button style={
+                {display: user === author ? 'block' : 'none'}
+            } id="del">Delete</button>
+            <button id="vote" style={
+                {display: user === author ? 'none' : 'block'}
+            }>Vote</button>
         </div>
         {/*Content and article data*/}
         <div
-            style={
-                {
-                    display: 'flex', flexDirection: 'column', justifyContent: 'center',
-                    alignItems: 'left', padding: '20px', borderLeft: '2px solid #222',
-                    borderRight: '2px solid #222', marginTop: '30px'
-                }
-            }>
+            style={{
+                display: 'flex', flexDirection: 'column', justifyContent: 'center',
+                alignItems: 'left', padding: '20px', borderLeft: '2px solid #222',
+                borderRight: '2px solid #222', marginTop: '30px'
+            }}>
             {/*Article*/}
             <div id="content"></div>
             {/*Article data*/}
@@ -60,11 +66,10 @@ export default ({ name, admin_button, content, views, author, tag, votes, user }
 export const getServerSideProps = async (context) => ({
     props: {
         name: context.query.name,
-        admin_button: context.query.admin_button,
-        content: context.query.content, 
-        views: context.query.views, 
-        author: context.query.author, 
-        tag: context.query.tag, 
+        content: context.query.content,
+        views: context.query.views,
+        author: context.query.author,
+        tag: context.query.tag,
         votes: context.query.votes,
         user: context.query.user
     }
