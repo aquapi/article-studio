@@ -23,6 +23,10 @@ export default ({ name }) => (
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
         {/*Socket*/}
         <script src="/socket.io/socket.io.js"></script>
+        {/*Showdown.js*/}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"
+            integrity="sha512-L03kznCrNOfVxOUovR6ESfCz9Gfny7gihUX/huVbQB9zjODtYpxaVtIaAkpetoiyV2eqWbvxMH9fiSv5enX7bw=="
+            crossOrigin="anonymous" referrerPolicy="no-referrer"></script>
     </Head>
 );
 
