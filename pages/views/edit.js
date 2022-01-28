@@ -1,4 +1,4 @@
-import Head from "../components/headers/edit"
+import Head from "../components/headers/edit";
 
 /**
  * @param {{name: string, md_content: string, image_url: string}}
@@ -9,8 +9,6 @@ export default ({ name, md_content, image_url }) => (
         <Head name={name} />
         {/*Navbar*/}
         <nav>
-            {/*Data*/}
-            <span>{name}</span>
             {/*Navbar buttons*/}
             <div style={{ display: 'flex' }}>
                 <div id='save' className="nav-item">Save</div>
@@ -20,7 +18,7 @@ export default ({ name, md_content, image_url }) => (
                 <div id='image' className="nav-item" style={{ justifySelf: 'flex-end' }}>
                     <input type="text" name="display_img" defaultValue={image_url} style={{ fontFamily: 'Corbel' }} id="img_url" />
                 </div>
-                <div className="nav-item" id='back'>Back</div>
+                <a href={`/reader/${encodeURIComponent(name)}`}>Back</a>
             </div>
         </nav>
         {/*Write and test*/}
@@ -28,13 +26,6 @@ export default ({ name, md_content, image_url }) => (
             <textarea style={{ width: '48%', padding: '10px', height: '248.6px' }} value={md_content}></textarea>
             <iframe style={{ width: '50%', border: '1px solid #555', height: '268.6px' }}></iframe>
         </div>
-        {/*All data will be here before sending to the server*/}
-        <form id="result">
-            <input name="name" defaultValue={name} />
-            <textarea name="content" className="save"></textarea>
-            <input name="display_img" className="save" />
-            <button id="submit"></button>
-        </form>
         <script type="text/javascript" src="/javascripts/getData.js"></script>
         <script src="/javascripts/content/edit.js"></script>
     </>
