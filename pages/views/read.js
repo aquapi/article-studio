@@ -35,7 +35,7 @@ export default ({ name, content, views, author, tag, votes, user }) => (
             </select>
             <button style={
                 {display: user === author ? 'block' : 'none'}
-            }>Edit</button>
+            } id="edit">Edit</button>
             <button style={
                 {display: user === author ? 'block' : 'none'}
             } id="del">Delete</button>

@@ -4,7 +4,7 @@ import Head from "../components/headers/edit";
  * @param {{name: string, md_content: string, image_url: string}}
  */
 
-export default ({ name, md_content, image_url }) => (
+export default ({ name, md_content, image_url, isPrivate }) => (
     <>
         <Head name={name} />
         {/*Navbar*/}
@@ -13,6 +13,10 @@ export default ({ name, md_content, image_url }) => (
             <div style={{ display: 'flex' }}>
                 <div id='save' className="nav-item">Save</div>
                 <div id='run' className="nav-item">Test</div>
+                <select id="private">
+                    <option id="private-false" selected={!isPrivate}>Public</option>
+                    <option id="private-true" selected={isPrivate}>Private</option>
+                </select>
             </div>
             <div style={{ display: 'flex' }}>
                 <div id='image' className="nav-item" style={{ justifySelf: 'flex-end' }}>
@@ -36,7 +40,8 @@ export const getServerSideProps = async (context) => {
         props: {
             name: context.query.name,
             md_content: context.query.md_content,
-            image_url: context.query.image_url
+            image_url: context.query.image_url,
+            isPrivate: context.query.isPrivate
         }
     }
 };
