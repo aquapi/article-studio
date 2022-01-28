@@ -64,6 +64,11 @@ document.getElementById("discuss_redirect").addEventListener("click", () =>
     location.replace(`/discuss/${encodeURIComponent(data.item(0).innerHTML)}`)
 );
 
+// Edit articles
+document.getElementById("edit").addEventListener("click", () => 
+    location.replace(`/article/edit/${encodeURIComponent(data.item(0).innerHTML)}`)
+);
+
 // Delete article
 document.getElementById("del").addEventListener("click", async () => {
     let delName = data.item(0).innerHTML;

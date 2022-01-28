@@ -21,6 +21,10 @@ async function main() {
             name: document.querySelector("title").innerHTML,
             content: document.querySelector("textarea").value,
             display_img: document.getElementById("img_url").value,
+            private: 
+                document.querySelector("select").options.item(
+                    document.querySelector("select").options.selectedIndex
+                ).innerHTML !== "Public"
         });
     });
 

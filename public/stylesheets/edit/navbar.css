@@ -35,3 +35,28 @@ a {
 a:hover {
     background-color: #111;
 }
+
+option {
+    color: #ffffff;
+}
+
+option:hover {
+    background-color: #111;
+}
+
+select {
+    color: white;
+    background-color: #333;
+    border: none;
+    font-family: Corbel;
+    outline: none;
+    cursor: pointer;
+    font-size: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    appearance: none;
+}
+
+select:hover {
+    background-color: #111;
+}
