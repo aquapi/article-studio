@@ -16,9 +16,9 @@
     + Categories
     + Search
     + Sign up, log in
+    + Private articles 
 - In progress:
     + Refractoring (Always)
-    + Private articles
     + Co-authors
     + Discuss will only open if author is online
 
