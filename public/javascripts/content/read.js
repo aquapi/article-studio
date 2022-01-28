@@ -17,8 +17,13 @@ document.getElementById("content").innerHTML =
         )
     ).id
     + ".min.css'>"
-    + htmlDecode(data.item(2).innerHTML)
-        .replace('<style>@import url(https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/base16/ocean.min.css)</style>', '');
+    + "<script>hljs.highlightAll()</script>"
+    + new showdown.Converter({
+        tables: true,
+        strikethrough: true,
+        parseImgDimensions: true,
+        ghCompatibleHeaderId: true
+    }).makeHtml(htmlDecode(data.item(2).innerHTML));
 
 // Change highlighter
 document.querySelector("select").addEventListener("change", () => {
@@ -30,8 +35,13 @@ document.querySelector("select").addEventListener("change", () => {
                 : 0
         ).id
         + ".min.css'>"
-        + htmlDecode(data.item(2).innerHTML)
-            .replace('<style>@import url(https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/base16/ocean.min.css)</style>', '');
+        + "<script>hljs.highlightAll()</script>"
+        + new showdown.Converter({
+            tables: true,
+            strikethrough: true,
+            parseImgDimensions: true,
+            ghCompatibleHeaderId: true
+        }).makeHtml(htmlDecode(data.item(2).innerHTML));
 
     // Save to localStorage
     localStorage.setItem("favTheme",
@@ -53,7 +63,9 @@ document.getElementById("back").addEventListener("click", () =>
 );
 
 // Discuss
-document.getElementById("discuss_redirect").addEventListener("click", () => location.replace(`/discuss/${encodeURIComponent(data.item(0).innerHTML)}`));
+document.getElementById("discuss_redirect").addEventListener("click", () => 
+    location.replace(`/discuss/${encodeURIComponent(data.item(0).innerHTML)}`)
+);
 
 // Delete article
 document.getElementById("del").addEventListener("click", async () => {

@@ -14,41 +14,16 @@ async function getBase64(file) {
 async function main() {
     const iframe = document.querySelector("iframe");
     const textarea = document.querySelector("textarea");
-    /* Load content as markdown */
-
-    textarea.value = new showdown.Converter({
-        tables: true,
-        strikethrough: true,
-        simpleLineBreaks: true,
-        parseImgDimensions: true,
-        ghCompatibleHeaderId: true
-    }).makeMarkdown(textarea.value);
-
-    /* Clean content*/
-    textarea.value = textarea.value
-            .replaceAll("<!-- -->", "")
-            .replaceAll('<link rel="stylesheet" href="/stylesheets/edit/framestyle.css">', '')
-            .replaceAll('<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>', '')
-            .replaceAll('<style>@import url(https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/base16/ocean.min.css)</style>', '')
-            .replaceAll('<script>hljs.highlightAll()</script>', '')
-    
-    textarea.value = textarea.value
-            .slice(6, textarea.value.length - 4)
-
-    /* Highlight */
-    hljs.highlightAll();
 
     /* Trigger when "Save" button is clicked */
-
     document.querySelector('#save').addEventListener('click', () => {
         document.querySelector('#run').click();
-        document.querySelector("textarea.save").value = iframe.srcdoc;
+        document.querySelector("textarea.save").value = document.querySelector("textarea").value;
         document.querySelector("input.save").value = document.getElementById("img_url").value;
         document.querySelector("#submit").click();
     });
 
     /* Submit to /article/save using axios */
-
     document.querySelector("#submit").addEventListener('click', (e) => {
         e.preventDefault();
         axios.post("/article/save", {
@@ -59,7 +34,6 @@ async function main() {
     })
 
     /* Key combining */
-
     document.addEventListener("keydown", e => {
         if (e.ctrlKey) {
             if (e.key === "s") {
@@ -82,7 +56,6 @@ async function main() {
         ` + new showdown.Converter({
             tables: true,
             strikethrough: true,
-            simpleLineBreaks: true,
             parseImgDimensions: true,
             ghCompatibleHeaderId: true
         }).makeHtml(textarea.value) +
