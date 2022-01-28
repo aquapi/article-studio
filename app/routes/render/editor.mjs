@@ -6,7 +6,7 @@ import Article from "../../models/article.mjs";
 // https://localhost/article/edit
 app.get("/article/edit/:name", async (req, res) => {
     // Get data
-    const { display_img, content, user } = await Article.findOne({
+    const { display_img, content, user, private: prv } = await Article.findOne({
         name: req.params?.name ?? "",
         user: req.session?.userID ?? ""
     }).exec() ?? {};
@@ -18,7 +18,8 @@ app.get("/article/edit/:name", async (req, res) => {
             image_url: display_img
                 ? display_img 
                 : "Display image url",
-            md_content: content ?? ""
+            md_content: content ?? "",
+            isPrivate: prv
         })
         // Redirect to login page
         : res.redirect("/login");

@@ -1,7 +1,6 @@
 /**
  * @param {string} ct category name
- * @param {Response<any, Record<string, any>, number>} res to write the result to the client
- * @param {{name: string, content: string, views: number, author: string, votes: number}[]} articles list
+ * @param {{name: string, content: string, views: number, author: string, votes: number, private: boolean}[]} articles list
  */
 
 const sort = (ct, articles) => {

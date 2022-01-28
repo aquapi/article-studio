@@ -10,7 +10,8 @@ const Article = mongoose.model("Site",
         description: String,
         views: Number,
         tag: String,
-        votes: Number
+        votes: Number,
+        private: Boolean,
     })
 );
 

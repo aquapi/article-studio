@@ -27,7 +27,8 @@ app.post("/process", async (req, res) => {
             description: req.body.description,
             views: 0,
             tag: req.body.tag,
-            votes: 0
+            votes: 0,
+            private: false
         }).save();
         // 200 OK
         res.writeHead(200);
@@ -65,7 +66,8 @@ app.post("/article/save", async (req, res) => {
         description: r.description,
         views: r.views,
         tag: r.tag ?? "",
-        votes: r.votes
+        votes: r.votes,
+        private: req.body?.private ?? (r.private ?? false)
     }).exec();
     // 200 OK
     res.writeHead(200);
