@@ -22,3 +22,16 @@ nav {
 .nav-item:hover {
     background-color: #111
 }
+
+a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+}
+
+a:hover {
+    background-color: #111;
+}

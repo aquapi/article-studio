@@ -17,21 +17,12 @@ async function main() {
 
     /* Trigger when "Save" button is clicked */
     document.querySelector('#save').addEventListener('click', () => {
-        document.querySelector('#run').click();
-        document.querySelector("textarea.save").value = document.querySelector("textarea").value;
-        document.querySelector("input.save").value = document.getElementById("img_url").value;
-        document.querySelector("#submit").click();
-    });
-
-    /* Submit to /article/save using axios */
-    document.querySelector("#submit").addEventListener('click', (e) => {
-        e.preventDefault();
         axios.post("/article/save", {
-            name: document.querySelector("form#result > input[name='name']").value,
-            content: document.querySelector("form#result > textarea[name='content']").value,
-            display_img: document.querySelector("form#result > input[name='display_img']").value,
+            name: document.querySelector("title").innerHTML,
+            content: document.querySelector("textarea").value,
+            display_img: document.getElementById("img_url").value,
         });
-    })
+    });
 
     /* Key combining */
     document.addEventListener("keydown", e => {
@@ -60,12 +51,6 @@ async function main() {
             ghCompatibleHeaderId: true
         }).makeHtml(textarea.value) +
             `<script>hljs.highlightAll()</script>`;
-    });
-
-    // Back button
-    document.querySelector('#back').addEventListener('click', () => {
-        const name = document.querySelectorAll("span").item(0).innerHTML;
-        location.replace(`/reader/${encodeURIComponent(name)}`);
     });
 }
 
