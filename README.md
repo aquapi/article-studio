@@ -1,12 +1,26 @@
 # Article Studio
 
+## Target user
+- Programmers or professional article writers
+
+## Do I copy the idea from another project?
+- No, I think this is the first project that has this idea (I did not say this is the only one)
+
 ## Functions
-- Creating articles
-- Editing articles by Github Markdown
-- Publishing articles
-- Sign up, login
-- Voting articles
-- Sort by articles views, votes
+- Completed:
+    + Creating and editing articles
+    + View articles
+    + Theme changer
+    + Vote
+    + Discuss
+    + Categories
+    + Search
+    + Sign up, log in
+- In progress:
+    + Refractoring (Always)
+    + Private articles
+    + Co-authors
+    + Discuss will only open if author is online
 
 ## Configure project
 Create a file named `.env`
@@ -32,12 +46,3 @@ Run the project using:
 ## License
 - Do not deploy this application on any cloud platform or machine
 - Use this project for testing and learning only
-
-## Import structure
-```                               
-    express.mjs ————→ servers.mjs ———————————————————————╮                               
-           |                 |                           |
-           |           socket.mjs                        |
-           |                 ↓                           ↓
-           ╰————————————→ routes ———→ load.mjs ———→ index.mjs
-```
