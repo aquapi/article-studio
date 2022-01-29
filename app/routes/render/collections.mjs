@@ -41,3 +41,24 @@ app.get("/otherarticle", async (req, res) =>
 			)
 		})
 );
+
+// Collaborated subpage
+app.get("/collaborated", async (req, res) => {
+	// Render
+	!req.session?.userID
+		? res.redirect("/login")
+		: next.render(req, res, "/views/article", {
+			Csession: req.session,
+			headerName: "Collaborated Articles",
+			articles: sort("views",
+				await Article
+					.find({})
+					.exec()
+					.then(v =>
+						v.filter(val =>
+							val.coAuthor.indexOf(req.session?.userID) > -1
+						)
+					)
+			)
+		})
+	});
