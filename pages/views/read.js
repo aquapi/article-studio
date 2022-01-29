@@ -6,9 +6,9 @@ const detailStyle = {
 }
 
 /**
- * @param {{name: string, admin_button: string, content: string, views: number, author: string, tag: string, votes: number}}
+ * @param {{name: string, admin_button: string, content: string, views: number, author: string, tag: string, votes: number, coAuthor: string[]}}
  */
-export default ({ name, content, views, author, tag, votes, user }) => (
+export default ({ name, content, views, author, tag, votes, user, coAuthor }) => (
     <>
         <Head name={name} />
         {/*Data*/}
@@ -34,13 +34,13 @@ export default ({ name, content, views, author, tag, votes, user }) => (
                 <option id="xcode">XCode</option>
             </select>
             <button style={
-                {display: user === author ? 'block' : 'none'}
+                {display: user === author || coAuthor.indexOf(user) > -1 ? 'block' : 'none'}
             } id="edit">Edit</button>
             <button style={
-                {display: user === author ? 'block' : 'none'}
+                {display: user === author || coAuthor.indexOf(user) > -1 ? 'block' : 'none'}
             } id="del">Delete</button>
             <button id="vote" style={
-                {display: user === author ? 'none' : 'block'}
+                {display: user === author || coAuthor.indexOf(user) > -1 ? 'none' : 'block'}
             }>Vote</button>
         </div>
         {/*Content and article data*/}
@@ -71,6 +71,7 @@ export const getServerSideProps = async (context) => ({
         author: context.query.author,
         tag: context.query.tag,
         votes: context.query.votes,
-        user: context.query.user
+        user: context.query.user,
+        coAuthor: context.query.coAuthor
     }
 });
