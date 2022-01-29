@@ -1,5 +1,21 @@
 import app from "../../loaders/express.mjs";
 import Article from "../../models/article.mjs";
+import User from "../../models/user.mjs";
+
+/**
+ * @param {string[]} list 
+ */
+async function check(list) {
+    for (const i of list) {
+        if (
+            !await User.findOne({
+                username: i
+            })
+        )
+            return false;
+    }
+    return true;
+}
 
 app.post("/coauths/save/:name", async (req, res) => {
     const r = await Article.findOne({
@@ -7,8 +23,11 @@ app.post("/coauths/save/:name", async (req, res) => {
     });
 
     // Check whether user is the author
-    if (r.user === req.session?.userID) {
-        const query = await Article.replaceOne(r, {
+    if (
+        r.user === req.session?.userID 
+        && await check(req.body?.coAuthor)
+    ) {
+        await Article.replaceOne(r, {
             user: r.user,
             name: r.name,
             content: r.content,
