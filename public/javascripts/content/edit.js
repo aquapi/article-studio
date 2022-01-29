@@ -28,6 +28,10 @@ async function main() {
         });
     });
 
+    document.querySelector("#co-auths").addEventListener("click", () => 
+        location.href = "/coauths/" + encodeURIComponent(document.querySelector("title").innerHTML)
+    );
+
     /* Key combining */
     document.addEventListener("keydown", e => {
         if (e.ctrlKey) {
