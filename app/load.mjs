@@ -54,5 +54,11 @@ import './routes/process/signup.mjs';
 // Delete process
 import './routes/process/delete.mjs';
 
+// Co-auth display
+import './routes/render/coauth.mjs';
+
+// Co-auth logic
+import './routes/process/coauth.mjs';
+
 // 404 Error
 import './routes/error/404.mjs';

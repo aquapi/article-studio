@@ -28,7 +28,8 @@ app.post("/process", async (req, res) => {
             views: 0,
             tag: req.body.tag,
             votes: 0,
-            private: false
+            private: false,
+            coAuthor: []
         }).save();
         // 200 OK
         res.writeHead(200);
@@ -36,7 +37,6 @@ app.post("/process", async (req, res) => {
     // End the response
     res.end();
 });
-
 
 // Save changes of articles
 app.post("/article/save", async (req, res) => {
@@ -46,10 +46,9 @@ app.post("/article/save", async (req, res) => {
     // Find the article with corresponding user
     const r = await Article.findOne({
         name: req.body?.name ?? "",
-        user: req.session?.userID ?? ""
     }).exec();
-    // Check whether the target article is found
-    if (!r) {
+    // Check whether user is the author or co-author
+    if (r.user !== req.session?.userID && r.coAuthor.indexOf(req.session?.userID) < 0) {
         // 401 Unauthorized
         res.writeHead(401);
         // End the request
@@ -67,7 +66,8 @@ app.post("/article/save", async (req, res) => {
         views: r.views,
         tag: r.tag ?? "",
         votes: r.votes,
-        private: req.body?.private ?? (r.private ?? false)
+        private: req.body?.private ?? (r.private ?? false),
+        coAuthor: req.body?.coAuthor ?? (r.coAuthor ?? [])
     }).exec();
     // 200 OK
     res.writeHead(200);

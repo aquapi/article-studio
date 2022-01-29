@@ -12,6 +12,7 @@ const Article = mongoose.model("Site",
         tag: String,
         votes: Number,
         private: Boolean,
+        coAuthor: [String],
     })
 );
 

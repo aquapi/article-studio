@@ -6,12 +6,12 @@ import Article from "../../models/article.mjs";
 // https://localhost/article/edit
 app.get("/article/edit/:name", async (req, res) => {
     // Get data
-    const { display_img, content, user, private: prv } = await Article.findOne({
-        name: req.params?.name ?? "",
-        user: req.session?.userID ?? ""
+    const { display_img, content, user, private: prv, coAuthor } = await Article.findOne({
+        name: req.params?.name ?? ""
     }).exec() ?? {};
     // Check whether the current user is the author
-    return user
+    return user === req.session?.userID
+        || coAuthor.indexOf(req.session?.userID) > -1
         // Render the page
         ? next.render(req, res, "/views/edit", {
             name: req.params?.name,
@@ -19,7 +19,8 @@ app.get("/article/edit/:name", async (req, res) => {
                 ? display_img 
                 : "Display image url",
             md_content: content ?? "",
-            isPrivate: prv
+            isPrivate: prv,
+            isCoAuthor: coAuthor.indexOf(req.session?.userID) > -1
         })
         // Redirect to login page
         : res.redirect("/login");

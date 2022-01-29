@@ -14,7 +14,7 @@ app.get("/reader/:name", async (req, res) => {
         return;
     }
     // If another user visits the read site 
-    if (r.user !== userID)
+    if (r.user !== userID || r.coAuthor.indexOf(userID) > -1)
         await Article.replaceOne(r, {
             user: r.user,
             name: r.name,
@@ -23,7 +23,9 @@ app.get("/reader/:name", async (req, res) => {
             description: r.description,
             views: r.views + 1,
             tag: r.tag,
-            votes: r.votes
+            votes: r.votes,
+            private: r.private ?? false,
+            coAuthor: r.coAuthor
         });
     // Render
     return next.render(req, res, "/views/read", {
@@ -33,6 +35,7 @@ app.get("/reader/:name", async (req, res) => {
         author: r.user,
         tag: r.tag,
         votes: r.votes,
-        user: req.session?.userID ?? ""
+        user: req.session?.userID ?? "",
+        coAuthor: r.coAuthor
     });
 });
