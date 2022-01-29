@@ -6,12 +6,12 @@ import Head from "../components/headers/coauth";
 export default ({ coAuthors, name }) => (
     <>
         <Head name={name} />
-        <h2>Co-authors of {name}</h2>
+        <h2>Co-authors</h2>
         <form>
-            <input placeholder="Invite a co-author" />
-            <input type="submit" />
+            <input placeholder="Invite a co-author" required={true} />
+            <button type="submit">+</button>
         </form>
-        <ul>{coAuthors.map(author => author ? <li>{author}</li> : <></>)}</ul>
+        <ul>{coAuthors.map(author => author ? <li><span>{author}</span><button class="remove">-</button></li> : <></>)}</ul>
         <script src="/javascripts/content/coauth.js"></script>
     </>
 );
