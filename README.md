@@ -17,9 +17,9 @@
     + Search
     + Sign up, log in
     + Private articles 
+    + Co-authors
 - In progress:
     + Refractoring (Always)
-    + Co-authors
     + Transfer Ownership
     + Discuss will only open if author is online
 
