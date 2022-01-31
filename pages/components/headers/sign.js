@@ -15,7 +15,7 @@ export default ({ page }) => (
         <link href={`https://fonts.googleapis.com/css2?family=Lora&family=Oxygen:wght@300&display=swap`} rel="stylesheet" />
         <link href={`https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap`} rel="stylesheet" />
         <title>{page}</title>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.25.0/axios.min.js" integrity="sha512-/Q6t3CASm04EliI1QyIDAA/nDo9R8FQ/BULoUFyN4n/BDdyIxeH7u++Z+eobdmr11gG5D/6nPFyDlnisDwhpYA==" crossOrigin="anonymous" referrerPolicy="no-referrer"></script>
+        <script src="/lib/axios.min.js"></script>
         {/* Stylesheet */}
         <link rel="stylesheet" href="/stylesheets/sign/main.css" />
     </Head>

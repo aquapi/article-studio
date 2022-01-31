@@ -9,6 +9,6 @@ export default ({ name }) => (
         {/*Stylesheet*/}
         <link rel="stylesheet" href="/stylesheets/coauth/main.css" />
         {/*Axios*/}
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="/lib/axios.min.js"></script>
     </Head>
 )

@@ -13,7 +13,7 @@ export default () => (
         <title>Create new article</title>
         {/*Stylesheet*/}
         <link rel="stylesheet" href="/stylesheets/create/main.css" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.25.0/axios.min.js" integrity="sha512-/Q6t3CASm04EliI1QyIDAA/nDo9R8FQ/BULoUFyN4n/BDdyIxeH7u++Z+eobdmr11gG5D/6nPFyDlnisDwhpYA==" crossOrigin="anonymous" referrerPolicy="no-referrer"></script>
+        <script src="/lib/axios.min.js"></script>
     </Head>
 );
 

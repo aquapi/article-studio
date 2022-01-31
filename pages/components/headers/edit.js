@@ -14,15 +14,13 @@ export default ({ name }) => (
         {/*Stylesheet*/}
         <link rel="stylesheet" href="/stylesheets/edit/main.css" />
         {/*Showdown.js*/}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"
-            integrity="sha512-L03kznCrNOfVxOUovR6ESfCz9Gfny7gihUX/huVbQB9zjODtYpxaVtIaAkpetoiyV2eqWbvxMH9fiSv5enX7bw=="
-            crossOrigin="anonymous" referrerPolicy="no-referrer"></script>
+        <script src="/lib/showdown.min.js"></script>
         {/*Axios*/}
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="/lib/axios.min.js"></script>
         {/*Highlight*/}
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/vs2015.min.css" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+        <script src="/lib/highlight.min.js"></script>
     </Head>
 )
 
