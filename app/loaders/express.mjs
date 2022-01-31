@@ -33,9 +33,6 @@ app.use(express.text({ limit: '200mb' }));
 // cookie parser middleware
 app.use(cookieParser());
 
-// Static root
-app.use(express.static(path.resolve()));
-
 // Use session middleware
 app.use(
     session({
