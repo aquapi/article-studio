@@ -2,7 +2,6 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import session from "express-session";
 import { config } from "dotenv";
-import * as path from "path";
 import createMemoryStore from "memorystore";
 import hpp from "hpp";
 import passport from "passport";

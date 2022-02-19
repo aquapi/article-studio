@@ -13,6 +13,8 @@ const next = Next({
         modern: true,
         experimental: {
             esmExternals: true,
+        },
+        compiler: {
             styledComponents: true,
         },
         useFileSystemPublicRoutes: false,
