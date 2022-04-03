@@ -3,6 +3,6 @@ node_modules
 .env
 bin/sync.sh
 bin/sync.bat
-ssl/*.pem
+ssl
 .next
-ecosystem.config.js
+yarn.lock
