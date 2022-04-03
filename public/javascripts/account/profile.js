@@ -1,5 +1,5 @@
 document.getElementById("back").addEventListener("click", () => 
-    location.replace(sessionStorage.getItem("prevLocation") ? sessionStorage.getItem("prevLocation") : "/article")
+    location.href = sessionStorage.getItem("prevLocation") ? sessionStorage.getItem("prevLocation") : "/article"
 );
 
 // Delete profile

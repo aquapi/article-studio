@@ -56,17 +56,17 @@ hljs.highlightAll();
 
 // Event listeners
 document.getElementById("back").addEventListener("click", () =>
-    location.replace(sessionStorage.getItem("prevLocation") ? sessionStorage.getItem("prevLocation") : "/article")
+    location.href = sessionStorage.getItem("prevLocation") ? sessionStorage.getItem("prevLocation") : "/article"
 );
 
 // Discuss
 document.getElementById("discuss_redirect").addEventListener("click", () => 
-    location.replace(`/discuss/${encodeURIComponent(data.item(0).innerHTML)}`)
+    location.href = `/discuss/${encodeURIComponent(data.item(0).innerHTML)}`
 );
 
 // Edit articles
 document.getElementById("edit").addEventListener("click", () => 
-    location.replace(`/article/edit/${encodeURIComponent(data.item(0).innerHTML)}`)
+    location.href = `/article/edit/${encodeURIComponent(data.item(0).innerHTML)}`
 );
 
 // Delete article
@@ -77,7 +77,7 @@ document.getElementById("del").addEventListener("click", async () => {
             name: delName
         }).then(
             () =>
-                location.replace(`/article`)
+                location.href = `/article`
         );
 });
 

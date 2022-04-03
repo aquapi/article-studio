@@ -23,7 +23,7 @@ h2 {
 }
 
 h6 {
-  font-family: Oxygen, sans-serif;
+  font-family: 'Oxygen', san-serif;
   color: rgba(255, 255, 255, 0.63);
   font-weight: 300;
   font-size: 12px;
@@ -32,7 +32,7 @@ h6 {
 
 h1 {
   color: white;
-  font-family: Lora, sans-serif;
+  font-family: 'Lora', serif;
   font-weight: 300;
 }
 

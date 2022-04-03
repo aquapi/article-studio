@@ -1,5 +1,5 @@
 document.getElementById("back").addEventListener("click", () =>
-    location.replace(sessionStorage.getItem("prevLocation") ? sessionStorage.getItem("prevLocation") : "/article")
+    location.href = sessionStorage.getItem("prevLocation") ? sessionStorage.getItem("prevLocation") : "/article"
 );
 
 document.querySelector("form").addEventListener("submit", async e => {
@@ -17,7 +17,7 @@ document.querySelector("form").addEventListener("submit", async e => {
         // Alert duplicate error
         ? alert("Another article has the same name as yours, please choose another name")
         // Else go to edit
-        : location.replace("/article/edit/" + encodeURIComponent(
+        : location.href = "/article/edit/" + encodeURIComponent(
             document.querySelector("input[name='name']").value
-        ));
+        );
 })

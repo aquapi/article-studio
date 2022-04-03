@@ -48,4 +48,4 @@ socket.on('chat message', (msg, textAlign, user) => {
 
 // Event listeners
 document.getElementById("refress").addEventListener("click", () => location.reload());
-document.getElementById("back").addEventListener("click", () => location.replace(`/reader/${encodeURIComponent(data.item(1).innerHTML)}`));
+document.getElementById("back").addEventListener("click", () => location.href = `/reader/${encodeURIComponent(data.item(1).innerHTML)}`);

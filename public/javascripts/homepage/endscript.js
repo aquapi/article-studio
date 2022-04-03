@@ -1,6 +1,6 @@
 // Create article button listener
 document.querySelector("#new").addEventListener("click", () =>
-    location.replace("/article/new")
+    location.href = "/article/new"
 );
 
 // Set hover status

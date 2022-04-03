@@ -1,5 +1,5 @@
 document.getElementById("back").addEventListener("click", () =>
-    location.replace(sessionStorage.getItem("prevLocation") ? sessionStorage.getItem("prevLocation") : "/article")
+    location.href = sessionStorage.getItem("prevLocation") ? sessionStorage.getItem("prevLocation") : "/article"
 );
 
 document.querySelector("form").addEventListener("submit", async e => {
@@ -16,5 +16,5 @@ document.querySelector("form").addEventListener("submit", async e => {
         // Failed
         ? alert("Cannot sign up or log in")
         // Go to previous location
-        : location.replace(sessionStorage.getItem("prevLocation"));
+        : location.href = sessionStorage.getItem("prevLocation");
 });

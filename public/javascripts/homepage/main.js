@@ -3,7 +3,7 @@ if (
     && sessionStorage.getItem("prevLocation") !== location.pathname 
     && document.referrer.slice(document.referrer.lastIndexOf("/")) !== sessionStorage.getItem("prevLocation")
 ) {
-    location.replace(sessionStorage.getItem("prevLocation"));
+    location.href = sessionStorage.getItem("prevLocation");
 }
 
 // Set location
@@ -100,7 +100,7 @@ $(() => {
 
 // Login button
 document.querySelector("#login").addEventListener("click", () => {
-    location.replace("/login");
+    location.href = "/login";
     sessionStorage.setItem("prevLocation", location.pathname);
 });
 
