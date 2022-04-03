@@ -6,6 +6,7 @@ import parse from "html-react-parser";
 import SelectTheme from "../components/read/SelectTheme";
 import converter from "../../src/utils/converter.mjs";
 import ArticleContent from "../components/read/ArticleContent";
+import axios from "axios";
 
 const detailStyle = {
     fontSize: '12px !important',

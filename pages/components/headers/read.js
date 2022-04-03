@@ -17,14 +17,6 @@ export default ({ name }) => (
         <link rel="icon" href="/icon/Article.ico" />
         {/*Stylesheet*/}
         <link rel="stylesheet" href="/stylesheets/read/main.css" />
-        {/*Axios*/}
-        <script src="/lib/axios.min.js"></script>
-        {/*Highlight*/}
-        <script src="/lib/highlight.min.js"></script>
-        {/*Socket*/}
-        <script src="/socket.io/socket.io.js"></script>
-        {/*Showdown.js*/}
-        <script src="/lib/showdown.min.js"></script>
     </Head>
 );
 
