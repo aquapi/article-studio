@@ -6,9 +6,6 @@
 export default socket => (
     (msg, userID, CurrentUser) => {
         // Send data to another user
-        socket.broadcast.emit('chat message', msg, "left", CurrentUser ?? "User" + userID);
-
-        // Send data to current user
-        socket.emit('chat message', msg, "right", "Me");
+        socket.broadcast.emit('chat', msg, CurrentUser ?? "User" + userID);
     } 
 ); 
