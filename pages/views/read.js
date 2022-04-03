@@ -1,4 +1,11 @@
 import Head from "../components/headers/read";
+import io from "socket.io-client";
+import { useState, useEffect } from "react";
+import hljs from "highlight.js";
+import parse from "html-react-parser";
+import SelectTheme from "../components/read/SelectTheme";
+import converter from "../../src/utils/converter.mjs";
+import ArticleContent from "../components/read/ArticleContent";
 
 const detailStyle = {
     fontSize: '12px !important',
@@ -8,60 +15,130 @@ const detailStyle = {
 /**
  * @param {{name: string, admin_button: string, content: string, views: number, author: string, tag: string, votes: number, coAuthor: string[]}}
  */
-export default ({ name, content, views, author, tag, votes, user, coAuthor }) => (
-    <>
+export default ({ name, content, views, author, tag, votes, user, coAuthor }) => {
+    // Socket
+    const socket = io("/read");
+
+    // Vote action
+    const vote = () => (
+        // Change the vote detail
+        document.getElementById("votesDetail").innerHTML = "Votes: " + (
+            Number(
+                document.getElementById("votesDetail").innerHTML
+                    .replaceAll("Votes: ", "")
+            ) + 1
+        ), 
+        // Emit vote event
+        socket.emit("vote",
+            user,
+            document.getElementById("authorDetail").innerHTML
+                .replaceAll("Author: ", ""),
+            name
+        )
+    );
+
+    // HTML Decoder
+    const htmlDecode = input =>
+        new DOMParser().parseFromString(input, "text/html").documentElement.textContent;
+
+    // Converted data
+    const [currentContent, setContent] = useState(null);
+
+    // When page loaded
+    useEffect(() => {
+        setContent(
+            // Style sheet link
+            "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/"
+            + document.querySelector("select").options.item(
+                Number(localStorage.getItem("favTheme") ?? "0")
+            ).id
+            + ".min.css'>"
+            // Convert to HTML
+            + converter.makeHtml(htmlDecode(content)))
+
+        // Highlight all code
+        hljs.highlightAll();
+    }, []);
+
+    // Change content
+    /**
+     * @type {React.ChangeEventHandler<HTMLSelectElement>}
+     */
+    const selectListener = event => {
+        setContent(
+            // Style
+            "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/"
+            + event.target.options.item(
+                event.target.options.selectedIndex >= 0
+                    ? event.target.options.selectedIndex
+                    : 0
+            ).id
+            + ".min.css'>"
+            // Convert to HTML
+            + converter.makeHtml(htmlDecode(content))
+        );
+
+        // Save to localStorage
+        localStorage.setItem("favTheme",
+            event.target.options.selectedIndex >= 0
+                ? event.target.options.selectedIndex
+                : 0
+        )
+
+        // Highlight all code 
+        hljs.highlightAll();
+    };
+
+    const isAuthor = user === author || coAuthor.indexOf(user) > -1;
+    const contentData = {
+        detailStyle, 
+        currentContent: currentContent ? parse(currentContent) : "", 
+        views,
+        author,
+        tag,
+        votes
+    };
+
+    return <>
         <Head name={name} />
-        {/*Data*/}
-        <span>{name}</span>
-        <span>{content}</span>
-        <span>{user}</span>
         {/*Navbar*/}
         <div id="buttons">
-            <button id="back">Back</button><br />
-            <button id="discuss_redirect">Discuss</button><br />
+            {/*Go back*/}
+            <button onClick={
+                // Change location
+                () => location.href =
+                    sessionStorage.getItem("prevLocation") ?? "/article"
+            }>Back</button><br />
+            {/*Discuss*/}
+            <button onClick={
+                () => location.href =
+                    `/discuss/${encodeURIComponent(name)}`
+            }>Discuss</button><br />
+            {/*Theme changer*/}
             <label htmlFor="theme-changer">Theme</label>
-            <select id="theme-changer">
-                <option id="base16/ocean">Default</option>
-                <option id="vs2015">VS Dark</option>
-                <option id="vs">VS Light</option>
-                <option id="github">Github</option>
-                <option id="idea">ItelliJ IDEA</option>
-                <option id="androidstudio">Android Studio</option>
-                <option id="atom-one-dark">Atom Dark</option>
-                <option id="atom-one-light">Atom Light</option>
-                <option id="stackoverflow-dark">Stackoverflow Dark</option>
-                <option id="stackoverflow-light">Stackoverflow Light</option>
-                <option id="xcode">XCode</option>
-            </select>
-            <button style={
-                {display: user === author || coAuthor.indexOf(user) > -1 ? 'block' : 'none'}
-            } id="edit">Edit</button>
-            <button style={
-                {display: user === author || coAuthor.indexOf(user) > -1 ? 'block' : 'none'}
-            } id="del">Delete</button>
-            <button id="vote" style={
-                {display: user === author || coAuthor.indexOf(user) > -1 ? 'none' : 'block'}
-            }>Vote</button>
+            <SelectTheme onChange={selectListener} />
+            {/*Edit*/}
+            <button style={{ display: isAuthor ? 'block' : 'none' }} onClick={
+                () => location.href =
+                    `/article/edit/${encodeURIComponent(name)}`
+            }>Edit</button>
+            {/*Delete*/}
+            <button style={{ display: isAuthor ? 'block' : 'none' }} onClick={
+                async () => {
+                    // Delete the current article
+                    if (confirm("Confirm delete?")) {
+                        await axios.post("/article/delete", { name });
+                        location.href = `/article`;
+                    }
+                }
+            }>Delete</button>
+            {/*Vote*/}
+            <button style={{ display: isAuthor ? 'none' : 'block' }} onClick={vote}>Vote</button>
         </div>
         {/*Content and article data*/}
-        <div
-            style={{
-                display: 'flex', flexDirection: 'column', justifyContent: 'center',
-                alignItems: 'left', padding: '20px', borderLeft: '2px solid #222',
-                borderRight: '2px solid #222', marginTop: '30px'
-            }}>
-            {/*Article*/}
-            <div id="content"></div>
-            {/*Article data*/}
-            <div style={detailStyle} id="viewsDetail"> Views: {views} </div>
-            <div style={detailStyle} id="authorDetail">Author: {author}</div>
-            <div style={detailStyle} id="tagDetail">Tag: {tag}</div>
-            <div style={detailStyle} id="votesDetail">Votes: {votes}</div>
-        </div>
-        <script type="text/javascript" src="/javascripts/getData.js"></script>
-        <script src="/javascripts/content/read.js"></script>
-    </>
-);
+        <ArticleContent {...contentData} />
+    </>;
+};
 
 export const getServerSideProps = async (context) => ({
     props: {
