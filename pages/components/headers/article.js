@@ -6,15 +6,10 @@ export default () => (
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="\lib\fontawesome\css\all.min.css" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="icon" href="/icon/Article.ico" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-        <link href={`https://fonts.googleapis.com/css2?family=Arvo&family=Merriweather:wght@300&display=swap`}
-            rel="stylesheet" />
-        <link href={`https://fonts.googleapis.com/css2?family=Lora&family=Oxygen:wght@300&display=swap`} rel="stylesheet" />
-        <link href={`https://fonts.googleapis.com/css2?family=Arvo&display=swap`} rel="stylesheet" />
-        <link href={`https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap`} rel="stylesheet" />
-        <link href={`https://fonts.googleapis.com/css2?family=Lora&display=swap`} rel="stylesheet" />
+        <link href={`https://fonts.googleapis.com/css2?family=Arvo&family=Lora&family=Open+Sans:wght@300&family=Oxygen:wght@300&family=Source+Sans+Pro:wght@300&display=swap`} rel="stylesheet" />
         <script src="/lib/jquery.min.js"></script>
         <script src="/lib/jquery-ui.min.js"></script>
         {/*Stylesheets*/}
