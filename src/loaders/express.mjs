@@ -1,7 +1,7 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import session from "express-session";
-import { config } from "dotenv";
+import "dotenv/config";
 import createMemoryStore from "memorystore";
 import hpp from "hpp";
 import passport from "passport";
@@ -9,9 +9,6 @@ import fs from "fs";
 
 // Memory store
 const MemoryStore = createMemoryStore(session);
-
-// Load ENV
-config();
 
 // Init app
 const app = express()
@@ -56,6 +53,13 @@ const app = express()
 
     // Use hpp middleware
     .use(hpp())
+
+    // Next static
+    .use((req, res, next) => {
+        if (req.url.startsWith("/_next"))
+            res.send(fs.readFileSync(req.url.replace("/_next", "./.next")));
+        next();
+    })
 
     // Blocking others from seeing this app is running
     .disable('x-powered-by');
