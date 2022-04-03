@@ -1,0 +1,25 @@
+@import "./wrapper.css";
+@import "./buttons.css";
+@import "./form.css";
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Oxygen', sans-serif !important;
+    letter-spacing: 0.5px !important; 
+    background-color: #333; 
+    overflow: hidden;
+}
+
+h3 {
+    font-family: "Lora", sans-serif;
+    font-weight: 400;
+}
+
+hr {
+    margin-bottom: 20px;
+}

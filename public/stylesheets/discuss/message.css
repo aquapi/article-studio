@@ -1,0 +1,23 @@
+#messages {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#messages > li {
+  padding: 0.5rem 1rem;
+}
+
+#messages > li > div.username {
+  font-size: 9px;
+  color: grey;
+}
+ 
+p {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+#messages > li:nth-child(odd) {
+  background: #efefef;
+}

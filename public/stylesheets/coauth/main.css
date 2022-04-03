@@ -1,0 +1,80 @@
+body {
+    background-color: #555;
+    font-family: Corbel;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-size: cover;
+}
+
+#__next {
+    color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+}
+
+h2 {
+    align-self: center;
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+    margin-top: 0px;
+    color: #555;
+    background-color: whitesmoke;
+}
+
+form {
+    display: flex;
+}
+
+input {
+    background-color: white;
+    border: none;
+    outline: none;
+    font-family: Corbel;
+    padding: 7px;
+    font-size: 15px;
+    height: 25.2px
+}
+
+button {
+    height: 100%;
+    border: none;
+    outline: none;
+    background-color: white;
+    height: 39.2px;
+    color: rgba(107, 107, 107, 0.3);
+}
+
+li {
+    border: none;
+    padding: 7px;
+    padding-right: 0px;
+    font-size: 15px;
+    height: 25.2px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.remove {
+    background-color: transparent;
+}
+
+li:nth-child(odd) {
+    background-color: rgba(107, 107, 107, 0.3);
+}
+
+h2 {
+    font-size: 20px;
+}
+
+button {
+    color: #555;
+}

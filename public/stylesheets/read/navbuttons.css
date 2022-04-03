@@ -1,0 +1,47 @@
+button {
+    padding: 18px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    color: white;
+    background-color: #333;
+    border: 0px;
+    font-family: "Oxygen", sans-serif;
+    cursor: pointer;
+    height: 52.8px;
+}
+
+button:hover {
+    background-color: #111;
+}
+
+#buttons {
+    background-color: #333;
+    display: flex;
+    height: 52.8px;
+}
+
+select {
+    color: white;
+    background-color: #333;
+    border: 0px;
+    font-family: "Oxygen", sans-serif;
+    text-align: center;
+    cursor: pointer;
+    max-width: 17.5px;
+    outline: none;
+}
+
+label {
+    padding: 18px;
+    padding-right: 5px;
+    background-color: #333;
+    color: white;
+}
+
+label:hover {
+    background-color: #111;
+}
+
+select:hover {
+    background-color: #111;
+}

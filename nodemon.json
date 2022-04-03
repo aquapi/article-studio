@@ -1,0 +1,11 @@
+{
+    "ignore": [
+        ".git",
+        "node_modules",
+        "public/javascripts/*",
+        "pages/*",
+        "next.config.mjs",
+        ".next/*"
+    ],
+    "ext": "mjs"
+}

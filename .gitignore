@@ -1,0 +1,8 @@
+package-lock.json
+node_modules
+.env
+bin/sync.sh
+bin/sync.bat
+ssl
+.next
+yarn.lock

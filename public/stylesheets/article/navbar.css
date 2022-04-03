@@ -1,0 +1,26 @@
+#nav {
+    display: flex;
+    height: 60px;
+    overflow-y: hidden;
+    justify-content: space-between;
+    font-family: Oxygen, sans-serif;
+    font-size: 12px;
+    align-items: center;
+    position: absolute;
+    z-index: 3;
+    width: 100%;
+    background-color: transparent;
+}
+
+/* Navbar buttons */
+.create {
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    cursor: pointer;
+    background-color: transparent;
+    color: white;
+}
