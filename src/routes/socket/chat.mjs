@@ -4,8 +4,8 @@
  */
 
 export default socket => (
-    (msg, userID, CurrentUser) => {
+    (msg, currentUser) => {
         // Send data to another user
-        socket.broadcast.emit('chat', msg, CurrentUser ?? "User" + userID);
+        socket.broadcast.emit('chat', msg, currentUser);
     } 
 ); 
