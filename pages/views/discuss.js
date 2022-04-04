@@ -1,7 +1,8 @@
 // @ts-check
 import Head from "../components/headers/discuss";
 import io from "socket.io-client";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import Messages from "../components/discuss/Messages";
 
 /**
  * @param {{name: string, user: string}} props
@@ -31,7 +32,7 @@ export default ({ name, user }) => {
                 }]
             );
         });
-        return () => socket 
+        return () => socket
             ? void socket.off()
             : null;
     }, [socket, messages]);
@@ -40,7 +41,7 @@ export default ({ name, user }) => {
     /**
      * @type {React.FormEventHandler<HTMLFormElement>} 
      */
-    const submitMessage = useCallback(e => {
+    const submitMessage = e => {
         if (!socket) return;
 
         const input = e.currentTarget.querySelector("input");
@@ -63,20 +64,12 @@ export default ({ name, user }) => {
          */
 
         socket.emit('chat message', input.value, user);
-    }, [socket, messages]);
+    };
 
     return <>
         <Head name={name} />
         {/*Messages will be here*/}
-        <ul id="messages">{
-            // Render error
-            messages.map(data =>
-                <li style={{ textAlign: data.textAlign }} key={Date.now()}>
-                    <p>{data.msg}</p>
-                    <div className="username">{data.user}</div>
-                </li>   
-            )
-        }</ul>
+        <Messages messages={messages} />
         {/*Send message form*/}
         <form id="form" onSubmit={submitMessage}>
             <input id="input" autoComplete="off" placeholder="Enter your message here" required={true} />
