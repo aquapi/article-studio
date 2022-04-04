@@ -30,9 +30,6 @@ import './routes/process/edit.mjs';
 // Article content
 import './routes/render/read.mjs';
 
-// Display discuss page
-import './routes/render/discuss.mjs';
-
 // Display login and signup page
 import './routes/render/login.mjs';
 
