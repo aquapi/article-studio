@@ -15,7 +15,6 @@ export default ({ page }) => (
         <link href={`https://fonts.googleapis.com/css2?family=Lora&family=Oxygen:wght@300&display=swap`} rel="stylesheet" />
         <link href={`https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap`} rel="stylesheet" />
         <title>{page}</title>
-        <script src="/lib/axios.min.js"></script>
         {/* Stylesheet */}
         <link rel="stylesheet" href="/stylesheets/sign/main.css" />
     </Head>
