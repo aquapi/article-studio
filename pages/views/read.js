@@ -110,19 +110,17 @@ export default ({ name, content, views, author, tag, votes, user, coAuthor }) =>
                 () => location.href =
                     sessionStorage.getItem("prevLocation") ?? "/article"
             }>Back</button><br />
-            {/*Discuss*/}
-            <button onClick={
-                () => location.href =
-                    `/discuss/${encodeURIComponent(name)}`
-            }>Discuss</button><br />
+
             {/*Theme changer*/}
             <label htmlFor="theme-changer">Theme</label>
             <SelectTheme onChange={selectListener} />
+
             {/*Edit*/}
             <button style={{ display: isAuthor ? 'block' : 'none' }} onClick={
                 () => location.href =
                     `/article/edit/${encodeURIComponent(name)}`
             }>Edit</button>
+
             {/*Delete*/}
             <button style={{ display: isAuthor ? 'block' : 'none' }} onClick={
                 async () => {
@@ -133,6 +131,7 @@ export default ({ name, content, views, author, tag, votes, user, coAuthor }) =>
                     }
                 }
             }>Delete</button>
+            
             {/*Vote*/}
             <button style={{ display: isAuthor ? 'none' : 'block' }} onClick={vote}>Vote</button>
         </div>
