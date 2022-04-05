@@ -13,6 +13,5 @@ export default () => (
         <title>Create new article</title>
         {/*Stylesheet*/}
         <link rel="stylesheet" href="/stylesheets/create/main.css" />
-        <script src="/lib/axios.min.js"></script>
     </Head>
 );
