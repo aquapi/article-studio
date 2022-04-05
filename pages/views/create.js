@@ -18,7 +18,4 @@ export default () => (
         </form>
         <script src="/javascripts/content/create.js"></script>
     </>
-)
-
-// Empty
-export const getServerSideProps = () => ({});
+);

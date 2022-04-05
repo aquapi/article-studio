@@ -19,6 +19,3 @@ export default ({ page }) => (
         <link rel="stylesheet" href="/stylesheets/sign/main.css" />
     </Head>
 );
-
-// Empty
-export const getServerSideProps = () => ({});

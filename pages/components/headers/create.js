@@ -16,6 +16,3 @@ export default () => (
         <script src="/lib/axios.min.js"></script>
     </Head>
 );
-
-// Empty
-export const getServerSideProps = () => ({});

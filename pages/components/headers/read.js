@@ -19,6 +19,3 @@ export default ({ name }) => (
         <link rel="stylesheet" href="/stylesheets/read/main.css" />
     </Head>
 );
-
-// Empty
-export const getServerSideProps = () => ({});

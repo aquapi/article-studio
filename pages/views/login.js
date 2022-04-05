@@ -49,6 +49,3 @@ export default () => {
         </form>
     </>;
 };
-
-// Empty
-export const getServerSideProps = () => ({});

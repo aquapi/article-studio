@@ -17,6 +17,3 @@ export default () => (
         <title>Articles</title>
     </Head>
 );
-
-// Empty
-export const getServerSideProps = () => ({});

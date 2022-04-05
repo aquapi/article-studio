@@ -2,7 +2,7 @@
  * @param {{data: {user: string, name: string, content: string, display_img: string, description: string, views: number, tag: string, votes: number}}}
  */
 
-export default ({ data }) => (
+export default ({ data = { user: "", name: "", content: "", display_img: "", description: "", views: 0, tag: "", votes: 0 } }) => (
     <div className="created">
         {/*Article name and tag*/}
         <div id={data.name} style={{ 
@@ -33,6 +33,3 @@ export default ({ data }) => (
         </div>
     </div>
 );
-
-// Empty
-export const getServerSideProps = () => ({});
