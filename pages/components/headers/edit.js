@@ -13,13 +13,5 @@ export default ({ name }) => (
         <title>{name}</title>
         {/*Stylesheet*/}
         <link rel="stylesheet" href="/stylesheets/edit/main.css" />
-        {/*Showdown.js*/}
-        <script src="/lib/showdown.min.js"></script>
-        {/*Axios*/}
-        <script src="/lib/axios.min.js"></script>
-        {/*Highlight*/}
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/vs2015.min.css" />
-        <script src="/lib/highlight.min.js"></script>
     </Head>
 );
