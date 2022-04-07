@@ -1,6 +1,7 @@
 // @ts-check
 import Head from "../components/headers/article";
 import Article from "../components/homepage/Article";
+import Categories from "../components/homepage/Categories";
 
 /**
  * @param {
@@ -84,16 +85,7 @@ export default ({ Csession, headerName: originalHeaderName, articles: originalAr
             <script type="text/javascript" src="/javascripts/getData.js"></script>
             <script src="/javascripts/homepage/main.js"></script>
             {/*Article collections links*/}
-            <div id="sort">
-                <div className="list" id="/article">Discover</div>
-                <div className="list" id="/mostvote">Most Voted</div>
-                {Csession ? <>
-                    <div className='list' id="/myarticle">My Articles</div>
-                    <div className='list' id="/otherarticle">Other Articles</div>
-                    <div className='list' id="/collaborated">Collaborated Articles</div>
-                </> : <></>}
-                <script src="/javascripts/homepage/collections.js"></script>
-            </div>
+            <Categories authorized={Csession} />
             {/*Header*/}
             <h2 style={{ fontFamily: 'Oxygen' }} id="header-name">{headerName}</h2>
             <hr style={{ width: '10%' }} />
