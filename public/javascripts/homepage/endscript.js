@@ -1,8 +1,3 @@
-// Create article button listener
-document.querySelector("#new").addEventListener("click", () =>
-    location.href = "/article/new"
-);
-
 // Set hover status
 document.getElementById(location.pathname).style.backgroundColor = "whitesmoke";
 document.getElementById(location.pathname).style.boxShadow = "none";

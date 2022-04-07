@@ -32,9 +32,29 @@ export default ({ Csession, headerName: originalHeaderName, articles: originalAr
                 <nav id="nav">
                     {/*Navbar buttons*/}
                     <div style={{ display: 'flex' }} id="nav_button">
-                        <div className="create" id="new">NEW</div>
-                        <div className="create" id="sign">SIGN UP</div>
-                        <div className="create" id="login">LOGIN</div>
+                        {Csession
+                            // New article
+                            ? <div
+                                className="create"
+                                id="new"
+                                onClick={
+                                    () => location.href = "/article/new"
+                                }>NEW</div>
+                            : <></>
+                        }
+                        <div className="create" id="sign">{Csession ? "PROFILE" : "SIGN UP"}</div>
+                        {!Csession
+                            ? <div
+                                className="create"
+                                id="login"
+                                onClick={
+                                    () => {
+                                        sessionStorage.setItem("prevLocation", location.pathname);
+                                        location.href = "/login";
+                                    }
+                                }>LOGIN</div>
+                            : <></>
+                        }
                     </div>
                     {/*Navbar search icon*/}
                     <div className="input">
@@ -82,7 +102,6 @@ export default ({ Csession, headerName: originalHeaderName, articles: originalAr
                 {articles.map(d => <Article data={d} key={d.name} />)}
             </div>
             {/*Scripts*/}
-            <script src="/javascripts/homepage/navbuttons.js"></script>
             <script src="/javascripts/homepage/endscript.js"></script>
         </>
     );
