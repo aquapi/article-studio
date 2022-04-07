@@ -3,7 +3,7 @@ import next from "../../loaders/next.mjs";
 import User from "../../models/user.mjs";
 
 // User's Profile
-app.get("/article/profile", async (req, res) =>
+app.get("/profile", async (req, res) =>
     next.render(req, res, "/views/profile", {
         name: req.session?.userID ?? "None",
         pass: await User.findOne({
