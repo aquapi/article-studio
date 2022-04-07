@@ -58,7 +58,7 @@ export default ({ Csession, headerName: originalHeaderName, articles: originalAr
 
     // Listeners
     const searchOnChange = e => {
-        const query = e.currentTarget.value;
+        const query = e?.currentTarget?.value ?? sessionStorage.getItem("search");
 
         if (!query || !query.replaceAll(" ", "")) {
             // Restore the original headers
@@ -69,7 +69,6 @@ export default ({ Csession, headerName: originalHeaderName, articles: originalAr
 
             // Remove fields of session storage
             sessionStorage.removeItem("search");
-            sessionStorage.removeItem("isSearching");
             return;
         };
 
@@ -77,25 +76,19 @@ export default ({ Csession, headerName: originalHeaderName, articles: originalAr
         setHeader("Search Result");
 
         // Count found articles
-        const result = [];
-
-        // Search the articles
-        for (const article of articles) {
-            // Search method
-            if (containAll(
-                [article.name, article.tag, article.votes, article.views, article.user].map(s => s.toString().toLowerCase()),
+        const result = JSON.parse(originalArticles).filter(article => 
+            containAll(
+                [article.name, article.tag, article.votes, article.views, article.user]
+                    .map(s => s.toString().toLowerCase()),
                 query.toLowerCase()
-            ))
-                result.push(article);
-        }
+            )
+        );
 
         // If articles match is more than 4
         setJustifyContent(result.length > 4 ? "flex-start" : "center");
 
         // Save search to sessionStorage
         sessionStorage.setItem("search", query);
-        // @ts-ignore
-        sessionStorage.setItem("isSearching", searchBarOpacity !== 0);
 
         // Set articles state
         setArticles(result);
@@ -115,12 +108,13 @@ export default ({ Csession, headerName: originalHeaderName, articles: originalAr
         sessionStorage.setItem("prevLocation", location.pathname);
 
         // If the user is searching
-        if (sessionStorage.getItem("isSearching")) {
+        if (sessionStorage.getItem("search")) {
             // Open the search bar
             setOpacity(1);
             setNavZIndex(3);
             // Set the value of search input
             setDefaultValue(sessionStorage.getItem("search"));
+            searchOnChange();
         }
 
         // Scroll to previous scroll
