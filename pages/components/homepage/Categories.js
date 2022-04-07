@@ -1,6 +1,21 @@
+import { useEffect, useState } from "react";
+
+/**
+ * @returns {Location}
+ */
+const useLocation = () => {
+    const [currentLocation, setLocation] = useState(null);
+    useEffect(() => {
+        setLocation(location);
+    }, []);
+    return currentLocation;
+}
+
 // @ts-check
-export default ({ authorized: Csession }) =>
-    <div id="sort">
+export default ({ authorized: Csession }) => {
+    const location = useLocation();
+
+    return <div id="sort">
         {(() => {
             /**
              * @type {React.MouseEventHandler<HTMLDivElement>}
@@ -55,8 +70,14 @@ export default ({ authorized: Csession }) =>
                             id={`/${urlName}`}
                             key={urlName}
                             onClick={collectionRedirect}
+                            // If current category is the page URL
+                            style={`/${urlName}` === location?.pathname ? {
+                                backgroundColor: "whitesmoke",
+                                boxShadow: "none"
+                            } : {}}
                         >{obj[urlName].header}</div>
                     );
             return result;
         })()}
-    </div>
+    </div>;
+}

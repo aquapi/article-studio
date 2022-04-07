@@ -19,16 +19,6 @@ function containAll(strs, str1) {
     return false;
 }
 
-// Set hover status
-document.getElementById(location.pathname).style.backgroundColor = "whitesmoke";
-document.getElementById(location.pathname).style.boxShadow = "none";
-
-// Set previous search
-if (sessionStorage.getItem("isSearching")) {
-    document.querySelector(".search-bar").style.display = "flex";
-    document.querySelector("input[type=text]").value = sessionStorage.getItem("search");
-}
-
 // Check whether user is signed in
 $("#sign").click(() => {
     // Check whether user is signed in

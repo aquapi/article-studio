@@ -39,7 +39,7 @@ input[type=text] {
     height: 100px;
     background-color: whitesmoke;
     overflow: hidden;
-    position: absolute;
+    position: fixed;
     justify-content: center;
     align-items: center;
     z-index: 4;

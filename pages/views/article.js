@@ -25,6 +25,7 @@ export default ({ Csession, headerName: originalHeaderName, articles: originalAr
     // States
     const [searchBarOpacity, setOpacity] = useState(0);
     const [navDisplay, setNavDisplay] = useState("flex");
+    const [defaultValueOfSearch, setDefaultValue] = useState("");
 
     // When page first load
     useEffect(() => {
@@ -38,6 +39,15 @@ export default ({ Csession, headerName: originalHeaderName, articles: originalAr
 
         // Set prev location
         sessionStorage.setItem("prevLocation", location.pathname);
+
+        // If the user is searching
+        if (sessionStorage.getItem("isSearching")) {
+            // Open the search bar
+            setOpacity(1);
+            setNavDisplay("hidden");
+            // Set the value of search input
+            setDefaultValue(sessionStorage.getItem("search"));
+        }
     }, []);
 
     return (
@@ -46,7 +56,11 @@ export default ({ Csession, headerName: originalHeaderName, articles: originalAr
             <div className="wait">
                 {/*Search bar*/}
                 <div className="search-bar" style={{ opacity: searchBarOpacity }}>
-                    <input type="text" placeholder="Search article name, tag, views, votes or author" />
+                    <input 
+                        type="text" 
+                        placeholder="Search article name, tag, views, votes or author" 
+                        defaultValue={defaultValueOfSearch} 
+                    />
                 </div>
                 {/*Navbar*/}
                 <Navbar authorized={Csession} setFade={() => {
