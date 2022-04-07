@@ -68,11 +68,6 @@ $("input[type=text]").keyup(() => {
 if (document.getElementsByClassName("created").length > 4)
     document.querySelector("#created-article").style["justify-content"] = "flex-start";
 
-// If images cannot load
-document.querySelectorAll("div > div > img").forEach(e =>
-    e.addEventListener("error", () => e.src = 'images/image-icon.jpg')
-)
-
 // Load page banner
 $(".wait").css("display", "block");
 
@@ -81,6 +76,3 @@ $("#created-article").css("display", 'flex');
 
 // Load body
 $("body").css("display", 'block');
-
-// Scroll to top
-document.documentElement.scrollTop = Number(sessionStorage.getItem("scroll"));

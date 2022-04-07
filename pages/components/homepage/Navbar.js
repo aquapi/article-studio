@@ -1,6 +1,6 @@
 // @ts-check
 export default ({ authorized: Csession, setFade, display }) =>
-    <nav id="nav" style={{ display }}>
+    <nav id="nav" style={{ zIndex: display }}>
         {/*Navbar buttons*/}
         <div style={{ display: 'flex' }} id="nav_button">
             {Csession

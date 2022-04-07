@@ -14,9 +14,16 @@ export default ({ data = { user: "", name: "", content: "", display_img: "", des
         }} className={data.tag + " " + data.user + " " + data.votes + " " + data.views}>
             {/*Display image*/}
             <img src={
-                data.display_img && data.display_img !== "undefined" && data.display_img !== "Display image url" ? 
+                data.display_img && data.display_img !== "Display image url" ? 
                     data.display_img : "images/image-icon.jpg"
-                } height="150px" width="276px" />
+                } 
+                height="150px" 
+                width="276px" 
+                onError={
+                    e => 
+                        e.currentTarget.src = 'images/image-icon.jpg'
+                }
+            />
             {/*Article name*/}
             <h3>{data.name.length <= 21 ? data.name : data.name.slice(0, 21) + "..."}</h3>
             {/*Article description*/}

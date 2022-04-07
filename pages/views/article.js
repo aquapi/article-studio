@@ -24,7 +24,7 @@ export default ({ Csession, headerName: originalHeaderName, articles: originalAr
 
     // States
     const [searchBarOpacity, setOpacity] = useState(0);
-    const [navDisplay, setNavDisplay] = useState("flex");
+    const [navZIndex, setNavZIndex] = useState(5);
     const [defaultValueOfSearch, setDefaultValue] = useState("");
 
     // When page first load
@@ -34,7 +34,7 @@ export default ({ Csession, headerName: originalHeaderName, articles: originalAr
             sessionStorage.getItem("prevLocation")
             && sessionStorage.getItem("prevLocation") !== location.pathname
             && document.referrer.slice(document.referrer.lastIndexOf("/")) !== sessionStorage.getItem("prevLocation")
-        ) 
+        )
             location.href = sessionStorage.getItem("prevLocation");
 
         // Set prev location
@@ -44,10 +44,13 @@ export default ({ Csession, headerName: originalHeaderName, articles: originalAr
         if (sessionStorage.getItem("isSearching")) {
             // Open the search bar
             setOpacity(1);
-            setNavDisplay("hidden");
+            setNavZIndex(3);
             // Set the value of search input
             setDefaultValue(sessionStorage.getItem("search"));
         }
+
+        // Scroll to previous scroll
+        document.documentElement.scrollTop = Number(sessionStorage.getItem("scroll"));
     }, []);
 
     return (
@@ -56,21 +59,21 @@ export default ({ Csession, headerName: originalHeaderName, articles: originalAr
             <div className="wait">
                 {/*Search bar*/}
                 <div className="search-bar" style={{ opacity: searchBarOpacity }}>
-                    <input 
-                        type="text" 
-                        placeholder="Search article name, tag, views, votes or author" 
-                        defaultValue={defaultValueOfSearch} 
+                    <input
+                        type="text"
+                        placeholder="Search article name, tag, views, votes or author"
+                        defaultValue={defaultValueOfSearch}
                     />
                 </div>
                 {/*Navbar*/}
                 <Navbar authorized={Csession} setFade={() => {
                     setOpacity(1);
-                    setNavDisplay("hidden");
-                }} display={navDisplay} />
+                    setNavZIndex(3);
+                }} display={navZIndex} />
                 {/*Make the background darker*/}
                 <div id="inner" onClick={() => {
                     setOpacity(0);
-                    setNavDisplay("flex");
+                    setNavZIndex(5);
                 }}></div>
                 {/*Banner text*/}
                 <div id="banner-text">
