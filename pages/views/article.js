@@ -1,54 +1,98 @@
 // @ts-check
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Head from "../components/headers/article";
 import Article from "../components/homepage/Article";
 import Categories from "../components/homepage/Categories";
 import Navbar from "../components/homepage/Navbar";
 
+// Search
 /**
- * @param {
-    {
-        Csession: import("express-session").Session & Partial<import("express-session").SessionData>, 
-        headerName: string, 
-        articles: string
+ * @param {string} str 
+ * @param {string} str1 
+ */
+function contain(str, str1) {
+    let pos = 0;
+    for (let c of str1) {
+        if (!str.includes(c, pos))
+            return false;
+        pos++;
     }
-} props
+    return true;
+}
+
+/**
+ * @param {string[]} strs 
+ * @param {string} str1 
+ */
+function containAll(strs, str1) {
+    for (const str of strs)
+        if (contain(str, str1))
+            return true;
+    return false;
+}
+
+/**
+ * @param {{Csession: import("express-session").Session & Partial<import("express-session").SessionData>, headerName: string, articles: string}} props
  */
 
 export default ({ Csession, headerName: originalHeaderName, articles: originalArticles }) => {
-    /**
-     * @type {
-        [
-            {
-                user: string, 
-                name: string, 
-                content: string, 
-                display_img: string, 
-                description: string, 
-                views: number, 
-                tag: string, 
-                votes: number
-            }[], 
-            React.Dispatch<{
-                user: string, 
-                name: string, 
-                content: string, 
-                display_img: string, 
-                description: string, 
-                views: number, 
-                tag: string, 
-                votes: number
-            }>
-        ]
-    }
-     */
-    const [articles, setArticles] = useState(JSON.parse(originalArticles));
-    const [headerName, setHeader] = useState(originalHeaderName);
-
-    // States
+    // Search bar related states
     const [searchBarOpacity, setOpacity] = useState(0);
     const [navZIndex, setNavZIndex] = useState(5);
     const [defaultValueOfSearch, setDefaultValue] = useState("");
+
+    /**
+     * @type {[{user: string, name: string, content: string, display_img: string, description: string, views: number, tag: string, votes: number}[], React.Dispatch<{user: string, name: string, content: string, display_img: string, description: string, views: number, tag: string, votes: number}[]>]}
+     */
+    // Search algorithm related states
+    const [articles, setArticles] = useState(JSON.parse(originalArticles));
+    const [headerName, setHeader] = useState(originalHeaderName);
+    const [createArticleJustifyContent, setJustifyContent] = useState(
+        articles.length > 4
+        ? "flex-start"
+        : "center"
+    );
+
+    // Listeners
+    const searchOnKeyUp = e => {
+        const query = e.currentTarget.value;
+
+        if (!query) {
+            // Restore the original headers
+            if (headerName !== originalHeaderName)
+                setHeader(originalHeaderName);
+            if (articles.length < originalArticles.length)
+                setArticles(JSON.parse(originalArticles));
+            return;
+        };
+
+        // Set the header
+        setHeader("Search Result");
+
+        // Count found articles
+        const result = [];
+
+        // Search the articles
+        for (const article of articles) {
+            // Search method
+            if (containAll(
+                [article.name, article.tag, article.votes, article.views, article.user].map(s => s.toString().toLowerCase()),
+                query.toLowerCase()
+            ))
+                result.push(article);
+        }
+
+        // If articles match is more than 4
+        setJustifyContent(result.length > 4 ? "flex-start" : "center");
+
+        // Save search to sessionStorage
+        sessionStorage.setItem("search", query);
+        // @ts-ignore
+        sessionStorage.setItem("isSearching", searchBarOpacity !== 0);
+
+        // Set articles state
+        setArticles(result);
+    };
 
     // When page first load
     useEffect(() => {
@@ -86,6 +130,7 @@ export default ({ Csession, headerName: originalHeaderName, articles: originalAr
                         type="text"
                         placeholder="Search article name, tag, views, votes or author"
                         defaultValue={defaultValueOfSearch}
+                        onKeyUp={searchOnKeyUp}
                     />
                 </div>
                 {/*Navbar*/}
@@ -105,28 +150,20 @@ export default ({ Csession, headerName: originalHeaderName, articles: originalAr
                 </div>
                 <div className="banner"></div>
             </div>
-            {/*Data*/}
-            <span style={{ display: 'none' }}>{Csession}</span>
-            <span style={{ display: 'none' }}>{headerName}</span>
-            <script type="text/javascript" src="/javascripts/getData.js"></script>
             {/*Article collections links*/}
             <Categories authorized={Csession} />
             {/*Header*/}
             <h2 style={{ fontFamily: 'Oxygen' }} id="header-name">{headerName}</h2>
             <hr style={{ width: '10%' }} />
             {/*Created article*/}
-            <div 
-                id='created-article' 
-                style={{ 
-                    justifyContent: articles.length > 4 
-                        ? "flex-start" 
-                        : "center" 
+            <div
+                id='created-article'
+                style={{
+                    justifyContent: createArticleJustifyContent
                 }}
             >
                 {articles.map(d => <Article data={d} key={d.name} />)}
             </div>
-            {/*Scripts*/}
-            <script src="/javascripts/homepage/endscript.js"></script>
         </>
     );
 };
