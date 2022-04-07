@@ -3,7 +3,6 @@
 @import "./lists.css";
 @import "./searchbar.css";
 @import "./navbar.css";
-@import "./hover.css";
 
 html::-webkit-scrollbar {
   display: none;

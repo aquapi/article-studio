@@ -3,6 +3,7 @@ export default ({ authorized: Csession, setFade, display }) =>
     <nav id="nav" style={{ zIndex: display }}>
         {/*Navbar buttons*/}
         <div style={{ display: 'flex' }} id="nav_button">
+            {/*New article*/}
             {Csession
                 // New article
                 ? <div
@@ -13,7 +14,14 @@ export default ({ authorized: Csession, setFade, display }) =>
                     }>NEW</div>
                 : <></>
             }
-            <div className="create" id="sign">{Csession ? "PROFILE" : "SIGN UP"}</div>
+
+            {/*Sign up or profile*/}
+            <div className="create" id="sign" onClick={() => {
+                // Redirect to sign up page or profile page
+                location.href = Csession ? "/profile" : "/signup";
+            }}>{Csession ? "PROFILE" : "SIGN UP"}</div>
+
+            {/*Login*/}
             {!Csession
                 ? <div
                     className="create"

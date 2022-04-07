@@ -1,5 +1,5 @@
 // @ts-check
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Head from "../components/headers/article";
 import Article from "../components/homepage/Article";
 import Categories from "../components/homepage/Categories";
@@ -17,10 +17,33 @@ import Navbar from "../components/homepage/Navbar";
 
 export default ({ Csession, headerName: originalHeaderName, articles: originalArticles }) => {
     /**
-     * @type {{user: string, name: string, content: string, display_img: string, description: string, views: number, tag: string, votes: number}[]}
+     * @type {
+        [
+            {
+                user: string, 
+                name: string, 
+                content: string, 
+                display_img: string, 
+                description: string, 
+                views: number, 
+                tag: string, 
+                votes: number
+            }[], 
+            React.Dispatch<{
+                user: string, 
+                name: string, 
+                content: string, 
+                display_img: string, 
+                description: string, 
+                views: number, 
+                tag: string, 
+                votes: number
+            }>
+        ]
+    }
      */
-    const articles = JSON.parse(originalArticles);
-    const headerName = originalHeaderName;
+    const [articles, setArticles] = useState(JSON.parse(originalArticles));
+    const [headerName, setHeader] = useState(originalHeaderName);
 
     // States
     const [searchBarOpacity, setOpacity] = useState(0);
@@ -92,7 +115,14 @@ export default ({ Csession, headerName: originalHeaderName, articles: originalAr
             <h2 style={{ fontFamily: 'Oxygen' }} id="header-name">{headerName}</h2>
             <hr style={{ width: '10%' }} />
             {/*Created article*/}
-            <div id='created-article'>
+            <div 
+                id='created-article' 
+                style={{ 
+                    justifyContent: articles.length > 4 
+                        ? "flex-start" 
+                        : "center" 
+                }}
+            >
                 {articles.map(d => <Article data={d} key={d.name} />)}
             </div>
             {/*Scripts*/}

@@ -19,17 +19,6 @@ function containAll(strs, str1) {
     return false;
 }
 
-// Check whether user is signed in
-$("#sign").click(() => {
-    // Check whether user is signed in
-    data.item(0).innerHTML === "undefined"
-        || !data.item(0).innerHTML
-        // Go to /signup if click SIGNUP
-        ? location.replace('/signup')
-        // Go to /profile if click PROFILE
-        : location.replace('/article/profile');
-});
-
 // Search 
 $("input[type=text]").keyup(() => {
     document.querySelector("#header-name").innerHTML = $("input[type=text]").val() ? "Search Result" : data.item(1).innerHTML;
@@ -63,16 +52,3 @@ $("input[type=text]").keyup(() => {
     sessionStorage.setItem("search", $("input[type=text]").val());
     sessionStorage.setItem("isSearching", $("input[type=text]").val() && document.querySelector(".search-bar").style.display !== "none")
 });
-
-// If articles count larger than 4
-if (document.getElementsByClassName("created").length > 4)
-    document.querySelector("#created-article").style["justify-content"] = "flex-start";
-
-// Load page banner
-$(".wait").css("display", "block");
-
-// Load created article part
-$("#created-article").css("display", 'flex');
-
-// Load body
-$("body").css("display", 'block');
