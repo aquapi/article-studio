@@ -1,9 +1,12 @@
 // @ts-check
 import { useEffect, useState } from "react";
 import Head from "../components/headers/article";
-import Article from "../components/homepage/Article";
+import Articles from "../components/homepage/Articles";
+import Banner from "../components/homepage/Banner";
 import Categories from "../components/homepage/Categories";
+import Header from "../components/homepage/Header";
 import Navbar from "../components/homepage/Navbar";
+import SearchBar from "../components/homepage/SearchBar";
 
 // Search
 /**
@@ -54,15 +57,19 @@ export default ({ Csession, headerName: originalHeaderName, articles: originalAr
     );
 
     // Listeners
-    const searchOnKeyUp = e => {
+    const searchOnChange = e => {
         const query = e.currentTarget.value;
 
-        if (!query) {
+        if (!query || !query.replaceAll(" ", "")) {
             // Restore the original headers
             if (headerName !== originalHeaderName)
                 setHeader(originalHeaderName);
             if (articles.length < originalArticles.length)
                 setArticles(JSON.parse(originalArticles));
+
+            // Remove fields of session storage
+            sessionStorage.removeItem("search");
+            sessionStorage.removeItem("isSearching");
             return;
         };
 
@@ -123,47 +130,33 @@ export default ({ Csession, headerName: originalHeaderName, articles: originalAr
     return (
         <>
             <Head />
-            <div className="wait">
+            <div>
                 {/*Search bar*/}
-                <div className="search-bar" style={{ opacity: searchBarOpacity }}>
-                    <input
-                        type="text"
-                        placeholder="Search article name, tag, views, votes or author"
-                        defaultValue={defaultValueOfSearch}
-                        onKeyUp={searchOnKeyUp}
-                    />
-                </div>
+                <SearchBar opacity={searchBarOpacity} defaultValue={defaultValueOfSearch} onChange={searchOnChange} />
+
                 {/*Navbar*/}
                 <Navbar authorized={Csession} setFade={() => {
                     setOpacity(1);
                     setNavZIndex(3);
                 }} display={navZIndex} />
-                {/*Make the background darker*/}
+
+                {/*Make the background darker. When click hide the search bar*/}
                 <div id="inner" onClick={() => {
                     setOpacity(0);
                     setNavZIndex(5);
                 }}></div>
+
                 {/*Banner text*/}
-                <div id="banner-text">
-                    <h1>Article Studio</h1>
-                    <h6>A place for creating creative articles</h6>
-                </div>
-                <div className="banner"></div>
+                <Banner />
             </div>
             {/*Article collections links*/}
             <Categories authorized={Csession} />
+
             {/*Header*/}
-            <h2 style={{ fontFamily: 'Oxygen' }} id="header-name">{headerName}</h2>
-            <hr style={{ width: '10%' }} />
+            <Header headerName={headerName} />
+
             {/*Created article*/}
-            <div
-                id='created-article'
-                style={{
-                    justifyContent: createArticleJustifyContent
-                }}
-            >
-                {articles.map(d => <Article data={d} key={d.name} />)}
-            </div>
+            <Articles justifyContent={createArticleJustifyContent} articles={articles} />
         </>
     );
 };
