@@ -1,3 +1,24 @@
+// Search
+/**
+ * @param {string} str 
+ * @param {string} str1 
+ */
+ function contain(str, str1) {
+    let pos = 0;
+    for (let c of str1) {
+        if (!str.includes(c, pos)) return false;
+        pos++;
+    }
+    return true;
+}
+
+function containAll(strs, str1) {
+    for (const str of strs) 
+        if (contain(str, str1))
+            return true;
+    return false;
+}
+
 // Set hover status
 document.getElementById(location.pathname).style.backgroundColor = "whitesmoke";
 document.getElementById(location.pathname).style.boxShadow = "none";

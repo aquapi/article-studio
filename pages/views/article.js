@@ -1,5 +1,5 @@
 // @ts-check
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Head from "../components/headers/article";
 import Article from "../components/homepage/Article";
 import Categories from "../components/homepage/Categories";
@@ -26,17 +26,30 @@ export default ({ Csession, headerName: originalHeaderName, articles: originalAr
     const [searchBarOpacity, setOpacity] = useState(0);
     const [navDisplay, setNavDisplay] = useState("flex");
 
+    // When page first load
+    useEffect(() => {
+        // Redirect to previous location (article page) if exists
+        if (
+            sessionStorage.getItem("prevLocation")
+            && sessionStorage.getItem("prevLocation") !== location.pathname
+            && document.referrer.slice(document.referrer.lastIndexOf("/")) !== sessionStorage.getItem("prevLocation")
+        ) 
+            location.href = sessionStorage.getItem("prevLocation");
+
+        // Set prev location
+        sessionStorage.setItem("prevLocation", location.pathname);
+    }, []);
+
     return (
         <>
             <Head />
             <div className="wait">
-                <div id="hover-action"></div>
                 {/*Search bar*/}
                 <div className="search-bar" style={{ opacity: searchBarOpacity }}>
                     <input type="text" placeholder="Search article name, tag, views, votes or author" />
                 </div>
                 {/*Navbar*/}
-                <Navbar authorized={Csession} setFade={() => { 
+                <Navbar authorized={Csession} setFade={() => {
                     setOpacity(1);
                     setNavDisplay("hidden");
                 }} display={navDisplay} />
@@ -56,7 +69,6 @@ export default ({ Csession, headerName: originalHeaderName, articles: originalAr
             <span style={{ display: 'none' }}>{Csession}</span>
             <span style={{ display: 'none' }}>{headerName}</span>
             <script type="text/javascript" src="/javascripts/getData.js"></script>
-            <script src="/javascripts/homepage/main.js"></script>
             {/*Article collections links*/}
             <Categories authorized={Csession} />
             {/*Header*/}

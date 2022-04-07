@@ -13,7 +13,11 @@
 #banner-text {
   position: absolute;
   z-index: 1;
+  max-width: 20%;
   text-align: center;
+  top: 35%;
+  left: 40%;
+  right: 40%;
 }
 
 #inner {
