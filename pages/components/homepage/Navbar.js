@@ -1,6 +1,6 @@
 // @ts-check
-export default ({ authorized: Csession }) =>
-    <nav id="nav">
+export default ({ authorized: Csession, setFade, display }) =>
+    <nav id="nav" style={{ display }}>
         {/*Navbar buttons*/}
         <div style={{ display: 'flex' }} id="nav_button">
             {Csession
@@ -32,8 +32,9 @@ export default ({ authorized: Csession }) =>
             <button
                 style={{
                     margin: '0px', backgroundColor: 'transparent !important', borderColor: 'transparent',
-                    borderStyle: 'solid', borderWidth: '5px', height: '36px'
-                }}>
+                    borderStyle: 'solid', borderWidth: '5px', height: '36px', zIndex: 5
+                }}
+                onClick={setFade}>
                 <i className="fa fa-search" style={{
                     backgroundColor: 'transparent', color: 'white', fontSize: '16px'
                 }}></i>

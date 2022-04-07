@@ -1,4 +1,5 @@
 // @ts-check
+import { useState } from "react";
 import Head from "../components/headers/article";
 import Article from "../components/homepage/Article";
 import Categories from "../components/homepage/Categories";
@@ -21,19 +22,29 @@ export default ({ Csession, headerName: originalHeaderName, articles: originalAr
     const articles = JSON.parse(originalArticles);
     const headerName = originalHeaderName;
 
+    // States
+    const [searchBarOpacity, setOpacity] = useState(0);
+    const [navDisplay, setNavDisplay] = useState("flex");
+
     return (
         <>
             <Head />
             <div className="wait">
                 <div id="hover-action"></div>
                 {/*Search bar*/}
-                <div className="search-bar">
+                <div className="search-bar" style={{ opacity: searchBarOpacity }}>
                     <input type="text" placeholder="Search article name, tag, views, votes or author" />
                 </div>
                 {/*Navbar*/}
-                <Navbar authorized={Csession} />
+                <Navbar authorized={Csession} setFade={() => { 
+                    setOpacity(1);
+                    setNavDisplay("hidden");
+                }} display={navDisplay} />
                 {/*Make the background darker*/}
-                <div id="inner"></div>
+                <div id="inner" onClick={() => {
+                    setOpacity(0);
+                    setNavDisplay("flex");
+                }}></div>
                 {/*Banner text*/}
                 <div id="banner-text">
                     <h1>Article Studio</h1>

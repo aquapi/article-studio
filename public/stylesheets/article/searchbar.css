@@ -41,7 +41,7 @@ input[type=text] {
     overflow: hidden;
     position: absolute;
     justify-content: center;
-    position: fixed;
     align-items: center;
     z-index: 4;
+    transition: opacity 1s;
 }

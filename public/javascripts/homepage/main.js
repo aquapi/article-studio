@@ -9,9 +9,6 @@ if (
 // Set location
 sessionStorage.setItem("prevLocation", location.pathname);
 
-// Hide the search bar
-$(".search-bar").fadeOut(0);
-
 // Search
 /**
  * @param {string} str 
@@ -99,13 +96,13 @@ $(() => {
 });
 
 // Search bar fade in/out
-$(".input > button").click(() => {
-    $(".search-bar").fadeIn(600);
-});
+// $(".input > button").click(() => {
+//     $(".search-bar").fadeIn(600);
+// });
 
-$("#inner").click(() => {
-    $(".search-bar").fadeOut(600);
-});
+// $("#inner").click(() => {
+//     $(".search-bar").fadeOut(600);
+// });
 
 // Resize window
 initWidthHeight();
