@@ -1,12 +1,23 @@
+// @ts-check
 import Head from "../components/headers/article";
 import Article from "../components/homepage/Article";
 
 /**
- * @param {{Csession: import("express-session").Session & Partial<import("express-session").SessionData>, headerName: string, articles: {name: string, content: string, views: number, author: string, votes: number}[]}} 
+ * @param {
+    {
+        Csession: import("express-session").Session & Partial<import("express-session").SessionData>, 
+        headerName: string, 
+        articles: string
+    }
+} props
  */
 
-export default ({ Csession, headerName, articles }) => {
-    articles = JSON.parse(articles);
+export default ({ Csession, headerName: originalHeaderName, articles: originalArticles }) => {
+    /**
+     * @type {{user: string, name: string, content: string, display_img: string, description: string, views: number, tag: string, votes: number}[]}
+     */
+    const articles = JSON.parse(originalArticles);
+    const headerName = originalHeaderName;
 
     return (
         <>
@@ -50,7 +61,6 @@ export default ({ Csession, headerName, articles }) => {
             {/*Data*/}
             <span style={{ display: 'none' }}>{Csession}</span>
             <span style={{ display: 'none' }}>{headerName}</span>
-            <span style={{ display: 'none' }}>{JSON.stringify(articles.map(d => d.name))}</span>
             <script type="text/javascript" src="/javascripts/getData.js"></script>
             <script src="/javascripts/homepage/main.js"></script>
             {/*Article collections links*/}
@@ -72,14 +82,13 @@ export default ({ Csession, headerName, articles }) => {
                 {articles.map(d => <Article data={d} key={d.name} />)}
             </div>
             {/*Scripts*/}
-            <script src="/javascripts/homepage/links.js"></script>
             <script src="/javascripts/homepage/navbuttons.js"></script>
             <script src="/javascripts/homepage/endscript.js"></script>
         </>
     );
 };
 
-export const getServerSideProps = async (context) => ({
+export const getServerSideProps = async context => ({
     props: {
         Csession: context.query.Csession?.userID ?? null,
         headerName: context.query.headerName,

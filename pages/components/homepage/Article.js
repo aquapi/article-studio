@@ -1,9 +1,12 @@
+// @ts-check
 /**
- * @param {{data: {user: string, name: string, content: string, display_img: string, description: string, views: number, tag: string, votes: number}}}
+ * @param {{data: {user: string, name: string, content: string, display_img: string, description: string, views: number, tag: string, votes: number}}} props
  */
 
 export default ({ data = { user: "", name: "", content: "", display_img: "", description: "", views: 0, tag: "", votes: 0 } }) => (
-    <div className="created">
+    <div className="created" onClick={
+        () => location.href = `/reader/${encodeURIComponent(data.name)}`
+    }>
         {/*Article name and tag*/}
         <div id={data.name} style={{ 
             display: 'flex', flexDirection: 'column', justifyContent: 'center', 
