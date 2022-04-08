@@ -6,7 +6,11 @@ export default ({ detailStyle, currentContent, views, author, tag, votes }) =>
             borderRight: '2px solid #222', marginTop: '30px'
         }}>
         {/*Article*/}
-        <div id="content">{currentContent}</div>
+        <iframe id="content" srcDoc={currentContent} onLoad={
+            e => 
+                e.currentTarget.style.height = 
+                    e.currentTarget.contentWindow.document.body.scrollHeight + 50 + 'px'
+        }></iframe>
         {/*Article data*/}
         <div style={detailStyle} id="viewsDetail">{"Views: " + views}</div>
         <div style={detailStyle} id="authorDetail">{"Author: " + author}</div>

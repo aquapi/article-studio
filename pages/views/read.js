@@ -2,8 +2,6 @@
 import Head from "../components/headers/read";
 import io from "socket.io-client";
 import { useState, useEffect } from "react";
-import hljs from "highlight.js";
-import parse from "html-react-parser";
 import converter from "../../src/utils/converter.mjs";
 import ArticleContent from "../components/read/ArticleContent";
 import Nav from "../components/read/Nav";
@@ -12,10 +10,6 @@ const detailStyle = {
     fontSize: '12px !important',
     alignSelf: 'flex-end'
 }
-
-// HTML Decoder
-const htmlDecode = input =>
-    new DOMParser().parseFromString(input, "text/html").documentElement.textContent;
 
 // Use socket
 /**
@@ -28,6 +22,25 @@ const useSocket = (uri, opts) => {
     }, []);
     return socket;
 };
+
+// Template
+const template = (theme, content) =>
+    `<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/${theme}.min.css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"; 
+            font-weight: 375;
+            font-size: 14px
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 375;
+        }
+    </style>
+    <body>
+        ${content}
+        <script>hljs.highlightAll()</script>
+    </body>`
 
 /**
  * @param {{name: string, admin_button: string, content: string, views: number, author: string, tag: string, votes: number, coAuthor: string[], user: string}} props
@@ -56,17 +69,15 @@ export default ({ name, content, views, author, tag, votes: __votes, user, coAut
     // When page loaded
     useEffect(() => {
         setContent(
-            // Style sheet link
-            "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/"
-            + document.querySelector("select").options.item(
-                Number(localStorage.getItem("favTheme") ?? "0")
-            ).id
-            + ".min.css'>"
-            // Convert to HTML
-            + converter.makeHtml(htmlDecode(content)))
-
-        // Highlight all code
-        hljs.highlightAll();
+            template(
+                // Theme
+                document.querySelector("select").options.item(
+                    Number(localStorage.getItem("favTheme") ?? "0")
+                ).id,
+                // Content
+                converter.makeHtml(content)
+            )
+        )
     }, []);
 
     // Change content
@@ -79,26 +90,23 @@ export default ({ name, content, views, author, tag, votes: __votes, user, coAut
             : 0;
 
         setContent(
-            // Style
-            "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/"
-            + event.target.options.item(selectedIndex).id
-            + ".min.css'>"
-            // Convert to HTML
-            + converter.makeHtml(htmlDecode(content))
+            template(
+                // Theme
+                event.target.options.item(selectedIndex).id, 
+                // Content
+                converter.makeHtml(content)
+            )
         );
 
         // Save to localStorage
         // @ts-ignore
         localStorage.setItem("favTheme", selectedIndex);
-
-        // Highlight all code 
-        hljs.highlightAll();
     };
 
     const isAuthor = user === author || coAuthor.indexOf(user) > -1;
     const contentData = {
         detailStyle,
-        currentContent: currentContent ? parse(currentContent) : "",
+        currentContent: currentContent,
         views,
         author,
         tag,
