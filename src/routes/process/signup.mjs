@@ -1,9 +1,10 @@
-import app from "../../loaders/express.mjs";
 import User from "../../models/user.mjs";
 
 // Sign up process
-app.post("/signupprocess",
-    async (req, res, next) => {
+export default {
+    path: "/signupprocess",
+    method: "post",
+    async handler(req, res, next) {
         const user = await User.findOne({
             username: req.body.name
         }).exec();
@@ -35,4 +36,4 @@ app.post("/signupprocess",
         // Redirect to homepage if success
         res.end();
     }
-);
+};

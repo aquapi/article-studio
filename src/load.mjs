@@ -1,7 +1,12 @@
 import 'dotenv/config';
 import mongoose from 'mongoose';
 import next from './loaders/next.mjs';
+import app from './loaders/express.mjs';
 import "./loaders/passport.mjs";
+
+// Socket connection
+import "./routes/socket/connect.mjs";
+import importAll from './utils/importAll.mjs';
 
 // Start the next server 
 await next.prepare();
@@ -14,42 +19,9 @@ await mongoose
     })
     .catch(console.log);
 
-// Socket connection
-import "./routes/socket/connect.mjs";
-
-// Display articles
-import './routes/render/collections.mjs';
-import './routes/render/homepage.mjs';
-
-// Display editor
-import './routes/render/editor.mjs';
-
-// All edit processes
-import './routes/process/edit.mjs';
-
-// Article content
-import './routes/render/read.mjs';
-
-// Display login and signup page
-import './routes/render/login.mjs';
-
-// Diplay profile
-import './routes/render/profile.mjs';
-
-// Logout processes
-import './routes/process/logout.mjs';
-
-// Login process
-import './routes/process/login.mjs';
-
-// Signup process
-import './routes/process/signup.mjs';
-
-// Delete process
-import './routes/process/delete.mjs';
-
-// Co-auth display
-import './routes/render/coauth.mjs';
-
-// Co-auth logic
-import './routes/process/coauth.mjs';
+// Load routes
+for (const mod of [
+    ...await importAll("./src/routes/render"), 
+    ...await importAll("./src/routes/process")
+]) 
+    app[mod.method](mod.path, mod.handler);

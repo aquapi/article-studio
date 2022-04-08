@@ -1,10 +1,11 @@
-import app from "../../loaders/express.mjs";
 import passport from "passport";
 
-app.post(
-    "/loginprocess",
+export default {
+    path: "/loginprocess",
+    method: 'post',
+
     // Login process
-    (req, res, next) =>
+    handler: (req, res, next) =>
         passport.authenticate("local", { session: false },
             (err, user) => {
                 // Check whether errors occur
@@ -24,4 +25,4 @@ app.post(
                 res.end();
             }
         )(req, res, next)
-);
+};
