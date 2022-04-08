@@ -1,46 +1,54 @@
+// @ts-check
 import Head from "../components/headers/read";
 import io from "socket.io-client";
 import { useState, useEffect } from "react";
 import hljs from "highlight.js";
 import parse from "html-react-parser";
-import SelectTheme from "../components/read/SelectTheme";
 import converter from "../../src/utils/converter.mjs";
 import ArticleContent from "../components/read/ArticleContent";
-import axios from "axios";
+import Nav from "../components/read/Nav";
 
 const detailStyle = {
     fontSize: '12px !important',
     alignSelf: 'flex-end'
 }
 
+// HTML Decoder
+const htmlDecode = input =>
+    new DOMParser().parseFromString(input, "text/html").documentElement.textContent;
+
+// Use socket
 /**
- * @param {{name: string, admin_button: string, content: string, views: number, author: string, tag: string, votes: number, coAuthor: string[]}}
+ * @returns {import("socket.io-client").Socket | null} 
  */
-export default ({ name, content, views, author, tag, votes, user, coAuthor }) => {
-    // Socket
-    const socket = io("/read");
+const useSocket = (uri, opts) => {
+    const [socket, setSocket] = useState(null);
+    useEffect(() => {
+        setSocket(io(uri, opts));
+    }, []);
+    return socket;
+};
+
+/**
+ * @param {{name: string, admin_button: string, content: string, views: number, author: string, tag: string, votes: number, coAuthor: string[], user: string}} props
+ */
+export default ({ name, content, views, author, tag, votes: __votes, user, coAuthor }) => {
+    const socket = useSocket("/read");
+
+    // Get votes
+    const [votes, setVotes] = useState(__votes);
 
     // Vote action
-    const vote = () => (
-        // Change the vote detail
-        document.getElementById("votesDetail").innerHTML = "Votes: " + (
-            Number(
-                document.getElementById("votesDetail").innerHTML
-                    .replaceAll("Votes: ", "")
-            ) + 1
-        ), 
-        // Emit vote event
-        socket.emit("vote",
-            user,
-            document.getElementById("authorDetail").innerHTML
-                .replaceAll("Author: ", ""),
-            name
-        )
-    );
+    const vote = () => {
+        // If socket exists
+        if (!socket) return;
 
-    // HTML Decoder
-    const htmlDecode = input =>
-        new DOMParser().parseFromString(input, "text/html").documentElement.textContent;
+        // Change the vote detail
+        setVotes(votes + 1);
+
+        // Emit vote event
+        socket.emit("vote", user, author, name);
+    };
 
     // Converted data
     const [currentContent, setContent] = useState(null);
@@ -66,25 +74,22 @@ export default ({ name, content, views, author, tag, votes, user, coAuthor }) =>
      * @type {React.ChangeEventHandler<HTMLSelectElement>}
      */
     const selectListener = event => {
+        const selectedIndex = event.target.options.selectedIndex >= 0
+            ? event.target.options.selectedIndex
+            : 0;
+
         setContent(
             // Style
             "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/"
-            + event.target.options.item(
-                event.target.options.selectedIndex >= 0
-                    ? event.target.options.selectedIndex
-                    : 0
-            ).id
+            + event.target.options.item(selectedIndex).id
             + ".min.css'>"
             // Convert to HTML
             + converter.makeHtml(htmlDecode(content))
         );
 
         // Save to localStorage
-        localStorage.setItem("favTheme",
-            event.target.options.selectedIndex >= 0
-                ? event.target.options.selectedIndex
-                : 0
-        )
+        // @ts-ignore
+        localStorage.setItem("favTheme", selectedIndex);
 
         // Highlight all code 
         hljs.highlightAll();
@@ -92,8 +97,8 @@ export default ({ name, content, views, author, tag, votes, user, coAuthor }) =>
 
     const isAuthor = user === author || coAuthor.indexOf(user) > -1;
     const contentData = {
-        detailStyle, 
-        currentContent: currentContent ? parse(currentContent) : "", 
+        detailStyle,
+        currentContent: currentContent ? parse(currentContent) : "",
         views,
         author,
         tag,
@@ -102,39 +107,10 @@ export default ({ name, content, views, author, tag, votes, user, coAuthor }) =>
 
     return <>
         <Head name={name} />
+
         {/*Navbar*/}
-        <div id="buttons">
-            {/*Go back*/}
-            <button onClick={
-                // Change location
-                () => location.href =
-                    sessionStorage.getItem("prevLocation") ?? "/article"
-            }>Back</button><br />
+        <Nav vote={vote} selectListener={selectListener} name={name} isAuthor={isAuthor} />
 
-            {/*Theme changer*/}
-            <label htmlFor="theme-changer">Theme</label>
-            <SelectTheme onChange={selectListener} />
-
-            {/*Edit*/}
-            <button style={{ display: isAuthor ? 'block' : 'none' }} onClick={
-                () => location.href =
-                    `/article/edit/${encodeURIComponent(name)}`
-            }>Edit</button>
-
-            {/*Delete*/}
-            <button style={{ display: isAuthor ? 'block' : 'none' }} onClick={
-                async () => {
-                    // Delete the current article
-                    if (confirm("Confirm delete?")) {
-                        await axios.post("/article/delete", { name });
-                        location.href = `/article`;
-                    }
-                }
-            }>Delete</button>
-            
-            {/*Vote*/}
-            <button style={{ display: isAuthor ? 'none' : 'block' }} onClick={vote}>Vote</button>
-        </div>
         {/*Content and article data*/}
         <ArticleContent {...contentData} />
     </>;
