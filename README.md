@@ -1,49 +1,30 @@
 # Article Studio
 
-## Target user
-- Programmers or professional article writers
+A place for creative articles.
 
-## Do I copy the idea from another project?
-- No, I think this is the first project that has this idea (I did not say this is the only one)
+Articles are written using [Github Markdown](https://gist.github.com/VEnis/7465176#file-gistfile1-md)
 
-## Functions
-- Completed:
-    + Creating and editing articles
-    + View articles
-    + Theme changer
-    + Vote
-    + Discuss
-    + Categories
-    + Search
-    + Sign up, log in
-    + Private articles 
-    + Co-authors
-- In progress:
-    + Refractoring (Always)
-    + Transfer Ownership
-    + Discuss will only open if author is online
+## Routes
+Each file in `src/routes` exports an object with:
+```typescript
+type Router = {
+    path: string,
+    method: string,
+    handler(req: Request, res: Response): void | Promise<void>,
+}
+```
 
-## Configure project
-Create a file named `.env`
-Provide environment variables:
-- EMAIL: Your email
-- PASSWORD: Your email password
-- DB_URL: Your MongoDB URL
-- SESSION_SECRET: Anything you want (should be machine-generated)
-- NODE_ENV: `production` (`development` mode doesn't allow JSON that hasn't been parsed to string)
-- HOST: Your local network IP
-- PORT: Your server port (Optional)
+These exports object are imported using `importAll` utility function then passed to the app.
 
-Create a directory named `ssl`
+## Loaders
+`src/loaders` includes the express server, passport strategies, Next.js server, Socket.io server, and the HTTP server.
 
-Generate an SSL certificate using:
-- `.\bin\SSL` in CMD or Powershell
-- `./bin/SSL.sh` in Bash
+## Models
+`src/models` includes the database models.
 
-Run the project using:
-- `.\bin\run` in CMD or Powershell
-- `./bin/run.sh` in Bash
-
-## License
-- Do not deploy this application on any cloud platform or machine
-- Use this project for testing and learning only
+## Utilities
+`src/utils` includes the utility functions.
+- `converter.mjs` exports the Showdown.js Markdown converter.
+- `filter.mjs` exports a function to filter articles.
+- `importAll.mjs` exports a function to import all files in a directory.
+- `sort.mjs` exports a function to sort articles by properties (Quick sort).
