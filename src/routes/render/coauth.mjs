@@ -1,6 +1,9 @@
 import next from "../../loaders/next.mjs";
 import Article from "../../models/article.mjs";
 
+/**
+ * @type {{path: string, method: string, handler: import("express").RequestHandler}}
+ */
 export default {
     path: "/coauths/:name",
     method: "get",

@@ -1,10 +1,13 @@
 import User from "../../models/user.mjs";
 
 // Sign up process
+/**
+ * @type {{path: string, method: string, handler: import("express").RequestHandler}}
+ */
 export default {
     path: "/signupprocess",
     method: "post",
-    async handler(req, res, next) {
+    async handler(req, res) {
         const user = await User.findOne({
             username: req.body.name
         }).exec();

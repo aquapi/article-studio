@@ -1,5 +1,8 @@
 import Article from "../../models/article.mjs";
 
+/**
+ * @type {{path: string, method: string, handler: import("express").RequestHandler}[]}
+ */
 export default [
     // Add article data to database
     {

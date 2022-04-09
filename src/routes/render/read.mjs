@@ -2,6 +2,9 @@ import next from "../../loaders/next.mjs";
 import Article from "../../models/article.mjs";
 
 // Read for client
+/**
+ * @type {{path: string, method: string, handler: import("express").RequestHandler}}
+ */
 export default {
     path: "/reader/:name",
     method: "get",

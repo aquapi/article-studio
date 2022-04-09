@@ -4,8 +4,10 @@ import sort from "../../utils/sort.mjs";
 import filter from "../../utils/filter.mjs";
 
 // Homepage
-// https://localhost/article
 
+/**
+ * @type {{path: string, method: string, handler: import("express").RequestHandler}[]}
+ */
 export default [
     {
         path: "/article",

@@ -1,5 +1,8 @@
 import next from "../../loaders/next.mjs";
 
+/**
+ * @type {{path: string, method: string, handler: import("express").RequestHandler}[]}
+ */
 export default [
 	// Login page
 	{

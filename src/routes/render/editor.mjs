@@ -2,6 +2,9 @@ import next from "../../loaders/next.mjs";
 import Article from "../../models/article.mjs";
 
 // Edit articles
+/**
+ * @type {{path: string, method: string, handler: import("express").RequestHandler}[]}
+ */
 export default [
     {
         path: "/article/edit/:name",

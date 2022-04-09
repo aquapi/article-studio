@@ -1,5 +1,8 @@
 import passport from "passport";
 
+/**
+ * @type {{path: string, method: string, handler: import("express").RequestHandler}}
+ */
 export default {
     path: "/loginprocess",
     method: 'post',

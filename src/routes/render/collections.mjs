@@ -4,6 +4,9 @@ import sort from "../../utils/sort.mjs";
 import filter from "../../utils/filter.mjs";
 
 // My article subpage: Show all articles created not by others
+/**
+ * @type {{path: string, method: string, handler: import("express").RequestHandler}[]}
+ */
 export default [
 	{
 		path: "/myarticle",

@@ -3,6 +3,9 @@ import next from "../../loaders/next.mjs";
 import User from "../../models/user.mjs";
 
 // User's Profile
+/**
+ * @type {{path: string, method: string, handler: import("express").RequestHandler}}
+ */
 export default {
     path: "/profile",
     method: "get",

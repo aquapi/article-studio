@@ -16,6 +16,9 @@ async function check(list) {
     return true;
 }
 
+/**
+ * @type {{path: string, method: string, handler: import("express").RequestHandler}}
+ */
 export default {
     path: "/coauths/save/:name",
     method: "post",

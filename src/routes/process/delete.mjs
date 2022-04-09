@@ -1,6 +1,9 @@
 import Article from "../../models/article.mjs";
 import User from "../../models/user.mjs";
 
+/**
+ * @type {{path: string, method: string, handler: import("express").RequestHandler}[]}
+ */
 export default [
     // Delete an user
     {
