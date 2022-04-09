@@ -1,0 +1,39 @@
+#!/usr/bin/env node
+
+const fs = require("fs");
+const yargs = require("yargs");
+
+const path = `./src/routes/${process.argv[2]}`;
+
+const options = yargs
+    .options("n", {
+        alias: "filename",
+        type: "string",
+        demandOption: true,
+    })
+    .options("p", {
+        alias: "path",
+        type: "string",
+        demandOption: true,
+    })
+    .options("m", {
+        alias: "method",
+        type: "string",
+        demandOption: true,
+    })
+    .options("a", {
+        alias: "async",
+        type: "boolean",
+    }).argv;
+
+// Append to the file 
+fs.appendFileSync(`${path}/${options.filename}.mjs`,
+`/**
+ * @type {{path: string, method: string, handler: import("express").RequestHandler}}
+ */
+export default {
+    path: "${options.path}",
+    method: "${options.method}",
+    ${options.async ? "async " : ""}handler(req, res) {}
+};
+`);

@@ -21,7 +21,8 @@
     "react-dom": "^18.0.0",
     "showdown": "^2.0.3",
     "socket.io": "^4.4.1",
-    "socket.io-client": "^4.4.1"
+    "socket.io-client": "^4.4.1",
+    "yargs": "^17.4.0"
   },
   "scripts": {
     "dev": "nodemon --config nodemon.json .",
